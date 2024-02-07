@@ -12,7 +12,7 @@ SET AUTOCOMMIT = 0;
 
 -- Records contact information about vendors. NOTES: phone varchar(20) to accomodate international phones.
 CREATE OR REPLACE TABLE Vendors (
-    vendorID INT AUTO_INCREMENT NOT NULL,
+    vendorID INT NOT NULL AUTO_INCREMENT ,
     name VARCHAR(255) NOT NULL,
     phone VARCHAR(20) NOT NULL,
     email VARCHAR(255) NOT NULL,
@@ -22,13 +22,13 @@ CREATE OR REPLACE TABLE Vendors (
 -- Records information about products and ingredients used in the bakery. NOTES: productWeight measurement unit is pounds (lbs). For productInStock attribute boolean choice for whether in stock (1) or not (0).
 
 CREATE OR REPLACE TABLE Products (
-    productID INT AUTO_INCREMENT NOT NULL,
+    productID INT NOT NULL AUTO_INCREMENT,
     vendorID INT,
     productPrice DECIMAL(16,2) NOT NULL,
     productWeight DECIMAL(16,2) NOT NULL,
     productDescription VARCHAR(1000),
-    productInStock INT, NOT NULL,
-    productName: VARCHAR(255) NOT NULL,
+    productInStock INT NOT NULL,
+    productName VARCHAR(255) NOT NULL,
     PRIMARY KEY (productID),
     FOREIGN KEY (vendorID) REFERENCES Vendors(vendorID) 
     ON DELETE RESTRICT
@@ -37,7 +37,7 @@ CREATE OR REPLACE TABLE Products (
 
 -- Records the total amount paid to vendors for ordered products.
 CREATE OR REPLACE TABLE Invoices (
-    invoiceID INT AUTO_INCREMENT,
+    invoiceID INT NOT NULL AUTO_INCREMENT,
     vendorID INT,
     invoiceDate DATE NOT NULL,
     PRIMARY KEY (invoiceID),
@@ -48,7 +48,7 @@ CREATE OR REPLACE TABLE Invoices (
 
 -- Records the items that are included in each invoice.
 CREATE OR REPLACE TABLE Invoice_Items (
-    invoiceItemsID INT AUTO_INCREMENT NOT NULL,
+    invoiceItemsID INT NOT NULL AUTO_INCREMENT,
     invoiceID INT,
     productID INT,
     orderQuantity INT NOT NULL,
@@ -63,7 +63,7 @@ CREATE OR REPLACE TABLE Invoice_Items (
 );
 
 
-... [your SQL goes here]
+-- [your SQL goes here]
 
 
 
@@ -212,10 +212,10 @@ VALUES
     750.00
 );
 
-SELECT * FROM ;
-SELECT * FROM ;
-SELECT * FROM ;
-SELECT * FROM ;
+SELECT * FROM Vendors;
+SELECT * FROM Products;
+SELECT * FROM Invoices;
+SELECT * FROM Invoice_Items;
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
