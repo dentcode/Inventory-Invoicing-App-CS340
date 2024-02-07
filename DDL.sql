@@ -31,7 +31,7 @@ CREATE OR REPLACE TABLE Products (
     productName VARCHAR(255) NOT NULL,
     PRIMARY KEY (productID),
     FOREIGN KEY (vendorID) REFERENCES Vendors(vendorID) 
-    ON DELETE RESTRICT
+    ON DELETE SET NULL
     ON UPDATE CASCADE
 );
 
@@ -42,7 +42,7 @@ CREATE OR REPLACE TABLE Invoices (
     invoiceDate DATE NOT NULL,
     PRIMARY KEY (invoiceID),
     FOREIGN KEY (vendorID) REFERENCES Vendors(vendorID) 
-    ON DELETE RESTRICT
+    ON DELETE SET NULL
     ON UPDATE CASCADE
 );
 
@@ -52,13 +52,13 @@ CREATE OR REPLACE TABLE Invoice_Items (
     invoiceID INT,
     productID INT,
     orderQuantity INT NOT NULL,
-    unitPrice DECIMAL(16,2) NOT NULL
+    unitPrice DECIMAL(16,2) NOT NULL,
     PRIMARY KEY (invoiceItemsID),
     FOREIGN KEY (invoiceID) REFERENCES Invoices(invoiceID) 
-    ON DELETE RESTRICT
+    ON DELETE SET NULL
     ON UPDATE CASCADE,
-    FOREIGN KEY (productID) REFERENCES Products(productsID)
-    ON DELETE RESTRICT
+    FOREIGN KEY (productID) REFERENCES Products(productID)
+    ON DELETE SET NULL
     ON UPDATE CASCADE
 );
 
