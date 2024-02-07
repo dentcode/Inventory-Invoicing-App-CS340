@@ -1,0 +1,15 @@
+{
+  "name": "round-bear",
+  "version": "1.0.0",
+  "description": "A database-driven website used by Round Bear Bakery",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Team 39 - Guibely De Aguinaga, Ignacio De La Cruz",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "forever": "^4.0.3"
+  }
+}
