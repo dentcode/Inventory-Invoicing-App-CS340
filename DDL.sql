@@ -62,10 +62,48 @@ CREATE OR REPLACE TABLE Invoice_Items (
     ON UPDATE CASCADE
 );
 
+-- Records customer’s information
+CREATE OR REPLACE TABLE Customers (
+  customerID INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(45) NOT NULL,
+  email VARCHAR(45) NOT NULL,
+  PRIMARY KEY (customerID)
+  );
 
--- [your SQL goes here]
+-- Records sales to a customer during a transaction
+CREATE OR REPLACE TABLE Sales (
+  salesID INT NOT NULL AUTO_INCREMENT,
+  customerID INT NULL,
+  date DATE NULL,
+  total DECIMAL(16,2) NOT NULL,
+  PRIMARY KEY (salesID),
+  FOREIGN KEY (customerID) REFERENCES Customers(customerID)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
+);
 
+--  Records menu items provided by bakery
+CREATE OR REPLACE TABLE Menu_Items (
+  menuItemID INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(45) NOT NULL,
+  listedPrice DECIMAL(16,2) NOT NULL,
+  menuItemQuanity INT NULL,
+  PRIMARY KEY (menuItemID)
+);
 
+-- Records which items are part of any particular Sales
+CREATE OR REPLACE TABLE Sales_Items (
+  salesID INT NULL,
+  menuItemID INT NULL,
+  orderQuanity INT NULL,
+  unitPrice DECIMAL(16,2) NULL,
+  FOREIGN KEY (salesID) REFERENCES Sales(salesID)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+  FOREIGN KEY (menuItemID) REFERENCES Menu_Items(menuItemID)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
+);
 
 
 -- SAMPLE DATA
@@ -212,6 +250,180 @@ VALUES
     750.00
 );
 
+INSERT INTO Customers(
+    customerID,
+    name,
+    email
+)
+VALUES
+(
+    1,
+    'George',
+    'georgeha@hello.com'
+),
+(
+    2,
+    'Paul',
+    'paulm@hello.com'
+),
+(
+    3,
+    'John',
+    'lenjohn@hello.com'
+),
+(
+    4,
+    'Ringo',
+    'ringost@hello.com'
+),
+(
+    5,
+    'Yoko',
+    'yokono@hello.com'
+);
+
+
+INSERT INTO Menu_Items(
+    menuItemID,
+    name,
+    listedPrice,
+    menuItemQuanity
+)
+VALUES(
+    1,
+    'Dulce de Leche Empanada',
+    5.00,
+    5
+),
+(
+    2,
+    'Croissant',
+    3.50,
+    8
+),
+(
+    3,
+    'Chocolate Croissant',
+    4.00,
+    6
+),
+(
+    4,
+    'Cupcake',
+    2.30,
+    8
+),
+(
+    5,
+    'Sourdough',
+    4.00,
+    7
+),
+(
+    6,
+    'Ciabatta',
+    3,
+    5
+),
+(
+    7,
+    'Brownies',
+    3.00,
+    6
+);
+
+
+INSERT INTO Sales_Items(
+    salesID,
+    menuItemID,
+    orderQuanity,
+    unitPrice
+)
+VALUES(
+    1,
+    2,
+    1,
+    3.50
+),
+(
+    1,
+    5,
+    1,
+    4.00
+),
+(
+    2,
+    7,
+    2,
+    3.00
+),
+(
+    3,
+    4,
+    1,
+    2.30
+),
+(
+    3,
+    2,
+    1,
+    3.50
+),
+(
+    4,
+    1,
+    3,
+    5.00
+),
+(
+    5,
+    3,
+    2,
+    4.00
+);
+
+INSERT INTO Sales(
+    salesID,
+    customerID,
+    date,
+    total
+)
+VALUES(
+    1,
+    3, 
+    '2024-01-02',
+    (Select SUM(unitPrice) from Sales_Items WHERE salesID = 1)
+),
+(
+    2,
+    4,
+    '2024-01-14',
+    (SELECT SUM(unitPrice) From Sales_Items WHERE salesID = 2)
+),
+(
+    3,
+    2,
+    '2024-02-03',
+    (SELECT SUM(unitPrice) From Sales_Items WHERE salesID = 3)
+),
+(
+    4,
+    1,
+    '2024-02-04',
+    (SELECT SUM(unitPrice) From Sales_Items WHERE salesID = 4)
+),
+(
+    5,
+    5,
+    '2024-02-05',
+    (SELECT SUM(unitPrice) From Sales_Items WHERE salesID = 5)
+    
+);
+
+SELECT * FROM Customers;
+SELECT * FROM Menu_Items;
+SELECT * FROM Sales;
+SELECT * FROM Sales_Items;
 SELECT * FROM Vendors;
 SELECT * FROM Products;
 SELECT * FROM Invoices;
