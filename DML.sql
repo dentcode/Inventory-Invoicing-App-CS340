@@ -6,19 +6,26 @@ Code Citations: ALL code sections within this file uses code from
 https://canvas.oregonstate.edu/courses/1946034/pages/exploration-database-application-design?module_item_id=23809325 as the skeleton code.
 */
 
+-- get all information from Vendors
 SELECT * FROM Vendors;
 
+-- get all information from Products, with vendor name standing in for vendorID
 SELECT Products.productID, Vendors.name AS vendor, Products.productPrice, Products.productWeight, Products.productDescription, Products.productInStock, Products.productName
 FROM Products
 INNER JOIN Vendors
 ON Products.vendorID = Vendors.vendorID;
 
+-- get all information from Products, with vendor name standing in for vendorID
 SELECT Invoices.invoiceID, Vendors.name AS vendor, Invoices.InvoiceDate
 FROM Invoices
 INNER JOIN Vendors
 ON Invoices.vendorID = Vendors.vendorID;
 
-SELECT * FROM Invoice_Items;
+-- get all information from Products, with product name standing in for productID
+SELECT Invoice_Items.invoiceItemsID, Invoice_Items.invoiceID, Products.productNAME AS product, Invoice_Items.orderQuantity, Invoice_Items.unitPrice
+FROM Invoice_Items
+INNER JOIN Products
+ON Invoice_Items.productID = Products.productID;
 
 -- get all information from customers
 SELECT * FROM Customers;
@@ -53,7 +60,7 @@ VALUES (:nameInput, :emailInput);
 SELECT menuItemID FROM Menu_Items
 WHERE name = :nameInput
 
---get IDs and names to papulate dropdown
+--get IDs and names to populate dropdown
 SELECT menuItemID, name, FROM Menu_Items
 
 -- Update price and quanity in menu Items by name dropdown
