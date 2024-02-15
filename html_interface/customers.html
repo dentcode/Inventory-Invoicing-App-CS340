@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' media='screen' href='project.css'>
+    <title>Customers</title>
+</head>
+<body>
+    <header> <h1> Customers</h1></header>
+    <nav class="global">
+        <a href="./index.html"> Home |</a>
+        <a href="./customers.html"> Customers |</a>
+        <a href="./sales.html">Sales |</a>
+        <a href="./menuItems.html"> Menu Items |</a>
+        <a href="./salesItem.html"> Sales Items</a>
+    </nav>
+    <main>
+        <section>
+            <h2> Browse Customers</h2>
+            <table border="1" cellpadding="5">
+                <thead>
+                <tr>
+                <th><a href="newCustomer">Add New</a></th>
+                  <th>customerID</th>
+                  <th>name</th>
+                  <th>email</th>
+                </tr>
+                </thead>
+                
+                <tbody>
+                <tr>
+                    <td><a href="cid1">Edit</a></td>
+                    <td>1</td>
+                    <td>George</td>
+                    <td>georgeha@hello.com</td>
+                    <td><a href="cid1">Delete</a></td>
+                </tr>
+                <tr>
+                    <td><a href="cid2">Edit</a></td>
+                    <td>2</td>
+                    <td>Paul</td>
+                    <td>paulm@hello.com</td>
+                    <td><a href="cid2">Delete</a></td>
+                </tr>
+                <tr>
+                    <td><a href="cid3">Edit</a></td>
+                    <td>3</td>
+                    <td>John</td>
+                    <td>lenjohn@hello.com</td>
+                    <td><a href="cid3">Delete</a></td>
+                </tr>
+                <tr>
+                    <td><a href="cid4">Edit</a></td>
+                    <td>4</td>
+                    <td>Ringo</td>
+                    <td>ringost@hello.com</td>
+                    <td><a href="cid4">Delete</a></td>
+                </tr>
+                <tr>
+                    <td><a href="cid5">Edit</a></td>
+                    <td>5</td>
+                    <td>Yoko</td>
+                    <td>yokono@hello.com</td>
+                    <td><a href="cid5">Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <p>
+            <div id="insertCustomer">
+                <form id="addCustomer">
+                    <fieldset>
+                        <legend> Add Customer</legend>
+                        <label for="fname"> First Name</label>
+                        <input type="text" id="fname" size="40">
+                        <label for="customerEmail"> Email</label>
+                        <input type="text" name="email" id="CustomerEmail" size="40" aria-required="true" maxlength="100" required pattern="[^ @]+@[^ @]+.[a-z]+"
+            placeholder="name@host.com"/>
+                    </fieldset>
+                </form>
+            </p>
+        </section>
+    </main>
+    
+</body>
+</html>

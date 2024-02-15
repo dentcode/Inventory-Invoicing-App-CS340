@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Items</title>
+</head>
+<body>
+    <header> <h1> Menu Items</h1></header>
+    <nav class="global">
+        <a href="./index.html"> Home |</a>
+        <a href="./customers.html"> Customers |</a>
+        <a href="./sales.html">Sales |</a>
+        <a href="./menuItems.html"> Menu Items |</a>
+        <a href="./salesItem.html"> Sales Items</a>
+    </nav>
+    <main>
+        <section>
+            <h2> Browse Menu Items</h2>
+            <table border="1" cellpadding="5">
+                <thead>
+                <tr>
+                    <th><a href="newMenuItme">Add New</a></th>
+                  <th>MenuItemID</th>
+                  <th>Name</th>
+                  <th>ListedPrice</th>
+                  <th>MenuItemQuanity</th>
+                </tr>
+                </thead>
+                
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td>1</td>
+                    <td>Dulce De Leche Empanada</td>
+                    <td>5.00</td>
+                    <td>5</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>2</td>
+                    <td>Croissant</td>
+                    <td>3.50</td>
+                    <td>8</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>3</td>
+                    <td>Chocolate Croissant</td>
+                    <td>4.00</td>
+                    <td>8</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>4</td>
+                    <td>Cupcake</td>
+                    <td>2.30</td>
+                    <td>8</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>5</td>
+                    <td>Sourdough</td>
+                    <td>4.00</td>
+                    <td>7</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>6</td>
+                    <td>Ciabatta</td>
+                    <td>3.00</td>
+                    <td>5</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>7</td>
+                    <td>Brownies</td>
+                    <td>3.00</td>
+                    <td>6</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <p>
+            <fieldset id="updateMenu" >
+                <legend> Update Menu Item </legend>
+                <label for="updateMenu"> Select One Item</label>
+                <select name="updateMenu" id="updateMenu">
+                <option value="chooseOne" selected> Choose One</option>
+                </select>
+    
+                <form action="/updateMenu" method="POST">
+                    <p>
+                    <label for="price"> Listed Price :</label>
+                    <input type="decimal" id="price" size="40">
+                    </p>
+                    <p><label for="quanity"> Quanity :</label>
+                    <input type="integer" id="quanity" size="40"/>
+                    </p>
+                </form>
+            </fieldset>
+            </p>
+
+            <p>
+            <fieldset id="deleteMenuItem">
+                <legend> Delete Menu Item</legend>
+                <label for="deleteMenu"> Select One Item </label>
+                <select name="deleteMenu" id="deleteMenu">
+                <option value="chooseOne" selected> Choose One</option>
+                </select>
+
+            <p><button type="submit">Submit</button></p>
+            </fieldset>
+            </p>
+
+        </section>
+    </main>
+    
+</body>
+</html>
