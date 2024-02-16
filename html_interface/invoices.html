@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' media='screen' href='project.css'>
+    <title>Invoices</title>
+</head>
+
+<body>
+    <header>
+        <h1> Invoices</h1>
+    </header>
+    <nav class="global">
+        <a href="./index.html"> Home |</a>
+        <a href="./customers.html"> Customers |</a>
+        <a href="./sales.html">Sales |</a>
+        <a href="./menuItems.html"> Menu Items |</a>
+        <a href="./salesItem.html"> Sales Items |</a>
+        <a href="./vendors.html"> Vendors |</a>
+        <a href="./products.html"> Products |</a>
+        <a href="./invoices.html"> Invoices |</a>
+        <a href="./invoice_items.html"> Invoice Items</a>
+    </nav>
+    <main>
+        <section>
+            <h2> Browse Invoices</h2>
+            <table border="1" cellpadding="5">
+                <thead>
+                    <tr>
+                        <th><a href="newInvoice">Add New</a></th>
+                        <th>invoiceID</th>
+                        <th>vendorID</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                </tbody>
+            </table>
+
+            <p>
+            <div id="insertInvoice">
+                <form id="addInvoice">
+                    <fieldset>
+                        <legend> Add Invoice</legend>
+                        <label for="InvoiceName"> Name</label>
+                        <input type="text" id="fname" size="40">
+                        <label for="InvoicePhone">Phone</label>
+                        <input type="tel" id="InvoicePhone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                        <label for="InvoiceEmail"> Email</label>
+                        <input type="text" name="email" id="InvoiceEmail" size="40" aria-required="true" maxlength="100"
+                            required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com" />
+                    </fieldset>
+                </form>
+                </p>
+        </section>
+    </main>
+
+</body>
+
+</html>

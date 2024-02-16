@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' media='screen' href='project.css'>
+    <title>Invoice_Items</title>
+</head>
+
+<body>
+    <header>
+        <h1> Invoice_Items</h1>
+    </header>
+    <nav class="global">
+        <a href="./index.html"> Home |</a>
+        <a href="./customers.html"> Customers |</a>
+        <a href="./sales.html">Sales |</a>
+        <a href="./menuItems.html"> Menu Items |</a>
+        <a href="./salesItem.html"> Sales Items |</a>
+        <a href="./vendors.html"> Vendors |</a>
+        <a href="./products.html"> Products |</a>
+        <a href="./invoices.html"> Invoices |</a>
+        <a href="./invoice_items.html"> Invoice Items</a>
+    </nav>
+    <main>
+        <section>
+            <h2> Browse Invoice_Items</h2>
+            <table border="1" cellpadding="5">
+                <thead>
+                    <tr>
+                        <th><a href="newInvoice_Item">Add New</a></th>
+                        <th>invoice item ID</th>
+                        <th>invoice ID</th>
+                        <th>product ID</th>
+                        <th>order quantity</th>
+                        <th>unit price</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                </tbody>
+            </table>
+
+            <p>
+            <div id="insertInvoice_Item">
+                <form id="addInvoice_Item">
+                    <fieldset>
+                        <legend> Add Invoice_Item</legend>
+                        <label for="Invoice_ItemName"> Name</label>
+                        <input type="text" id="fname" size="40">
+                        <label for="Invoice_ItemPhone">Phone</label>
+                        <input type="tel" id="Invoice_ItemPhone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                        <label for="Invoice_ItemEmail"> Email</label>
+                        <input type="text" name="email" id="Invoice_ItemEmail" size="40" aria-required="true"
+                            maxlength="100" required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com" />
+                    </fieldset>
+                </form>
+                </p>
+        </section>
+    </main>
+
+</body>
+
+</html>
