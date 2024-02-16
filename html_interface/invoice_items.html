@@ -48,13 +48,16 @@
                 <form id="addInvoice_Item">
                     <fieldset>
                         <legend> Add Invoice_Item</legend>
-                        <label for="Invoice_ItemName"> Name</label>
-                        <input type="text" id="fname" size="40">
-                        <label for="Invoice_ItemPhone">Phone</label>
-                        <input type="tel" id="Invoice_ItemPhone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                        <label for="Invoice_ItemEmail"> Email</label>
-                        <input type="text" name="email" id="Invoice_ItemEmail" size="40" aria-required="true"
-                            maxlength="100" required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com" />
+                        <label for="invoiceID"> invoiceID</label>
+                        <input type="text" id="invoiceID" size="40">
+                        <label for="productID"> productID</label>
+                        <input type="text" id="productID" size="40">
+                        <label for="orderQuantity"> order quantity</label>
+                        <input type="integer" id="orderQuantity" size="40">
+                        <label for="unitPrice"> unit price</label>
+                        <input type="decimal" id="unitPrice" name="unitPrice" size="40">
+
+
                     </fieldset>
                 </form>
                 </p>
