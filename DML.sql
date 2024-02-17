@@ -22,7 +22,10 @@ VALUES (:nameInput, :phoneInput, :emailInput);
 ---------------------
 
 -- get all information from Products
-SELECT * FROM Products;
+SELECT Products.productID, Vendors.name AS vendor, Products.productPrice, Products.productWeight, Products.productDescription, Products.productInStock, Products.productName
+FROM Products
+INNER JOIN Vendors
+ON Products.vendorID = Vendors.vendorID;
 
 -- Insert into Products
 INSERT INTO Products (vendorID, productPrice, productWeight, productDescription, productInStock, productName)
@@ -32,7 +35,10 @@ VALUES (:vendorIDInput, :productPriceInput, :productWeightInput, :productDescrip
 ---------------------
 
 -- get all information from Invoices
-SELECT * FROM Invoices;
+SELECT Invoices.invoiceID, Vendors.name AS vendor, Invoices.InvoiceDate
+FROM Invoices
+INNER JOIN Vendors
+ON Invoices.vendorID = Vendors.vendorID;
 
 -- Insert into Invoices
 INSERT INTO Invoices (vendorID, invoiceDate)
@@ -43,7 +49,10 @@ VALUES (:vendorIDInput, :invoiceDateInput);
 --------------------
 
 -- get all information from Invoice_Items
-SELECT * FROM Invoice_Items;
+SELECT Invoice_Items.invoiceItemsID, Invoice_Items.invoiceID, Products.productNAME AS product, Invoice_Items.orderQuantity, Invoice_Items.unitPrice
+FROM Invoice_Items
+INNER JOIN Products
+ON Invoice_Items.productID = Products.productID;
 
 -- Insert into Invoice_Items
 INSERT INTO Invoice_Items (invoiceID, productID, orderQuantity, unitPrice)
