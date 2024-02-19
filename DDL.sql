@@ -48,14 +48,14 @@ CREATE OR REPLACE TABLE Invoices (
 
 -- Records the items that are included in each invoice.
 CREATE OR REPLACE TABLE Invoice_Items (
-    invoiceItemsID INT NOT NULL AUTO_INCREMENT,
+    invoiceItemID INT NOT NULL AUTO_INCREMENT,
     invoiceID INT,
     productID INT,
     orderQuantity INT NOT NULL,
     unitPrice DECIMAL(16,2) NOT NULL,
     PRIMARY KEY (invoiceItemsID),
     FOREIGN KEY (invoiceID) REFERENCES Invoices(invoiceID) 
-    ON DELETE SET NULL
+    ON DELETE CASCADE
     ON UPDATE CASCADE,
     FOREIGN KEY (productID) REFERENCES Products(productID)
     ON DELETE SET NULL

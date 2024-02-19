@@ -6,49 +6,109 @@ Code Citations: ALL code sections within this file uses code from
 https://canvas.oregonstate.edu/courses/1946034/pages/exploration-database-application-design?module_item_id=23809325 as the skeleton code.
 */
 
+
+
 ----------------------
 --Vendors
 ----------------------
 
--- get all information from Vendors
-SELECT * FROM Vendors;
+------ SELECT (READ)------
 
--- Insert into Vendors
+-- get all vendors information
+SELECT Vendors.vendorID, Vendors.name, Vendors.phone, Vendors.email FROM Vendors;
+
+
+-------INSERT (CREATE)------
+
+-- add a new vendor
 INSERT INTO Vendors (name, phone, email)
 VALUES (:nameInput, :phoneInput, :emailInput);
+
+
+------DELETE------
+
+-- remove a vendor
+DELETE FROM Vendors WHERE Vendors.vendorID = :vendor_ID_selected_from_vendor_page;
+
+------UPDATE------
+
+-- update a vendor's data based on submission of the update vendor form
+SELECT vendorID, name, phone, email
+    FROM Vendors
+    WHERE vendorID = :vendor_ID_selected_from_vendor_page;
+
+UPDATE Vendors
+    SET name = :nameInput, phone = :phoneInput, email = :emailInput
+    WHERE vendorID = :vendor_ID_from_the_update_form;
 
 ---------------------
 --Products
 ---------------------
 
--- get all information from Products
+-----SELECT (READ)------
+
+-- get all products and their vendors' name
 SELECT Products.productID, Vendors.name AS vendor, Products.productPrice, Products.productWeight, Products.productDescription, Products.productInStock, Products.productName
 FROM Products
 INNER JOIN Vendors
 ON Products.vendorID = Vendors.vendorID;
 
--- Insert into Products
+
+------INSERT (CREATE)------
+
+--get all vendor IDs and names to populate the vendors dropdown
+SELECT vendorID, name FROM Vendors;
+
+-- add a new product
 INSERT INTO Products (vendorID, productPrice, productWeight, productDescription, productInStock, productName)
-VALUES (:vendorIDInput, :productPriceInput, :productWeightInput, :productDescriptionInput, :productInStockInput, :productNameInput);
+VALUES (:vendor_ID_from_dropdown_Input, :productPriceInput, :productWeightInput, :productDescriptionInput, :productInStockInput, :productNameInput);
+
+
+------DELETE------
+
+-- delete a product
+DELETE FROM Products WHERE Products.productID = :product_ID_selected_from_product_page;
+
+
+------UPDATE------
+
+-- update a product's data based on submission of the update product form
+SELECT productID, vendor, productPrice, productWeight, productDescription, productInStock, productName
+    FROM Products
+    WHERE productID = :product_ID_selected_from_product_page;
+
+UPDATE Products
+    SET vendor = :vendor_ID_from_dropdown_Input, productPrice = :productPriceInput, productWeight = :productWeightInput, 
+    productDescription = :productDescriptionInput, productInStock = :productInStockInput, productName = :productNameInput
+    WHERE productID = :product_ID_from_the_update_form;
+
 ---------------------
 --Invoices
 ---------------------
 
--- get all information from Invoices
-SELECT Invoices.invoiceID, Vendors.name AS vendor, Invoices.InvoiceDate
+-- Select from Invoices
+SELECT Invoices.invoiceID, Vendors.name AS vendor, Invoices.invoiceDate
 FROM Invoices
 INNER JOIN Vendors
 ON Invoices.vendorID = Vendors.vendorID;
 
 -- Insert into Invoices
-INSERT INTO Invoices (vendorID, invoiceDate)
-VALUES (:vendorIDInput, :invoiceDateInput);
+INSERT INTO Invoices (vendor, invoiceDate)
+VALUES (:vendor_ID_from_dropdown_Input, :invoiceDateInput);
+
+------stand (DELETE)------
+
+-- remove an invoice
+DELETE FROM Invoices WHERE Invoices.invoiceID = :invoice_ID_selected_from_invoice_page
+
+------stand (UPDATE)------
+
 
 --------------------
 --Invoice_Items
 --------------------
 
--- get all information from Invoice_Items
+-- Select from Invoice_Items
 SELECT Invoice_Items.invoiceItemsID, Invoice_Items.invoiceID, Products.productNAME AS product, Invoice_Items.orderQuantity, Invoice_Items.unitPrice
 FROM Invoice_Items
 INNER JOIN Products
@@ -58,10 +118,19 @@ ON Invoice_Items.productID = Products.productID;
 INSERT INTO Invoice_Items (invoiceID, productID, orderQuantity, unitPrice)
 VALUES (:invoiceIDInput, :productIDInput, :orderQuantityInput, :unitPriceInput);
 
+------stand (DELETE)------
+
+-- remove invoice item
+DELETE FROM Invoice_Items WHERE Invoice_Items.invoiceItemsID = :invoice_item_id_selected_from_invoiceItems_page
+
+------stand (UPDATE)------
+
+
 
 ---------------------
 --Customers
 ---------------------
+
 
 -- get all information from customers
 SELECT * FROM Customers;
@@ -69,6 +138,7 @@ SELECT * FROM Customers;
 -- Insert into customers/ new customer
 INSERT INTO Customers (name, email)
 VALUES (:nameInput, :emailInput);
+
 
 ---------------------
 --Sales
@@ -80,6 +150,7 @@ SELECT * FROM Sales;
 -- Insert into sales
 INSERT INTO Sales (customerID, date)
 VALUES (:customerIDInput, :dateInput);
+
 
 ---------------------
 --Menu_Items
@@ -107,6 +178,7 @@ WHERE name = :name_menu_item_from_dropdown_input
 -- Delete Menu Item by ID
 DELETE FROM Menu_Items
 WHERE menuItemID = :menuItemIDInput
+
 
 ---------------------
 --Sales_Iems
