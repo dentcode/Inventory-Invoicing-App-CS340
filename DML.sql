@@ -47,7 +47,7 @@ UPDATE Vendors
 
 -----SELECT (READ)------
 
--- get all products and their vendors' name
+-- get all products information and their vendors' name
 SELECT Products.productID, Vendors.name AS vendor, Products.productPrice, Products.productWeight, Products.productDescription, Products.productInStock, Products.productName
 FROM Products
 INNER JOIN Vendors
@@ -86,45 +86,72 @@ UPDATE Products
 --Invoices
 ---------------------
 
--- Select from Invoices
+-----SELECT (READ)------
+
+-- get all invoices information
 SELECT Invoices.invoiceID, Vendors.name AS vendor, Invoices.invoiceDate
 FROM Invoices
 INNER JOIN Vendors
 ON Invoices.vendorID = Vendors.vendorID;
 
--- Insert into Invoices
+------INSERT (CREATE)------
+
+--get all vendor IDs and names to populate the vendors dropdown (see Products Insert)
+
+-- Add a new invoice
 INSERT INTO Invoices (vendor, invoiceDate)
 VALUES (:vendor_ID_from_dropdown_Input, :invoiceDateInput);
 
-------stand (DELETE)------
+------DELETE------
 
 -- remove an invoice
 DELETE FROM Invoices WHERE Invoices.invoiceID = :invoice_ID_selected_from_invoice_page
 
-------stand (UPDATE)------
+------UPDATE------
+
+SELECT invoiceID, vendor, invoiceDate
+    FROM Invoices
+    WHERE invoiceID = :invoice_ID_selected_from_invoice_page;
+
+UPDATE Invoices
+    SET vendor = :vendor_ID_from_dropdown_Input, invoiceDate = :invoiceDateInput
+    WHERE invoice_ID_from_the_update_form;
 
 
 --------------------
 --Invoice_Items
 --------------------
 
--- Select from Invoice_Items
-SELECT Invoice_Items.invoiceItemsID, Invoice_Items.invoiceID, Products.productNAME AS product, Invoice_Items.orderQuantity, Invoice_Items.unitPrice
+-----SELECT (READ)------
+
+-- get all Invoice_Items information
+SELECT Invoice_Items.InvoiceItemID, Invoice_Items.invoiceID, Products.productNAME AS product, Invoice_Items.orderQuantity, Invoice_Items.unitPrice
 FROM Invoice_Items
 INNER JOIN Products
 ON Invoice_Items.productID = Products.productID;
 
--- Insert into Invoice_Items
-INSERT INTO Invoice_Items (invoiceID, productID, orderQuantity, unitPrice)
-VALUES (:invoiceIDInput, :productIDInput, :orderQuantityInput, :unitPriceInput);
+------INSERT (CREATE)------
 
-------stand (DELETE)------
+--get all product IDs and product names to populate the products dropdown
+SELECT productID, productName FROM Products;
+
+-- add a new invoice_item
+INSERT INTO Invoice_Items (invoiceID, product, orderQuantity, unitPrice)
+VALUES (:invoiceIDInput, :product_ID_from_dropdown_Input, :orderQuantityInput, :unitPriceInput);
+
+------DELETE------
 
 -- remove invoice item
-DELETE FROM Invoice_Items WHERE Invoice_Items.invoiceItemsID = :invoice_item_id_selected_from_invoiceItems_page
+DELETE FROM Invoice_Items WHERE Invoice_Items.InvoiceItemID = :invoice_item_id_selected_from_invoice_items_page
 
-------stand (UPDATE)------
+------UPDATE------
+SELECT InvoiceItemID, invoiceID, product, orderQuantity, unitPrice
+    FROM Invoice_Items
+    WHERE InvoiceItemID = :invoice_item_id_selected_from_invoice_items_page;
 
+UPDATE Invoice_Items
+    SET invoiceID = :invoiceIDInput, product = :product_ID_from_dropdown_Input, orderQuantity = :orderQuantityInput, unitPrice = :unitPriceInput
+    WHERE invoiceItemID = :invoice_item_ID_selected_from_the_update_form;
 
 
 ---------------------
