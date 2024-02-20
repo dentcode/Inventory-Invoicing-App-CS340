@@ -37,6 +37,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel -->
                         <th>name</th>
                         <th>phone</th>
                         <th>email</th>
+                        <th>delete</th>
                     </tr>
                 </thead>
 
@@ -50,16 +51,49 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel -->
                 <form id="addVendor">
                     <fieldset>
                         <legend> Add Vendor</legend>
-                        <label for="VendorName"> Name</label>
-                        <input type="text" id="fname" size="40">
-                        <label for="VendorPhone">Phone</label>
-                        <input type="tel" id="VendorPhone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                        <label for="VendorEmail"> Email</label>
-                        <input type="text" name="email" id="VendorEmail" size="40" aria-required="true" maxlength="100"
-                            required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com" />
+                        <p>
+                            <label for="VendorName"> Name</label>
+                            <input type="text" id="fname" size="40">
+                        </p>
+                        <p>
+                            <label for="VendorPhone">Phone</label>
+                            <input type="tel" id="VendorPhone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                        </p>
+                        <p>
+                            <label for="VendorEmail"> Email</label>
+                            <input type="text" name="email" id="VendorEmail" size="40" aria-required="true"
+                                maxlength="100" required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com" />
+                        </p>
                     </fieldset>
                 </form>
                 </p>
+
+                <p>
+                <fieldset id="updateVendor">
+                    <legend> Update Vendor </legend>
+                    <label for="updateVendor"> Select Vendor</label>
+                    <select name="updateVendor" id="updateVendor">
+                        <option value="chooseOne" selected> Choose One</option>
+                    </select>
+
+                    <form action="/updateVendor" method="POST">
+                        <p>
+                            <label for="VendorName"> Name</label>
+                            <input type="text" id="fname" size="40">
+                        </p>
+                        <p>
+                            <label for="VendorPhone">Phone</label>
+                            <input type="tel" id="VendorPhone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                        </p>
+                        <p>
+                            <label for="VendorEmail"> Email</label>
+                            <input type="text" name="email" id="VendorEmail" size="40" aria-required="true"
+                                maxlength="100" required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com" />
+                        </p>
+                    </form>
+                </fieldset>
+                </p>
+
         </section>
     </main>
 
