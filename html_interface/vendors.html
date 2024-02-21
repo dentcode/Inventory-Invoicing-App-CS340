@@ -31,13 +31,15 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel -->
             <h2> Browse Vendors</h2>
             <table border="1" cellpadding="5">
                 <thead>
+                    <th><a href="newVendor">Add New</a></th>
                     <tr>
-                        <th><a href="newVendor">Add New</a></th>
+                        <th>edit</th>
                         <th>vendorID</th>
                         <th>name</th>
                         <th>phone</th>
                         <th>email</th>
                         <th>delete</th>
+
                     </tr>
                 </thead>
 
@@ -45,7 +47,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel -->
 
                 </tbody>
             </table>
-
+            <p>&nbsp;</p>
             <p>
             <div id="insertVendor">
                 <form id="addVendor">
@@ -65,18 +67,22 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel -->
                                 maxlength="100" required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com" />
                         </p>
                     </fieldset>
+                    <input class="btn" type="submit" id="addVendor" value="Add Vendor">
+                    <input class="btn" type="button" value="Cancel" onclick="browseVendors()">
                 </form>
-                </p>
+            </div>
+            <p>&nbsp;</p>
+            <div id="update">
+                <form action="/updateVendor" method="POST">
+                    
+                    <fieldset id="updateVendor">
+                        <legend> Update Vendor </legend>
+                        <label for="updateVendor"> Select Vendor</label>
+                        <select name="updateVendor" id="updateVendor">
+                            <option value="chooseOne" selected> Choose One</option>
+                        </select>
 
-                <p>
-                <fieldset id="updateVendor">
-                    <legend> Update Vendor </legend>
-                    <label for="updateVendor"> Select Vendor</label>
-                    <select name="updateVendor" id="updateVendor">
-                        <option value="chooseOne" selected> Choose One</option>
-                    </select>
 
-                    <form action="/updateVendor" method="POST">
                         <p>
                             <label for="VendorName"> Name</label>
                             <input type="text" id="fname" size="40">
@@ -90,9 +96,13 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel -->
                             <input type="text" name="email" id="VendorEmail" size="40" aria-required="true"
                                 maxlength="100" required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com" />
                         </p>
-                    </form>
-                </fieldset>
+
+                    </fieldset>
+                    <input class="btn" type="submit" id="updateVendor" value="Update Vendor">
+                    <input class="btn" type="button" value="Cancel" onclick="browseVendors()">
+                </form>
                 </p>
+            </div>
 
         </section>
     </main>
