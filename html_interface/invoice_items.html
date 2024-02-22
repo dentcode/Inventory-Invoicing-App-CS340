@@ -48,19 +48,60 @@
                 <form id="addInvoice_Item">
                     <fieldset>
                         <legend> Add Invoice_Item</legend>
-                        <label for="invoiceID"> invoiceID</label>
-                        <input type="text" id="invoiceID" size="40">
-                        <label for="productID"> productID</label>
-                        <input type="text" id="productID" size="40">
-                        <label for="orderQuantity"> order quantity</label>
-                        <input type="integer" id="orderQuantity" size="40">
-                        <label for="unitPrice"> unit price</label>
-                        <input type="decimal" id="unitPrice" name="unitPrice" size="40">
-
+                        <p>
+                            <label for="invoiceID"> invoiceID</label>
+                            <input type="text" id="invoiceID" size="40">
+                        </p>
+                        <p>
+                            <label for="productID"> productID</label>
+                            <input type="text" id="productID" size="40">
+                        </p>
+                        <p>
+                            <label for="orderQuantity"> order quantity</label>
+                            <input type="integer" id="orderQuantity" size="40">
+                        </p>
+                        <p>
+                            <label for="unitPrice"> unit price</label>
+                            <input type="decimal" id="unitPrice" name="unitPrice" size="40">
+                        </p>
 
                     </fieldset>
+                    <input class="btn" type="submit" id="addInvoice_Item" value="Add Invoice_Item">
+                    <input class="btn" type="button" value="Cancel" onclick="browseInvoice_Items()">
                 </form>
                 </p>
+
+                <form action="/updateInvoice_Item" method="POST"></form>
+                <fieldset id="updateInvoice_Item">
+                    <legend> Update Invoice_Item </legend>
+                    <p>
+                        <label for="updateInvoice_Item"> Select Invoice_Item</label>
+                        <select name="updateInvoice_Item" id="updateInvoice_Item">
+                            <option value="chooseOne" selected> Choose One</option>
+                    </p>
+
+                    <p>
+                        <label for="invoiceID"> invoiceID</label>
+                        <input type="text" id="invoiceID" size="40">
+                    </p>
+                    <p>
+                        <label for="productID"> productID</label>
+                        <input type="text" id="productID" size="40">
+                    </p>
+                    <p>
+                        <label for="orderQuantity"> order quantity</label>
+                        <input type="integer" id="orderQuantity" size="40">
+                    </p>
+                    <p>
+                        <label for="unitPrice"> unit price</label>
+                        <input type="decimal" id="unitPrice" name="unitPrice" size="40">
+                    </p>
+
+                    </select>
+                </fieldset>
+                <input class="btn" type="submit" id="updateInvoice_Item" value="Update Invoice_Item">
+                <input class="btn" type="button" value="Cancel" onclick="browseInvoice_Items()">
+                </form>
         </section>
     </main>
 

@@ -46,14 +46,42 @@
                 <form id="addInvoice">
                     <fieldset>
                         <legend> Add Invoice</legend>
-                        <label for="vendorID"> vendorID</label>
-                        <input type="text" id="vendorID" size="40">
+                        <p>
+                            <label for="vendorID"> vendorID</label>
+                            <input type="text" id="vendorID" size="40">
+                        </p>
                         <p>
                             <label for="Date"> Date</label>
                             <input type="date" id="Date" size="40">
+                        </p>
                     </fieldset>
+                    <input class="btn" type="submit" id="addInvoice" value="Add Invoice">
+                    <input class="btn" type="button" value="Cancel" onclick="browseInvoices()">
                 </form>
-                </p>
+
+                <form action="/updateInvoice" method="POST">
+
+
+                    <fieldset id="updateInvoice">
+                        <legend> Update Invoice </legend>
+                        <label for="updateInvoice"> Select Invoice</label>
+                        <select name="updateInvoice" id="updateInvoice">
+                            <option value="chooseOne" selected> Choose One</option>
+                        </select>
+                        <p>
+                            <label for="vendorID"> vendorID</label>
+                            <input type="text" id="vendorID" size="40">
+
+                        <p>
+                            <label for="Date"> Date</label>
+                            <input type="date" id="Date" size="40">
+                        </p>
+                    </fieldset>
+                    <input class="btn" type="submit" id="updateInvoice" value="Update Invoice">
+                    <input class="btn" type="button" value="Cancel" onclick="browseInvoices()">
+                </form>
+
+
         </section>
     </main>
 
