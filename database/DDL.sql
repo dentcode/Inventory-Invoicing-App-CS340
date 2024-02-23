@@ -53,7 +53,7 @@ CREATE OR REPLACE TABLE Invoice_Items (
     productID INT,
     orderQuantity INT NOT NULL,
     unitPrice DECIMAL(16,2) NOT NULL,
-    PRIMARY KEY (invoiceItemsID),
+    PRIMARY KEY (invoiceItemID),
     FOREIGN KEY (invoiceID) REFERENCES Invoices(invoiceID) 
     ON DELETE CASCADE
     ON UPDATE CASCADE,
