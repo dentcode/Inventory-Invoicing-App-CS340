@@ -49,7 +49,7 @@
             <p>
             <form id="addSales">
                 <fieldset>
-                    <legend> Sales Items</legend>
+                    <legend> Add Sales Item</legend>
                     <label for="salesIDforItem"> Sales ID</label>
                     <input type="text" id="salesIDforItem" size="40">
             </p>
@@ -60,10 +60,33 @@
                     <label for="orderQuan"> Order Quanity</label>
                     <input type="integer" id="orderQuan" size="40">
                     </p>
+                    <p> 
+                    <label for="unitPrice"> Unit Price</label>
+                    <input type="integer" id="unitPrice" size="40"></p>
+                    <input class="btn" type="submit" id="addSalesItem" value="submit" onclick="addSalesItem()">
         
             </fieldset>
             </form>
             </p>
+
+            <form action="/updateSalesItems" method="POST"></form>
+            <fieldset id="updateSalesItems" >
+                <legend> Update Sales Item </legend>
+                <label for="updateSalesItems"> Select One Item</label>
+                <select name="updateSalesItems" id="updateSalesItems">
+                <option value="chooseOne" selected> Choose One</option>
+                </select>
+                <p>
+                <label for="orderQuan"> Order Quanity</label>
+                <input type="integer" id="orderQuan" size="40">
+                </p>
+                <p> 
+                <label for="unitPrice"> Unit Price</label>
+                <input type="integer" id="unitPrice" size="40"></p>
+                <input class="btn" type="submit" id="updateSalesItem" value="submit" onclick="updateSalesItems()">
+            </fieldset>
+            </p>
+
         </section>
     </main>
 

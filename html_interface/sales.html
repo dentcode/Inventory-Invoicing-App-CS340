@@ -38,7 +38,7 @@
 
                 <tbody>
                     <tr>
-                        <td></td>
+                        <td><a href="#">Delete</a></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -47,19 +47,48 @@
                 
             </table>
             <p>
-            <form id="addSales">
+            <form id="addSale">
                 <fieldset>
-                    <legend> Add Sales</legend>
+                    <legend> Add Sale</legend>
                     <label for="custId"> Customer ID</label>
                     <input type="text" id="custId" size="40">
                     <p>
                     <label for="dateSale"> Date</label>
                     <input type="date" id="dateSale" size="40">
                     </p>
+                    <input class="btn" type="submit" id="addcustomer" value="Add Customer" onclick="addSales">
             
             </fieldset>
             </form>
             </p>
+
+            <p>&nbsp;</p>
+                <div id="update">
+                    <form action="/updateSales" method="POST">
+                        
+                        <fieldset id="updateSale">
+                            <legend> Update Sale </legend>
+                            <label for="updateSale"> Select Sale ID</label>
+                            <select name="updateSale" id="updateSale">
+                                <option value="chooseOne" selected> Choose One</option>
+                            </select>
+    
+    
+                            <p>
+                                <label for="updateDateSale"> Date</label>
+                                <input type="date" id="updateDateSale" size="40">
+                            </p>
+        
+                            <p>
+                                <label for="updateTotalSale"> Total</label>
+                                <input type="decimal" id="updateTotalSale" size="10">
+                            </p>
+                            <input class="btn" type="submit" id="updateSale" value="Update Sale">
+                            <input class="btn" type="button" value="Cancel" onclick="updateSale()">
+                        </fieldset>
+                        
+                    </form>
+
         </section>
     </main>
 

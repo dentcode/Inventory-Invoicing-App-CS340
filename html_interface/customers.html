@@ -25,7 +25,7 @@
     </nav>
     <main>
         <section>
-            <h2> Browse Customers</h2>
+            <h2> Customers</h2>
             <table border="1" cellpadding="5">
                 <thead>
                     <tr>
@@ -75,7 +75,7 @@
                 </tbody>
             </table>
 
-            <p>
+            <p>&nbsp;</p>
             <div id="insertCustomer">
                 <form id="addCustomer">
                     <fieldset>
@@ -86,8 +86,40 @@
                         <input type="text" name="email" id="CustomerEmail" size="40" aria-required="true"
                             maxlength="100" required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com" />
                     </fieldset>
+                    <input class="btn" type="submit" id="addcustomer" value="Add Customer">
+                    <input class="btn" type="button" value="Cancel" onclick="Customers()">
+
                 </form>
-                </p>
+                
+                <p>&nbsp;</p>
+                <div id="update">
+                    <form action="/updateCustomer" method="POST">
+                        
+                        <fieldset id="updateCustomer">
+                            <legend> Update Customer </legend>
+                            <label for="updateCustomer"> Select Customer ID</label>
+                            <select name="updateCustomer" id="updateCustomer">
+                                <option value="chooseOne" selected> Choose One</option>
+                            </select>
+    
+    
+                            <p>
+                                <label for="CustomerName"> Name</label>
+                                <input type="text" id="fname" size="40">
+                            </p>
+        
+                            <p>
+                                <label for="customerEmail"> Email</label>
+                                <input type="text" name="email" id="VendorEmail" size="40" aria-required="true"
+                                    maxlength="100" required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com" />
+                            </p>
+    
+                        </fieldset>
+                        <input class="btn" type="submit" id="updateCustomer" value="Update Customer">
+                        <input class="btn" type="button" value="Cancel" onclick="Customer()">
+                    </form>
+                    
+                </div>
         </section>
     </main>
 

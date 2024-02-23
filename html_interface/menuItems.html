@@ -90,16 +90,36 @@
                 </tr>
                 </tbody>
             </table>
-
             <p>
+                <form action="/addMenuItem" method="POST"></form>
+            <fieldset id="addMenuitem" >
+                <legend> Add Menu Item </legend>
+                    <p>
+                    <label for="itemName"> Item Name :</label>
+                    <input type="text" id="itemName" size="40">
+                    </p>
+                    <p>
+                    <label for="price"> Listed Price :</label>
+                    <input type="decimal" id="price" size="40">
+                    </p>
+                    <p>
+                    <label for="quanity"> Quanity :</label>
+                    <input type="integer" id="quanity" size="40"/>
+                    </p>
+                </form>
+                <input class="btn" type="submit" id="addMenuItem" value="submit" onclick="addMenuItem()">
+            </fieldset>
+            </p>
+
+            </p>
+            <p>
+            <form action="/updateMenu" method="POST"></form>
             <fieldset id="updateMenu" >
                 <legend> Update Menu Item </legend>
                 <label for="updateMenu"> Select One Item</label>
                 <select name="updateMenu" id="updateMenu">
                 <option value="chooseOne" selected> Choose One</option>
                 </select>
-    
-                <form action="/updateMenu" method="POST">
                     <p>
                     <label for="price"> Listed Price :</label>
                     <input type="decimal" id="price" size="40">
@@ -108,9 +128,11 @@
                     <input type="integer" id="quanity" size="40"/>
                     </p>
                 </form>
+                <input class="btn" type="submit" id="updateMenuItem" value="submit" onclick="updateMenuItem()">
             </fieldset>
             </p>
 
+        
             <p>
             <fieldset id="deleteMenuItem">
                 <legend> Delete Menu Item</legend>
@@ -118,11 +140,10 @@
                 <select name="deleteMenu" id="deleteMenu">
                 <option value="chooseOne" selected> Choose One</option>
                 </select>
-
-            <p><button type="submit">Submit</button></p>
+                <p><input class="btn" type="submit" id="deleteMenuItem" value="submit" onclick="deleteMenuItem()"></p>
             </fieldset>
+            
             </p>
-
         </section>
     </main>
     

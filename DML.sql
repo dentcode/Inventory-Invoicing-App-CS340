@@ -158,41 +158,80 @@ UPDATE Invoice_Items
 --Customers
 ---------------------
 
-
+---- READ ----
 -- get all information from customers
 SELECT * FROM Customers;
 
+---- INSERT (CREATE) -----
 -- Insert into customers/ new customer
 INSERT INTO Customers (name, email)
 VALUES (:nameInput, :emailInput);
 
 
+------DELETE------
+
+-- remove a customer
+DELETE FROM Customers WHERE Customers.customerID = :customer_ID_selected_from_customer_page;
+
+------UPDATE------
+
+-- update a customer's data based on submission of the update customer form
+SELECT customerID, name, email
+    FROM Customers
+    WHERE customerID = :customer_ID_selected_from_customer_page;
+
+UPDATE Customers
+    SET name = :nameInput, email = :emailInput
+    WHERE customerID = :customer_ID_from_the_update_form;
+
 ---------------------
 --Sales
 ---------------------
 
--- get all sales
-SELECT * FROM Sales;
 
+---- READ ----
+-- get customers sale
+SELECT Customers.name AS Customer, Customers.customerID, Sales.salesID, Sales.date, Sales.total  
+FROM Sales 
+INNER JOIN Customers ON Sales.customerID = Customers.customerID
+WHERE Customers.customerID = :customer_ID_selected_from_customer_page;
+
+---- INSERT (CREATE) ----
 -- Insert into sales
 INSERT INTO Sales (customerID, date)
 VALUES (:customerIDInput, :dateInput);
 
+-- remove a sale
+DELETE FROM Sales WHERE Sales.salesID = :sales_ID_selected_from_customer_page;
+
+------UPDATE------
+
+-- update a sale's data, based on submission of the update sales form
+SELECT salesID, customerID, date, total
+    FROM Sales
+    WHERE salesID = :sales_ID_selected_from_customer_page;
+
+UPDATE Sales
+    SET date = :dateInput, total = :totalInput
+    WHERE salesID = :sales_ID_from_the_update_form;
 
 ---------------------
---Menu_Items
+--- Menu_Items
 ---------------------
-
--- get all menu itmes
-SELECT * FROM Menu_Items;
-
--- Insert into Menu items
-INSERT INTO Menu_Items (name, listedPrice, menuItmeQuanity)
-VALUES (:nameInput, :listedPriceInput, :menuItmeQuanityInput);
+--- READ ---
+-- get all menu items
+SELECT * FROM Menu_Items
 
 -- look for menu item ID by name
 SELECT menuItemID FROM Menu_Items
 WHERE name = :nameInput
+
+--- CREATE ---
+-- Insert into Menu items
+INSERT INTO Menu_Items (name, listedPrice, menuItmeQuanity)
+VALUES (:nameInput, :listedPriceInput, :menuItmeQuanityInput);
+
+--- UPDATE ---
 
 --get IDs and names to populate dropdown
 SELECT menuItemID, name, FROM Menu_Items
@@ -202,19 +241,39 @@ UPDATE Menu_Items
 SET listedPrice = :listedPriceInput, menuItmeQuanity = :menuItmeQuanityInput
 WHERE name = :name_menu_item_from_dropdown_input
 
--- Delete Menu Item by ID
+--- DELETE ---
+-- Delete Menu Item by name
 DELETE FROM Menu_Items
-WHERE menuItemID = :menuItemIDInput
+WHERE name = :name_menu_item_from_dropdown_input
 
 
 ---------------------
---Sales_Iems
+---Sales_Items
 ---------------------
+--- READ ---
+--- get informtation about a sales item by salesID
+SELECT Menu_Items.name AS "Item name", Menu_Items.menuItemID, Sales.salesID, Sales_Items.orderQuanity, Sales_Items.unitPrice 
+FROM Sales_Items
+INNER JOIN Menu_Items ON Sales_Items.menuItemId = Menu_Items.menuItemID 
+INNER JOIN Sales ON Sales_Items.salesID = Sales.salesID
+WHERE Sales.salesID = :salesIDInput;
 
---get all sales items
-SELECT * FROM Sales_Items;
+
+--- CREATE ----
 
 -- Insert into Sales Items
 INSERT INTO Sales_Items (menuItemID, orderQuanity, unitPrice)
-VALUES (:nameInput, :emailInput);
+VALUES (:menuItemIDInput, :orderQuantityInput, :unitPriceInput);
+
+--- UPDATE ---
+
+--get IDs and names to populate dropdown
+SELECT Sales.salesID, FROM Sales
+
+-- Update order quanities and unit price in Sales Items by salesID dropdown
+UPDATE Sales_Items
+SET orderQuantity = :orderQuanityInput, unitPrice = :unitPriceInput
+WHERE salesID = :sales_id_from_dropdown_input
+
+
 
