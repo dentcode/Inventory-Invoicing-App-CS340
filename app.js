@@ -60,7 +60,7 @@ app.post('/add-vendor-ajax', function (req, res) {
             res.sendStatus(400);
         }
         else {
-            // If there was no error, perform a SELECT * on bsg_people
+            // If there was no error, perform a SELECT * on Vendor
             query2 = `SELECT * FROM Vendors;`;
             db.pool.query(query2, function (error, rows, fields) {
 

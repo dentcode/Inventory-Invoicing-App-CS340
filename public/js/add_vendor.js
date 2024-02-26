@@ -15,7 +15,7 @@ addvendorForm.addEventListener("submit", function (e) {
 
     // Prevent the form from submitting
     e.preventDefault();
-    //debugger;
+    debugger;
 
     // Get form fields we need to get data from
     let inputVendorName = document.getElementById("input-vname");
@@ -86,10 +86,10 @@ addRowToTable = (data) => {
     let emailCell = document.createElement("TD");
 
     // Fill the cells with correct data
-    idCell.innerText = newRow.id;
-    nameCell.innerText = newRow.vname;
-    phoneCell.innerText = newRow.vphone;
-    emailCell.innerText = newRow.vemail;
+    idCell.innerText = newRow.vendorID;
+    nameCell.innerText = newRow.name;
+    phoneCell.innerText = newRow.phone;
+    emailCell.innerText = newRow.email;
 
     // Add the cells to the row 
     row.appendChild(idCell);
