@@ -84,7 +84,7 @@ app.post('/add-vendor-ajax', function (req, res) {
 app.delete('/delete-vendor-ajax/', function (req, res, next) {
     let data = req.body;
     let vendorID = parseInt(data.vendorID);
-    let deleteVendor = `DELETE FROM Vendor WHERE vendorID = ?`;
+    let deleteVendor = `DELETE FROM Vendors WHERE vendorID = ?`;
 
 
 

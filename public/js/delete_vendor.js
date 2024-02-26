@@ -7,15 +7,45 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%2
 as the skeleton code.
 */
 
-function deletevendor(vendorID) {
+function deleteVendor(vendorID) {
+    debugger;
+    let link = '/delete-vendor-ajax/';
+    let data = {
+        vendorID: vendorID
+    };
+
+    $.ajax({
+        url: link,
+        type: 'DELETE',
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        success: function (result) {
+            deleteRow(vendorID);
+        }
+    });
+}
+
+function deleteRow(vendorID) {
+    let table = document.getElementById("vendor-table");
+    for (let i = 0, row; row = table.rows[i]; i++) {
+        if (table.rows[i].getAttribute("data-value") == vendorID) {
+            table.deleteRow(i);
+            break;
+        }
+    }
+}
+
+
+/*
+function deleteVendor(vendorID) {
     // Put our data we want to send in a javascript object
     let data = {
         id: vendorID
     };
-
+    debugger;
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("DELETE", "/delete-vendor-ajax", true);
+    xhttp.open("DELETE", "/delete-vendor-ajax/", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -35,15 +65,16 @@ function deletevendor(vendorID) {
 }
 
 
-function deleteRow(vendorID){
+function deleteRow(vendorID) {
 
     let table = document.getElementById("vendor-table");
     for (let i = 0, row; row = table.rows[i]; i++) {
-       //iterate through rows
-       //rows would be accessed using the "row" variable assigned in the for loop
-       if (table.rows[i].getAttribute("data-value") == vendorID) {
+        //iterate through rows
+        //rows would be accessed using the "row" variable assigned in the for loop
+        if (table.rows[i].getAttribute("data-value") == vendorID) {
             table.deleteRow(i);
             break;
-       }
+        }
     }
 }
+*/

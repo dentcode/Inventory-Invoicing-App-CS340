@@ -15,7 +15,7 @@ addvendorForm.addEventListener("submit", function (e) {
 
     // Prevent the form from submitting
     e.preventDefault();
-    debugger;
+
 
     // Get form fields we need to get data from
     let inputVendorName = document.getElementById("input-vname");
@@ -85,7 +85,7 @@ addRowToTable = (data) => {
     let phoneCell = document.createElement("TD");
     let emailCell = document.createElement("TD");
 
-    let deleteCell = document.createElement("TD"); 
+    let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
     idCell.innerText = newRow.vendorID;    // needs to match attribute name in database
@@ -93,11 +93,11 @@ addRowToTable = (data) => {
     phoneCell.innerText = newRow.phone;
     emailCell.innerText = newRow.email;
 
-	deleteCell = document.createElement("button");
-	deleteCell.innerHTML = "Delete";
-	deleteCell.onclick = function(){
-deleteVendor(newRow.vendorID);
-	}
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function () {
+        deleteVendor(newRow.vendorID);
+    }
 
 
     // Add the cells to the row 
@@ -105,10 +105,10 @@ deleteVendor(newRow.vendorID);
     row.appendChild(nameCell);
     row.appendChild(phoneCell);
     row.appendChild(emailCell);
-row.appendChild(deleteCell);
+    row.appendChild(deleteCell);
 
-	// Add a row attribute so the deleteRow function can find a newly added row
-	row.setAttribute('data-value', newRow.vendorID);
+    // Add a row attribute so the deleteRow function can find a newly added row
+    row.setAttribute('data-value', newRow.vendorID);
     // Add the row to the table
     currentTable.appendChild(row);
 }
