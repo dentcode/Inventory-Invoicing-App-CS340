@@ -49,23 +49,22 @@ as the skeleton code.
 
 <!-- /views/vendor.hbs -->
 
-{{!-- Form to add a record to the table  --}}
+{{!-- Form to add a record to the table --}}
 <h2>Add Vendor</h2>
 <p>To add a new vendor, please enter their information below and click 'Submit'!</p>
 <form id="add-vendor-form-ajax">
     <label for="input-vname">Name: </label>
     <input type="text" name="input-vname" id="input-vname">
-    
+
     <label for="input-vphone">Phone: </label>
     <input type="tel" name="input-vphone" id="input-vphone">
 
     <label for="input-vemail">Email: </label>
-    <input type="text" name="input-vemail" id="input-vemail" size="40" aria-required="true"
-           maxlength="100" required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com">
+    <input type="text" name="input-vemail" id="input-vemail" size="40" aria-required="true" maxlength="100" required
+        pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com">
 
     <input type="submit">
 </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_vendor.js"></script>
-

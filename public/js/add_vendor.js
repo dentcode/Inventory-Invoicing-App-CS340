@@ -15,6 +15,7 @@ addvendorForm.addEventListener("submit", function (e) {
 
     // Prevent the form from submitting
     e.preventDefault();
+    //debugger;
 
     // Get form fields we need to get data from
     let inputVendorName = document.getElementById("input-vname");
@@ -64,11 +65,11 @@ addvendorForm.addEventListener("submit", function (e) {
 
 
 // Creates a single row from an Object representing a single record from 
-// bsg_people
+// vendor
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
-    let currentTable = document.getElementById("people-table");
+    let currentTable = document.getElementById("vendor-table");
 
     // Get the location where we should insert the new row (end of table)
     let newRowIndex = currentTable.rows.length;
@@ -77,27 +78,24 @@ addRowToTable = (data) => {
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
 
-    // Create a row and 4 cells
+    // Create a row and 3 cells
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
-    let firstNameCell = document.createElement("TD");
-    let lastNameCell = document.createElement("TD");
-    let homeworldCell = document.createElement("TD");
-    let ageCell = document.createElement("TD");
+    let nameCell = document.createElement("TD");
+    let phoneCell = document.createElement("TD");
+    let emailCell = document.createElement("TD");
 
     // Fill the cells with correct data
     idCell.innerText = newRow.id;
-    firstNameCell.innerText = newRow.vname;
-    lastNameCell.innerText = newRow.vphone;
-    homeworldCell.innerText = newRow.homeworld;
-    ageCell.innerText = newRow.age;
+    nameCell.innerText = newRow.vname;
+    phoneCell.innerText = newRow.vphone;
+    emailCell.innerText = newRow.vemail;
 
     // Add the cells to the row 
     row.appendChild(idCell);
-    row.appendChild(firstNameCell);
-    row.appendChild(lastNameCell);
-    row.appendChild(homeworldCell);
-    row.appendChild(ageCell);
+    row.appendChild(nameCell);
+    row.appendChild(phoneCell);
+    row.appendChild(emailCell);
 
     // Add the row to the table
     currentTable.appendChild(row);
