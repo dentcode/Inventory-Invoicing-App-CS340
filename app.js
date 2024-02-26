@@ -79,6 +79,32 @@ app.post('/add-vendor-ajax', function (req, res) {
         }
     })
 });
+
+// DELETE Route
+app.delete('/delete-vendor-ajax/', function (req, res, next) {
+    let data = req.body;
+    let vendorID = parseInt(data.vendorID);
+    let deleteVendor = `DELETE FROM Vendor WHERE vendorID = ?`;
+
+
+
+    // Run the 1st query
+    db.pool.query(deleteVendor, [vendorID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        else {
+            // Run the second query
+            res.sendStatus(204);
+        }
+    })
+});
+
+
 /*
     LISTENER
 */
