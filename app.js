@@ -104,6 +104,47 @@ app.delete('/delete-vendor-ajax/', function (req, res, next) {
     })
 });
 
+// UPDATE Route
+
+app.put('/put-vendor-ajax', function (req, res, next) {
+    let data = req.body;
+
+
+    let name = parseInt(data.fullname);
+    let phone = parseInt(data.phone);
+    let email = parseInt(data.email)
+    let vendorID = parseInt(data.vendorID);
+
+
+    let queryUpdateVendor = `UPDATE Vendors SET name = ?, phone = ?, email = ? WHERE vendorID = ?`;
+    let selectVendor = `SELECT * FROM Vendors WHERE vendorID = ?`;
+
+
+    // Run the 1st query
+    db.pool.query(queryUpdateVendor, [name, phone, email, vendorID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we run our second query and return that data so we can use it to update the people's
+        // table on the front-end
+        else {
+            // Run the second query
+            db.pool.query(selectVendor, [vendorID], function (error, rows, fields) {
+
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 
 /*
     LISTENER
