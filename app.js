@@ -51,7 +51,7 @@ app.get('/customer', function (req, res) {
     })  // will process this file, before sending the finished HTML to the client.
 });
 
-// get customers
+// get vendors
 
 app.get('/vendor', function (req, res) {
     let query1 = "SELECT * FROM Vendors;";
@@ -167,6 +167,33 @@ app.delete('/delete-vendor-ajax/', function (req, res, next) {
         }
     })
 });
+
+
+//DELETE Customers
+
+app.delete('/delete-customer-ajax/', function(req,res,next){
+    let data = req.body;
+    let customerID = parseInt(data.customerID);
+    let deleteCustomer = `DELETE FROM Customers WHERE customerID = ?`;
+
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteCustomer, [customerID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                res.sendStatus(204);
+                      }
+                  })
+              });
+
 
 // UPDATE Route
 

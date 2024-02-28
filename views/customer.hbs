@@ -1,31 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customers</title>
-</head>
-
-<body>
-    <header>
+<!-- customer.hbs -->
         <h1> Customers</h1>
-    </header>
-    <nav class="global">
-        <a href="./index.html"> Home |</a>
-        <a href="./customers.html"> Customers |</a>
-        <a href="./sales.html">Sales |</a>
-        <a href="./menuItems.html"> Menu Items |</a>
-        <a href="./salesItem.html"> Sales Items |</a>
-        <a href="./vendors.html"> Vendors |</a>
-        <a href="./products.html"> Products |</a>
-        <a href="./invoices.html"> Invoices |</a>
-        <a href="./invoice_items.html"> Invoice Items</a>
-    </nav>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <main>
         <section>
-            <h2> Customers</h2>
-            <table id="customer-table" border="1" cellpadding="5">
+            <table id="customer-table"  border="1" cellpadding="5">
                 <thead>
                     <tr>
                         {{#each data.[0]}}
@@ -33,42 +11,44 @@
                             {{@key}}
                         </th>
                         {{/each}}
+                        <th>Delete</th>
                     </tr>
                 </thead>
 
-                {{!-- Body section --}}
-                <tbody>
+                 {{!-- Body section --}}
+    <tbody>
 
-                    {{!-- For each row, print the id, name, email --}}
-                    {{#each data}}
-                    <tr>
-                        <td>{{this.customerID}}</td>
-                        <td>{{this.name}}</td>
-                        <td>{{this.email}}</td>
-                    </tr>
-                    {{/each}}
-                </tbody>
+        {{!-- For each row, print the id, name, email --}}
+        {{#each data}}
+         <tr data-value={{this.customerID}}>
+            <td>{{this.customerID}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.email}}</td>
+            <td><button onclick="deleteCustomer({{this.customerID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
             </table>
+            <script src="./js/delete_customer.js"></script>
 
+            
             <p>&nbsp;</p>
-            <form id="add-customer-form-ajax">
-                <fieldset>
+                <form id="add-customer-form-ajax">
+                    <fieldset>
                     <legend> Add Customer</legend>
                     <label for="input-cname"> First Name</label>
                     <input type="text" name="input-cname" id="input-cname" size="40">
 
                     <label for="input-cemail"> Email</label>
                     <input type="text" name="input-cemail" id="input-cemail" size="40" aria-required="true"
-                        maxlength="100" required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com" />
-
+                    maxlength="100" required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com" />
+                    
                     <input type="submit">
-                </fieldset>
-            </form>
-            {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-            <script src="./js/add_customer.js"></script>
+                    </fieldset>
+                </form>
+                {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+                <script src="./js/add_customer.js"></script> 
 
         </section>
     </main>
-</body>
 
-</html>
