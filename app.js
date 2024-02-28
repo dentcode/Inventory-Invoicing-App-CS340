@@ -33,19 +33,16 @@ var db = require('./database/db-connector') // Database
 */
 
 app.get('/', function (req, res) {
-    let query1 = "SELECT * FROM Vendors;"
+    res.render('index');
 
-    db.pool.query(query1, function (error, rows, fields) {
-
-        res.render('vendor', { data: rows });      // Note the call to render() and not send(). Using render() ensures the templating engine
-    })                           // will process this file, before sending the finished HTML to the client.
+    // will process this file, before sending the finished HTML to the client.
 });
 
 
 
 // get customers
 
-app.get('/', function (req, res) {
+app.get('/customer', function (req, res) {
     let query1 = "SELECT * FROM Customers;";
 
     db.pool.query(query1, function (error, rows, fields) {
@@ -61,7 +58,7 @@ app.get('/vendor', function (req, res) {
 
     db.pool.query(query1, function (error, rows, fields) {
 
-        res.render('customer', { data: rows });  // Note the call to render() and not send(). Using render() ensures the templating engine
+        res.render('vendor', { data: rows });  // Note the call to render() and not send(). Using render() ensures the templating engine
     })  // will process this file, before sending the finished HTML to the client.
 });
 
