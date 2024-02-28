@@ -1,7 +1,17 @@
-// Get the objects we need to modify
+/*
+Students: Guibely De Aguinaga and Ignacio De La Cruz
+Assignment: CS340 Project
+Course: CS340 - Group 39
+Code Citations: ALL code sections within this file uses code from
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
+as the skeleton code.
+*/
+
+
+// Get the objects that need to be modified
 let addCustomerForm = document.getElementById('add-customer-form-ajax');
 
-// Modify the objects we need
+// Modify the objects needed
 addCustomerForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
