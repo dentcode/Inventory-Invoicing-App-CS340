@@ -41,6 +41,22 @@ app.get('/', function (req, res) {
     })                           // will process this file, before sending the finished HTML to the client.
 });
 
+
+
+// get customers
+
+app.get('/', function(req, res)
+    {
+        let query1 = "SELECT * FROM Customers;";      
+
+        db.pool.query(query1, function(error, rows, fields){       
+            
+            res.render('customer', {data: rows});  // Note the call to render() and not send(). Using render() ensures the templating engine
+        })  // will process this file, before sending the finished HTML to the client.
+    });
+         
+
+
 // app.js - ROUTES section
 
 app.post('/add-vendor-ajax', function (req, res) {
@@ -79,6 +95,51 @@ app.post('/add-vendor-ajax', function (req, res) {
         }
     })
 });
+
+
+// customer post
+
+app.post('/add-customer-ajax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+   
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Customers (name, email) VALUES ('${data.name}', '${data.email}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on Customers
+            query2 = `SELECT * FROM Customers;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
 
 // DELETE Route
 app.delete('/delete-vendor-ajax/', function (req, res, next) {
