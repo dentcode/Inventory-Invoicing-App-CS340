@@ -7,6 +7,7 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%2
 https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data
 https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
 https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
 as the skeleton code.
 -->
 
@@ -74,3 +75,44 @@ as the skeleton code.
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_vendor.js"></script>
+
+
+
+{{!-- Form to update a record in the table --}}
+<h2>Updating A Vendor's Information Form</h2>
+<p>To update a specific vendor's information select their vendor ID from the drop-down menu on the left and update the
+    information</p>
+<form id="update-vendor-form-ajax">
+
+    <label for="input-vID">Vendor ID: </label>
+    <select name="input-vID" id="mySelect">
+        <option value="test">Select a Vendor</option>
+        {{#each data}}
+        <option value="{{this.vendorID}}">{{this.vendorID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-vname">Name: </label>
+    <input type="text" name="input-vname" id="input-vname">
+
+    <label for="input-vphone">Phone: </label>
+    <input type="tel" name="input-vphone" id="input-vphone">
+
+    <label for="input-vemail">Email: </label>
+    <input type="text" name="input-vemail" id="input-vemail" size="40" aria-required="true" maxlength="100" required
+        pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com">
+
+    <!--
+    <label for="input-homeworld">Homeworld: </label>
+    <select name="input-homeworld" id="input-homeworld-update">
+        <option>Select a Planet</option>
+        {{#each planets}}
+        <option value="{{this.vendorID}}">{{this.vendorID}}</option>
+        {{/each}}
+    </select>
+-->
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_vendor.js"></script>
