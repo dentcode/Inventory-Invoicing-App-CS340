@@ -12,44 +12,46 @@ as the skeleton code.
 
 
 // Get the objects we need to modify
-let updatePersonForm = document.getElementById('update-vendor-form-ajax');
+let updateVendorForm = document.getElementById('update-vendor-form-ajax');
 
 // Modify the objects we need
 updateVendorForm.addEventListener("submit", function (e) {
 
     // Prevent the form from submitting
     e.preventDefault();
+    // debugger;
 
     // Get form fields we need to get data from
     let inputvID = document.getElementById("mySelect");
-    let inputvname = document.getElementById("input-vname");
-    let inputvphone = document.getElementById("input-vphone");
-    let inputvemail = document.getElementById("input-vemail");
+    let inputvname = document.getElementById("update-name");
+    let inputvphone = document.getElementById("update-phone");
+    let inputvemail = document.getElementById("update-email");
 
     // Get the values from the form fields
     let vendorIDValue = inputvID.value;
     let nameValue = inputvname.value;
-    let phoneValue = inputvphone;
-    let emailValue = inputvemail;
+    let phoneValue = inputvphone.value;
+    let emailValue = inputvemail.value;
 
     // currently the database table for Vendors does not allow updating values to NULL
     // so we must abort if being passed NULL
-
-    if (isNaN(nameValue)) {
-        return;
-    }
-    if (isNaN(phoneValue)) {
-        return;
-    }
-    if (isNaN(emailValue)) {
-        return;
-    }
+    /*
+        if (isNaN(nameValue)) {
+            return;
+        }
+        if (isNaN(phoneValue)) {
+            return;
+        }
+        if (isNaN(emailValue)) {
+            return;
+        }
+        */
 
     // Put our data we want to send in a javascript object
     let data = {
         vid: vendorIDValue,
         vname: nameValue,
-        vphone: homeworldValue,
+        vphone: phoneValue,
         vemail: emailValue,
     }
 

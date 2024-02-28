@@ -60,7 +60,7 @@ app.post('/add-vendor-ajax', function (req, res) {
             res.sendStatus(400);
         }
         else {
-            // If there was no error, perform a SELECT * on Vendor
+            // If there was no error, perform a SELECT * on Vendors
             query2 = `SELECT * FROM Vendors;`;
             db.pool.query(query2, function (error, rows, fields) {
 
@@ -110,14 +110,14 @@ app.put('/put-vendor-ajax', function (req, res, next) {
     let data = req.body;
 
 
-    let name = parseInt(data.fullname);
-    let phone = parseInt(data.phone);
-    let email = parseInt(data.email)
-    let vendorID = parseInt(data.vendorID);
+    let name = data.vname;
+    let phone = data.vphone;
+    let email = data.vemail;
+    let vendorID = parseInt(data.vid);
 
 
     let queryUpdateVendor = `UPDATE Vendors SET name = ?, phone = ?, email = ? WHERE vendorID = ?`;
-    let selectVendor = `SELECT * FROM Vendors WHERE vendorID = ?`;
+    let selectVendor = `SELECT * FROM Vendors;`;
 
 
     // Run the 1st query
@@ -133,7 +133,7 @@ app.put('/put-vendor-ajax', function (req, res, next) {
         // table on the front-end
         else {
             // Run the second query
-            db.pool.query(selectVendor, [vendorID], function (error, rows, fields) {
+            db.pool.query(selectVendor, function (error, rows, fields) {
 
                 if (error) {
                     console.log(error);
