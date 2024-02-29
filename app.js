@@ -237,6 +237,50 @@ app.put('/put-vendor-ajax', function (req, res, next) {
     })
 });
 
+
+// UPDATE customer
+
+app.put('/put-customer-ajax', function (req, res, next) {
+    let data = req.body;
+
+
+    let name = data.name;
+    let email = data.email;
+    let customerID = parseInt(data.customerID);
+
+
+    let queryUpdateCustomer = `UPDATE Customers SET name = ?, email = ? WHERE customerID = ?`;
+    let selectCustomer = `SELECT * FROM Customers;`;
+
+
+    // Run the 1st query
+    db.pool.query(queryUpdateCustomer, [name, email, customerID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we run our second query and return that data so we can use it to update the people's
+        // table on the front-end
+        else {
+            // Run the second query
+            db.pool.query(selectCustomer, function (error, rows, fields) {
+
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
+
 /*
     LISTENER
 */
