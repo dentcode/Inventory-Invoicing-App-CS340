@@ -1,0 +1,130 @@
+<!--
+Students: Ignacio De La Cruz and Guibely De Aguinaga
+Assignment: CS340 Project
+Course: CS340 - Group 39
+Code Citations: ALL code sections within this file uses code from
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+as the skeleton code.
+-->
+
+<h1>Products</h1>
+<p>This is the products page.</p>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+{{!-- Create a table --}}
+<table id="product-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the product id, name, phone, and email, in order --}}
+        {{#each data}}
+        <tr data-value={{this.productID}}>
+            <td>{{this.productID}}</td>
+            <td>{{this.vendor}}</td>
+            <td>{{this.productprice}}</td>
+            <td>{{this.productweight}}</td>
+            <td>{{this.productdescription}}</td>
+            <td>{{this.productinstock}}</td>
+            <td>{{this.productname}}</td>
+            <td><button onclick="deleteProduct({{this.productID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_product.js"></script>
+
+
+
+<!-- /views/product.hbs -->
+
+{{!-- Form to add a record to the table --}}
+<h2>Add Product</h2>
+<p>To add a new product, please enter their information below and click 'Submit'!</p>
+<form id="add-product-form-ajax">
+    <label for="input-vname">Vendor: </label>
+    <input type="text" name="input-vname" id="input-vname">
+
+    <label for="input-price">Price: </label>
+    <input type="decimal" name="input-price" id="input-price">
+
+    <label for="input-weight">Weight: </label>
+    <input type="decimal" id="input-weight" name="input-weight">
+
+    <label for="input-description"> Description</label>
+    <textarea type="textarea" id="input-description" name="input-description"></textarea>
+
+    <label for="InStock"> In Stock?</label>
+    <input type="decimal" min="0" max="1" id="input-instock" name="input-instock">
+
+    <label for="input-name">Product Name: </label>
+    <input type="text" name="input-name" id="update-name">
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_vendor.js"></script>
+
+
+
+
+
+{{!-- Form to update a record in the table --}}
+<h2>Updating A Product's Information Form</h2>
+<p>To update a specific product's information select their product ID from the drop-down menu on the left and update the
+    information</p>
+<form id="update-product-form-ajax">
+
+    <label for="input-pID">Product ID: </label>
+    <select name="input-pID" id="mySelect">
+        <option value="test">Select a Product</option>
+        {{#each data}}
+        <option value="{{this.productID}}">{{this.productID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-vname">Vendor: </label>
+    <input type="text" name="input-vname" id="input-vname">
+
+    <label for="input-price">Price: </label>
+    <input type="decimal" name="input-price" id="input-price">
+
+    <label for="input-weight">Weight: </label>
+    <input type="decimal" id="input-weight" name="input-weight">
+
+    <label for="input-description"> Description</label>
+    <textarea type="textarea" id="input-description" name="input-description"></textarea>
+
+    <label for="InStock"> In Stock?</label>
+    <input type="decimal" min="0" max="1" id="input-instock" name="input-instock">
+
+    <label for="input-name">Product Name: </label>
+    <input type="text" name="input-name" id="update-name">
+
+
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_product.js"></script>

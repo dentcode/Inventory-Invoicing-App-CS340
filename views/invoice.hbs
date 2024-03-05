@@ -11,15 +11,13 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%2
 as the skeleton code.
 -->
 
-<!-- vendor.hbs -->
-<h1>Vendors</h1>
-<p>This is the vendor page.</p>
+<h1>Invoices</h1>
+<p>This is the invoices page.</p>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
-
 {{!-- Create a table --}}
-<table id="vendor-table">
+<table id="invoice-table">
 
     {{!-- Header section --}}
     <thead>
@@ -39,42 +37,38 @@ as the skeleton code.
     {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the vendor id, name, phone, and email, in order --}}
+        {{!-- For each row, print the product id, name, phone, and email, in order --}}
         {{#each data}}
-        <tr data-value={{this.vendorID}}>
-            <td>{{this.vendorID}}</td>
-            <td>{{this.name}}</td>
-            <td>{{this.phone}}</td>
-            <td>{{this.email}}</td>
-            <td><button onclick="deleteVendor({{this.vendorID}})">Delete</button></td>
+        <tr data-value={{this.invoiceID}}>
+            <td>{{this.invoiceID}}</td>
+            <td>{{this.vendor}}</td>
+            <td>{{this.invoicedate}}</td>
+            <td><button onclick="deleteInvoice({{this.invoiceID}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
-<script src="./js/delete_vendor.js"></script>
+<script src="./js/delete_invoice.js"></script>
 
 
-<!-- /views/vendor.hbs -->
+
+<!-- /views/invoice.hbs -->
 
 {{!-- Form to add a record to the table --}}
-<h2>Add Vendor</h2>
-<p>To add a new vendor, please enter their information below and click 'Submit'!</p>
-<form id="add-vendor-form-ajax">
-    <label for="input-vname">Name: </label>
-    <input type="text" name="input-vname" id="input-vname">
+<h2>Add Invoice</h2>
+<p>To add a new invoice, please enter their information below and click 'Submit'!</p>
+<form id="add-invoice-form-ajax">
+    <label for="input-vendorID">Vendor: </label>
+    <input type="text" name="input-vendorID" id="input-vendorID">
 
-    <label for="input-vphone">Phone: </label>
-    <input type="tel" name="input-vphone" id="input-vphone">
-
-    <label for="input-vemail">Email: </label>
-    <input type="text" name="input-vemail" id="input-vemail" size="40" aria-required="true" maxlength="100" required
-        pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com">
+    <label for="input-invoicedate">Invoice Date: </label>
+    <input type="date" name="input-invoicedate" id="input-invoicedate">
 
     <input type="submit">
 </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_vendor.js"></script>
+<script src="./js/add_invoice.js"></script>
 
 
 
@@ -84,27 +78,23 @@ as the skeleton code.
     information</p>
 <form id="update-vendor-form-ajax">
 
-    <label for="input-vID">Vendor ID: </label>
-    <select name="input-vID" id="mySelect">
-        <option value="test">Select a Vendor</option>
+    <label for="input-iID">Invoice ID: </label>
+    <select name="input-iID" id="mySelect">
+        <option value="test">Select an Invoice</option>
         {{#each data}}
-        <option value="{{this.vendorID}}">{{this.vendorID}}</option>
+        <option value="{{this.invoiceID}}">{{this.invoiceID}}</option>
         {{/each}}
     </select>
 
-    <label for="input-name">Name: </label>
-    <input type="text" name="input-name" id="update-name">
+    <label for="input-vendorID">Vendor: </label>
+    <input type="text" name="input-vendorID" id="input-vendorID">
 
-    <label for="input-phone">Phone: </label>
-    <input type="tel" name="input-phone" id="update-phone">
-
-    <label for="input-email">Email: </label>
-    <input type="text" name="input-email" id="update-email" size="40" aria-required="true" maxlength="100" required
-        pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com">
+    <label for="input-invoicedate">Invoice Date: </label>
+    <input type="date" name="input-invoicedate" id="input-invoicedate">
 
 
     <input type="submit">
 
 </form>
 
-<script src="./js/update_vendor.js"></script>
+<script src="./js/update_invoice.js"></script>

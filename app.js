@@ -51,58 +51,6 @@ app.get('/customer', function (req, res) {
     })  // will process this file, before sending the finished HTML to the client.
 });
 
-// get vendors
-
-app.get('/vendor', function (req, res) {
-    let query1 = "SELECT * FROM Vendors;";
-
-    db.pool.query(query1, function (error, rows, fields) {
-
-        res.render('vendor', { data: rows });  // Note the call to render() and not send(). Using render() ensures the templating engine
-    })  // will process this file, before sending the finished HTML to the client.
-});
-
-
-// app.js - ROUTES section
-
-app.post('/add-vendor-ajax', function (req, res) {
-
-    // Capture the incoming data and parse it back to a JS object
-    let data = req.body;
-
-    // Create the query and run it on the database
-    query1 = `INSERT INTO Vendors (name, phone, email) VALUES ('${data.vname}', '${data.vphone}', '${data.vemail}')`;
-    db.pool.query(query1, function (error, rows, fields) {
-
-        // Check to see if there was an error
-        if (error) {
-
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error)
-            res.sendStatus(400);
-        }
-        else {
-            // If there was no error, perform a SELECT * on Vendors
-            query2 = `SELECT * FROM Vendors;`;
-            db.pool.query(query2, function (error, rows, fields) {
-
-                // If there was an error on the second query, send a 400
-                if (error) {
-
-                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                    console.log(error);
-                    res.sendStatus(400);
-                }
-                // If all went well, send the results of the query back.
-                else {
-                    res.send(rows);
-                }
-            })
-        }
-    })
-});
-
-
 // customer post
 
 app.post('/add-customer-ajax', function (req, res) {
@@ -143,32 +91,6 @@ app.post('/add-customer-ajax', function (req, res) {
 });
 
 
-
-// DELETE Route
-app.delete('/delete-vendor-ajax/', function (req, res, next) {
-    let data = req.body;
-    let vendorID = parseInt(data.vendorID);
-    let deleteVendor = `DELETE FROM Vendors WHERE vendorID = ?`;
-
-
-
-    // Run the 1st query
-    db.pool.query(deleteVendor, [vendorID], function (error, rows, fields) {
-        if (error) {
-
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error);
-            res.sendStatus(400);
-        }
-
-        else {
-            // Run the second query
-            res.sendStatus(204);
-        }
-    })
-});
-
-
 //DELETE Customers
 
 app.delete('/delete-customer-ajax/', function(req,res,next){
@@ -193,49 +115,6 @@ app.delete('/delete-customer-ajax/', function(req,res,next){
                       }
                   })
               });
-
-
-// UPDATE Route
-
-app.put('/put-vendor-ajax', function (req, res, next) {
-    let data = req.body;
-
-
-    let name = data.vname;
-    let phone = data.vphone;
-    let email = data.vemail;
-    let vendorID = parseInt(data.vid);
-
-
-    let queryUpdateVendor = `UPDATE Vendors SET name = ?, phone = ?, email = ? WHERE vendorID = ?`;
-    let selectVendor = `SELECT * FROM Vendors;`;
-
-
-    // Run the 1st query
-    db.pool.query(queryUpdateVendor, [name, phone, email, vendorID], function (error, rows, fields) {
-        if (error) {
-
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error);
-            res.sendStatus(400);
-        }
-
-        // If there was no error, we run our second query and return that data so we can use it to update the people's
-        // table on the front-end
-        else {
-            // Run the second query
-            db.pool.query(selectVendor, function (error, rows, fields) {
-
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400);
-                } else {
-                    res.send(rows);
-                }
-            })
-        }
-    })
-});
 
 
 // UPDATE customer
@@ -278,6 +157,162 @@ app.put('/put-customer-ajax', function (req, res, next) {
         }
     })
 });
+
+                            /////////////////////////////////////////
+                            ////             VENDORS            ////
+                            ///////////////////////////////////////
+
+// GET VENDORS
+
+app.get('/vendor', function (req, res) {
+    let query1 = "SELECT * FROM Vendors;";
+
+    db.pool.query(query1, function (error, rows, fields) {
+
+        res.render('vendor', { data: rows });  // Note the call to render() and not send(). Using render() ensures the templating engine
+    })  // will process this file, before sending the finished HTML to the client.
+});
+
+// vendor post
+
+app.post('/add-vendor-ajax', function (req, res) {
+
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Vendors (name, phone, email) VALUES ('${data.vname}', '${data.vphone}', '${data.vemail}')`;
+    db.pool.query(query1, function (error, rows, fields) {
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else {
+            // If there was no error, perform a SELECT * on Vendors
+            query2 = `SELECT * FROM Vendors;`;
+            db.pool.query(query2, function (error, rows, fields) {
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
+// DELETE VENDORS
+
+app.delete('/delete-vendor-ajax/', function (req, res, next) {
+    let data = req.body;
+    let vendorID = parseInt(data.vendorID);
+    let deleteVendor = `DELETE FROM Vendors WHERE vendorID = ?`;
+
+
+
+    // Run the 1st query
+    db.pool.query(deleteVendor, [vendorID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        else {
+            // Run the second query
+            res.sendStatus(204);
+        }
+    })
+});
+
+
+// UPDATE VENDORS
+
+app.put('/put-vendor-ajax', function (req, res, next) {
+    let data = req.body;
+
+
+    let name = data.vname;
+    let phone = data.vphone;
+    let email = data.vemail;
+    let vendorID = parseInt(data.vid);
+
+
+    let queryUpdateVendor = `UPDATE Vendors SET name = ?, phone = ?, email = ? WHERE vendorID = ?`;
+    let selectVendor = `SELECT * FROM Vendors;`;
+
+
+    // Run the 1st query
+    db.pool.query(queryUpdateVendor, [name, phone, email, vendorID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we run our second query and return that data so we can use it to update the people's
+        // table on the front-end
+        else {
+            // Run the second query
+            db.pool.query(selectVendor, function (error, rows, fields) {
+
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+                                /////////////////////////////////////////
+                                ////           PRODUCTS             ////
+                                ///////////////////////////////////////
+
+// get products
+
+app.get('/product', function (req, res) {
+    let query1 = "SELECT * FROM Products;";
+
+    db.pool.query(query1, function (error, rows, fields) {
+
+        res.render('product', { data: rows });  // Note the call to render() and not send(). Using render() ensures the templating engine
+    })  // will process this file, before sending the finished HTML to the client.
+});
+
+
+                                /////////////////////////////////////////
+                                ////           INVOICES             ////
+                                ///////////////////////////////////////
+
+
+// get invoices
+
+app.get('/invoice', function (req, res) {
+    let query1 = "SELECT * FROM Invoices;";
+
+    db.pool.query(query1, function (error, rows, fields) {
+
+        res.render('invoice', { data: rows });  // Note the call to render() and not send(). Using render() ensures the templating engine
+    })  // will process this file, before sending the finished HTML to the client.
+});
+
 
 
 
