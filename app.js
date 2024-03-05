@@ -93,28 +93,27 @@ app.post('/add-customer-ajax', function (req, res) {
 
 //DELETE Customers
 
-app.delete('/delete-customer-ajax/', function(req,res,next){
+app.delete('/delete-customer-ajax/', function (req, res, next) {
     let data = req.body;
     let customerID = parseInt(data.customerID);
     let deleteCustomer = `DELETE FROM Customers WHERE customerID = ?`;
 
-  
-  
-          // Run the 1st query
-          db.pool.query(deleteCustomer, [customerID], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  
-              else
-              {
-                res.sendStatus(204);
-                      }
-                  })
-              });
+
+
+    // Run the 1st query
+    db.pool.query(deleteCustomer, [customerID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        else {
+            res.sendStatus(204);
+        }
+    })
+});
 
 
 // UPDATE customer
@@ -158,9 +157,9 @@ app.put('/put-customer-ajax', function (req, res, next) {
     })
 });
 
-                            /////////////////////////////////////////
-                            ////             VENDORS            ////
-                            ///////////////////////////////////////
+/////////////////////////////////////////
+////             VENDORS            ////
+///////////////////////////////////////
 
 // GET VENDORS
 
@@ -281,11 +280,11 @@ app.put('/put-vendor-ajax', function (req, res, next) {
     })
 });
 
-                                /////////////////////////////////////////
-                                ////           PRODUCTS             ////
-                                ///////////////////////////////////////
+/////////////////////////////////////////
+////           PRODUCTS             ////
+///////////////////////////////////////
 
-// get products
+// GET PRODUCTS
 
 app.get('/product', function (req, res) {
     let query1 = "SELECT * FROM Products;";
@@ -296,13 +295,124 @@ app.get('/product', function (req, res) {
     })  // will process this file, before sending the finished HTML to the client.
 });
 
+// POST PRODUCTS
 
-                                /////////////////////////////////////////
-                                ////           INVOICES             ////
-                                ///////////////////////////////////////
+app.post('/add-product-ajax', function (req, res) {
+
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO PRODUCTS (vendorID, productPrice, productWeight, productDescription, productInStock, productName) VALUES ('${data.vendorID}', '${data.price}', '${data.weight}', '${data.description}', '${data.instock}', '${data.name}')`;
+    db.pool.query(query1, function (error, rows, fields) {
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else {
+            // If there was no error, perform a SELECT * on Vendors
+            query2 = `SELECT * FROM Products;`;
+            db.pool.query(query2, function (error, rows, fields) {
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 
 
-// get invoices
+// DELETE PRODUCTS
+
+app.delete('/delete-product-ajax/', function (req, res, next) {
+    let data = req.body;
+    let productID = parseInt(data.productID);
+    let deleteProduct = `DELETE FROM Products WHERE productID = ?`;
+
+
+
+    // Run the 1st query
+    db.pool.query(deleteProduct, [productID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        else {
+            // Run the second query
+            res.sendStatus(204);
+        }
+    })
+});
+
+// UPDATE PRODUCTS
+
+app.put('/put-product-ajax', function (req, res, next) {
+    let data = req.body;
+
+    let vendorID = parseInt(data.vid);
+    let price = data.price
+    let weight = data.weight
+    let description = data.description
+    let instock = data.instock
+    let name = data.name
+
+    let productID = parseInt(data.pid)
+
+
+    let queryUpdateProduct = `UPDATE Products SET vendorID = ?, productPrice = ?, productWeight = ?, productDescription = ?, productInStock = ?, productName = ? WHERE productID = ?`;
+    let selectProduct = `SELECT * FROM Products;`;
+
+
+    // Run the 1st query
+    db.pool.query(queryUpdateProduct, [vendorID, price, weight, description, instock, name, productID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we run our second query and return that data so we can use it to update the people's
+        // table on the front-end
+        else {
+            // Run the second query
+            db.pool.query(selectProduct, function (error, rows, fields) {
+
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
+
+/////////////////////////////////////////
+////           INVOICES             ////
+///////////////////////////////////////
+
+
+// GET INVOICES
 
 app.get('/invoice', function (req, res) {
     let query1 = "SELECT * FROM Invoices;";
@@ -314,7 +424,110 @@ app.get('/invoice', function (req, res) {
 });
 
 
+// POST INVOICES
 
+app.post('/add-invoice-ajax', function (req, res) {
+
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Invoices (vendorID, invoiceDate) VALUES ('${data.vendorID}', '${data.date}')`;
+    db.pool.query(query1, function (error, rows, fields) {
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else {
+            // If there was no error, perform a SELECT * on Vendors
+            query2 = `SELECT * FROM Invoices;`;
+            db.pool.query(query2, function (error, rows, fields) {
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
+// DELETE INVOICES
+
+app.delete('/delete-invoice-ajax/', function (req, res, next) {
+    let data = req.body;
+    let invoiceID = parseInt(data.invoiceID);
+    let deleteInvoice = `DELETE FROM Invoices WHERE invoiceID = ?`;
+
+
+
+    // Run the 1st query
+    db.pool.query(deleteInvoice, [invoiceID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        else {
+            // Run the second query
+            res.sendStatus(204);
+        }
+    })
+});
+
+// UPDATE VENDORS
+
+app.put('/put-invoice-ajax', function (req, res, next) {
+    let data = req.body;
+
+
+    let vendorID = parseInt(data.vendorid);
+    let date = data.date
+    let invoiceID = parseInt(data.invoiceid);
+
+    let queryUpdateInvoice = `UPDATE Invoices SET vendorID = ?, invoiceDate = ? WHERE invoiceID = ?`;
+    let selectVendor = `SELECT * FROM Invoices;`;
+
+
+    // Run the 1st query
+    db.pool.query(queryUpdateInvoice, [vendorID, date, invoiceID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we run our second query and return that data so we can use it to update the people's
+        // table on the front-end
+        else {
+            // Run the second query
+            db.pool.query(selectInvoice, function (error, rows, fields) {
+
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 
 /*
     LISTENER
