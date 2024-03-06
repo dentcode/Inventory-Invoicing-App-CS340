@@ -489,7 +489,7 @@ app.delete('/delete-invoice-ajax/', function (req, res, next) {
     })
 });
 
-// UPDATE VENDORS
+// UPDATE INVOICES
 
 app.put('/put-invoice-ajax', function (req, res, next) {
     let data = req.body;

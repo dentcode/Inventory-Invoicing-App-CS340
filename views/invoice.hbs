@@ -41,8 +41,8 @@ as the skeleton code.
         {{#each data}}
         <tr data-value={{this.invoiceID}}>
             <td>{{this.invoiceID}}</td>
-            <td>{{this.vendor}}</td>
-            <td>{{this.invoicedate}}</td>
+            <td>{{this.vendorID}}</td>
+            <td>{{this.invoiceDate}}</td>
             <td><button onclick="deleteInvoice({{this.invoiceID}})">Delete</button></td>
         </tr>
         {{/each}}
