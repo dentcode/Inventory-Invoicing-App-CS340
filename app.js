@@ -354,6 +354,50 @@ app.delete('/delete-menuItem-ajax/', function (req, res, next) {
 });
 
 
+// UPDATE MENU_ITEMS
+
+app.put('/put-menuItem-ajax', function (req, res, next) {
+    let data = req.body;
+
+    let name = data.name;
+    let listedPrice = data.listedPrice;
+    let menuItemQuanity = data.menuItemQuanity;
+    
+    let menuItemID = parseInt(data.menuItemID);
+  
+    let queryUpdateMenuItems = `UPDATE Menu_Items SET name = ?, listedPrice = ?, menuItemQuanity = ? WHERE menuItemID = ?`;
+    let selectMenuItems = `SELECT * FROM Menu_Items`;
+
+
+    // Run the 1st query
+    db.pool.query(queryUpdateMenuItems, [name, listedPrice, menuItemQuanity, menuItemID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we run our second query and return that data so we can use it to update the people's
+        // table on the front-end
+        else {
+            // Run the second query
+            db.pool.query(selectMenuItems, function (error, rows, fields) {
+
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
+
+
 
 /////////////////////////////////////////
 ////             VENDORS            ////
