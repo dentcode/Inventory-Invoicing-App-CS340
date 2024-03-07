@@ -82,9 +82,9 @@ function updateRow(data, salesID) {
             let totalCell = updateRowIndex.getElementsByTagName("td")[3];
 
             // Reassign attributes to our value we updated to
-            customerCell.innerHTML = parsedData[0].customerID;
-            dateCell.innerHTML = parsedData[0].date;
-            totalCell.innerHTML = parsedData[0].total;
+            customerCell.innerHTML = parsedData[i -1].customerID;
+            dateCell.innerHTML = parsedData[i - 1].date;
+            totalCell.innerHTML = parsedData[i - 1].total;
 
         }
     }

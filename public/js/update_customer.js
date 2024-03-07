@@ -78,8 +78,8 @@ function updateRow(data, customerID) {
             let emailCell = updateRowIndex.getElementsByTagName("td")[2];
 
             // Reassign attributes to our value we updated to
-            nameCell.innerHTML = parsedData[0].name;
-            emailCell.innerHTML = parsedData[0].email;
+            nameCell.innerHTML = parsedData[i -1].name;
+            emailCell.innerHTML = parsedData[i - 1].email;
 
         }
     }

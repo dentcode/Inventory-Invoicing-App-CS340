@@ -36,7 +36,7 @@ updateMenuItemForm.addEventListener("submit", function (e) {
         menuItemID: menuItemIDValue,
         name: nameValue,
         listedPrice: priceValue,
-        menuItemQuanity: quanityValue
+        menuItemQuanity: quanityValue,
     }
 
     // Setup our AJAX request
@@ -77,14 +77,14 @@ function updateRow(data, menuItemID) {
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Get td of attribute values
-            let itemNameCell = updateRowIndex.getElementsByTagName("td")[1];
-            let itemPriceCell = updateRowIndex.getElementsByTagName("td")[2];
-            let itemQuanityCell = updateRowIndex.getElementsByTagName("td")[3];
+            let nameCell = updateRowIndex.getElementsByTagName("td")[1];
+            let priceCell = updateRowIndex.getElementsByTagName("td")[2];
+            let quanityCell = updateRowIndex.getElementsByTagName("td")[3];
 
             // Reassign attributes to our value we updated to
-            itemNameCell.innerHTML = parsedData[0].name;
-            itemPriceCell.innerHTML = parsedData[0].listedPrice;
-            itemQuanityCell.innerHTML = parsedData[0].menuItemQuanity;
+            nameCell.innerHTML = parsedData[i - 1].name;
+            priceCell.innerHTML = parsedData[i - 1].listedPrice;
+            quanityCell.innerHTML = parsedData[i - 1].menuItemQuanity;
 
         }
     }
