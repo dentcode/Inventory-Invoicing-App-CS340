@@ -1,0 +1,120 @@
+<!--
+Students: Guibely De Aguinaga and Ignacio De La Cruz
+Assignment: CS340 Project
+Course: CS340 - Group 39
+Code Citations: ALL code sections within this file uses code from
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+as the skeleton code.
+-->
+
+
+
+
+<!-- sales.hbs -->
+        <h1> Sales</h1>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <main>
+        <section>
+            <table id="sales-table"  border="1" cellpadding="5">
+                <thead>
+                    <tr>
+                        {{#each data.[0]}}
+                        <th>
+                            {{@key}}
+                        </th>
+                        {{/each}}
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+
+                 {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print each attributes --}}
+        {{#each data}}
+         <tr data-value={{this.salesID}}>
+            <td>{{this.salesID}}</td>
+            <td>{{this.customerID}}</td>
+            <td>{{this.date}}</td>
+            <td>{{this.total}}</td>
+            <td><button onclick="deleteSales({{this.salesID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+            </table>
+            <script src="./js/delete_sales.js"></script>
+
+            
+            <p>&nbsp;</p>
+                <form id="add-sales-form-ajax">
+                    <fieldset>
+                    <legend> Add Sale</legend>
+                    <p> Fill in Sale information</p>
+                    <label for="input-cID"> Customer ID</label>
+                    <input type="text" name="input-cID" id="input-cID" size="30">
+
+                    <p>
+                    <label for="input-sdate"> Date</label>
+                    <input type="date" name="saleDate" id="input-sdate" size="20" aria-required="true"
+                     placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" />
+                    </p>
+
+                    <p>
+                    <label for="input-stotal"> Total</label>
+                    <input type="decimal" name="input-saleTotal", placeholder="0.00" id="input-stotal" size="10">
+                    </p>
+
+                    <input type="submit">
+                    </fieldset>
+                </form>
+                {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+                <script src="./js/add_sales.js"></script> 
+
+
+        {{!-- Form to update a record in the table --}}
+<p>&nbsp;</p>
+<form id="update-sales-form-ajax">
+    <fieldset>
+    <legend> Update Sale information</legend>
+    <p>To update a specific sale, select the sale's ID and customer's ID
+        from the drop-down menu on the left and update the information</p>
+    <label for="input-salesID">Sales ID: </label>
+    <select name="input-salesID" id="mySelect">
+        <option value="test">Select an ID</option>
+        {{#each data}}
+        <option value="{{this.salesID}}">{{this.salesID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-customerID">Customer ID: </label>
+    <select name="input-customerID" id="update-customer">
+        <option value="customerSelect">Select an ID</option>
+        {{#each data}}
+        <option value="{{this.customerID}}">{{this.customerID}}</option>
+        {{/each}}
+    </select>
+
+    <p>
+    <label for="update-date"> Date</label>
+    <input type="date" name="saleDate" id="update-date" size="20" aria-required="true"
+        placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" />
+    </p>
+
+    <p>
+    <label for="update-total"> Total</label>
+    <input type="decimal" name="saleTotal" placeholder="0.00" id="update-total" size="10">
+    </p>
+    <input type="submit">
+    </fieldset>
+
+</form>
+
+<script src="./js/update_sales.js"></script>
+
+        </section>
+    </main>
+
