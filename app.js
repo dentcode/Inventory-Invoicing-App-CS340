@@ -242,9 +242,9 @@ app.put('/put-sales-ajax', function (req, res, next) {
     let customerID = parseInt(data.customerID);
     let date = data.date;
     let total = data.total;
-    
+
     let salesID = parseInt(data.salesID);
-  
+
     let queryUpdateSales = `UPDATE Sales SET customerID = ?, date = ?, total = ? WHERE salesID = ?`;
     let selectSales = `SELECT * FROM Sales`;
 
@@ -362,9 +362,9 @@ app.put('/put-menuItem-ajax', function (req, res, next) {
     let name = data.name;
     let listedPrice = data.listedPrice;
     let menuItemQuanity = data.menuItemQuanity;
-    
+
     let menuItemID = parseInt(data.menuItemID);
-  
+
     let queryUpdateMenuItems = `UPDATE Menu_Items SET name = ?, listedPrice = ?, menuItemQuanity = ? WHERE menuItemID = ?`;
     let selectMenuItems = `SELECT * FROM Menu_Items`;
 
@@ -545,7 +545,7 @@ app.post('/add-product-ajax', function (req, res) {
     let data = req.body;
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO PRODUCTS (vendorID, productPrice, productWeight, productDescription, productInStock, productName) VALUES ('${data.vendorID}', '${data.price}', '${data.weight}', '${data.description}', '${data.instock}', '${data.name}')`;
+    query1 = `INSERT INTO Products (vendorID, productPrice, productWeight, productDescription, productInStock, productName) VALUES ('${data.vendorID}', '${data.price}', '${data.weight}', '${data.description}', '${data.instock}', '${data.name}')`;
     db.pool.query(query1, function (error, rows, fields) {
 
         // Check to see if there was an error
@@ -607,14 +607,14 @@ app.delete('/delete-product-ajax/', function (req, res, next) {
 app.put('/put-product-ajax', function (req, res, next) {
     let data = req.body;
 
-    let vendorID = parseInt(data.vid);
-    let price = data.price
-    let weight = data.weight
-    let description = data.description
-    let instock = data.instock
-    let name = data.name
+    let vendorID = parseInt(data.vendorID);
+    let price = data.productPrice
+    let weight = data.productWeight
+    let description = data.productDescription
+    let instock = data.productInStock
+    let name = data.productName
 
-    let productID = parseInt(data.pid)
+    let productID = parseInt(data.productID)
 
 
     let queryUpdateProduct = `UPDATE Products SET vendorID = ?, productPrice = ?, productWeight = ?, productDescription = ?, productInStock = ?, productName = ? WHERE productID = ?`;
@@ -737,12 +737,12 @@ app.put('/put-invoice-ajax', function (req, res, next) {
     let data = req.body;
 
 
-    let vendorID = parseInt(data.vendorid);
-    let date = data.date
-    let invoiceID = parseInt(data.invoiceid);
+    let vendorID = parseInt(data.vendorID);
+    let date = data.invoiceDate
+    let invoiceID = parseInt(data.invoiceID);
 
     let queryUpdateInvoice = `UPDATE Invoices SET vendorID = ?, invoiceDate = ? WHERE invoiceID = ?`;
-    let selectVendor = `SELECT * FROM Invoices;`;
+    let selectInvoice = `SELECT * FROM Invoices;`;
 
 
     // Run the 1st query

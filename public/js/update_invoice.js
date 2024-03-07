@@ -19,12 +19,12 @@ updateInvoiceForm.addEventListener("submit", function (e) {
 
     // Prevent the form from submitting
     e.preventDefault();
-    // debugger;
+    debugger;
 
     // Get form fields we need to get data from
     let inputinvoiceID = document.getElementById("mySelect");
-    let inputvendor = document.getElementById("input-vendorID");
-    let inputdate = document.getElementById("input-invoicedate");
+    let inputvendor = document.getElementById("update-vendorID");
+    let inputdate = document.getElementById("update-invoicedate");
 
 
     // Get the values from the form fields
@@ -64,7 +64,7 @@ updateInvoiceForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response, vendorIDValue);
+            updateRow(xhttp.response, invoiceIDValue);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {

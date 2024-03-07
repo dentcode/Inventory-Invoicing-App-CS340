@@ -58,7 +58,7 @@ as the skeleton code.
 <h2>Add Invoice</h2>
 <p>To add a new invoice, please enter their information below and click 'Submit'!</p>
 <form id="add-invoice-form-ajax">
-    <label for="input-vendorID">Vendor: </label>
+    <label for="input-vendorID">Vendor ID: </label>
     <input type="text" name="input-vendorID" id="input-vendorID">
 
     <label for="input-invoicedate">Invoice Date: </label>
@@ -86,11 +86,11 @@ as the skeleton code.
         {{/each}}
     </select>
 
-    <label for="input-vendorID">Vendor: </label>
-    <input type="text" name="input-vendorID" id="input-vendorID">
+    <label for="input-vendorID">Vendor ID: </label>
+    <input type="text" name="input-vendorID" id="update-vendorID">
 
     <label for="input-invoicedate">Invoice Date: </label>
-    <input type="date" name="input-invoicedate" id="input-invoicedate">
+    <input type="date" name="input-invoicedate" id="update-invoicedate" aria-required="true" placeholder="dd-mm-yy">
 
 
     <input type="submit">

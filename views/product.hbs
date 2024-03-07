@@ -41,12 +41,12 @@ as the skeleton code.
         {{#each data}}
         <tr data-value={{this.productID}}>
             <td>{{this.productID}}</td>
-            <td>{{this.vendor}}</td>
-            <td>{{this.productprice}}</td>
-            <td>{{this.productweight}}</td>
-            <td>{{this.productdescription}}</td>
-            <td>{{this.productinstock}}</td>
-            <td>{{this.productname}}</td>
+            <td>{{this.vendorID}}</td>
+            <td>{{this.productPrice}}</td>
+            <td>{{this.productWeight}}</td>
+            <td>{{this.productDescription}}</td>
+            <td>{{this.productInStock}}</td>
+            <td>{{this.productName}}</td>
             <td><button onclick="deleteProduct({{this.productID}})">Delete</button></td>
         </tr>
         {{/each}}
@@ -62,7 +62,7 @@ as the skeleton code.
 <h2>Add Product</h2>
 <p>To add a new product, please enter their information below and click 'Submit'!</p>
 <form id="add-product-form-ajax">
-    <label for="input-vname">Vendor: </label>
+    <label for="input-vname">Vendor ID: </label>
     <input type="text" name="input-vname" id="input-vname">
 
     <label for="input-price">Price: </label>
@@ -84,7 +84,7 @@ as the skeleton code.
 </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_vendor.js"></script>
+<script src="./js/add_product.js"></script>
 
 
 
@@ -96,31 +96,31 @@ as the skeleton code.
     information</p>
 <form id="update-product-form-ajax">
 
-    <label for="input-pID">Product ID: </label>
-    <select name="input-pID" id="mySelect">
+    <label for="update-pID">Product ID: </label>
+    <select name="update-pID" id="mySelect">
         <option value="test">Select a Product</option>
         {{#each data}}
         <option value="{{this.productID}}">{{this.productID}}</option>
         {{/each}}
     </select>
 
-    <label for="input-vname">Vendor: </label>
-    <input type="text" name="input-vname" id="input-vname">
+    <label for="update-vname">Vendor ID: </label>
+    <input type="text" name="update-vname" id="update-vname">
 
-    <label for="input-price">Price: </label>
-    <input type="decimal" name="input-price" id="input-price">
+    <label for="update-price">Price: </label>
+    <input type="decimal" name="update-price" id="update-price">
 
-    <label for="input-weight">Weight: </label>
-    <input type="decimal" id="input-weight" name="input-weight">
+    <label for="update-weight">Weight: </label>
+    <input type="decimal" id="update-weight" name="update-weight">
 
-    <label for="input-description"> Description</label>
-    <textarea type="textarea" id="input-description" name="input-description" maxlength="1000"></textarea>
+    <label for="update-description"> Description</label>
+    <textarea type="textarea" id="update-description" name="update-description" maxlength="1000"></textarea>
 
     <label for="InStock"> In Stock?</label>
-    <input type="decimal" min="0" max="1" id="input-instock" name="input-instock">
+    <input type="decimal" min="0" max="1" id="update-instock" name="update-instock">
 
-    <label for="input-name">Product Name: </label>
-    <input type="text" name="input-name" id="input-name">
+    <label for="update-name">Product Name: </label>
+    <input type="text" name="update-name" id="update-name">
 
 
     <input type="submit">

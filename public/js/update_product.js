@@ -23,12 +23,12 @@ updateProductForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputproductID = document.getElementById("mySelect");
-    let inputvname = document.getElementById("input-vname");
-    let inputprice = document.getElementById("input-price");
-    let inputweight = document.getElementById("input-weight");
-    let inputdescription = document.getElementById("input-description");
-    let inputinstock = document.getElementById("input-instock");
-    let inputname = document.getElementById("input-name");
+    let inputvname = document.getElementById("update-vname");
+    let inputprice = document.getElementById("update-price");
+    let inputweight = document.getElementById("update-weight");
+    let inputdescription = document.getElementById("update-description");
+    let inputinstock = document.getElementById("update-instock");
+    let inputname = document.getElementById("update-name");
 
     // Get the values from the form fields
     let productValue = inputproductID.value;
@@ -74,7 +74,7 @@ updateProductForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response, vendorIDValue);
+            updateRow(xhttp.response, productValue);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {

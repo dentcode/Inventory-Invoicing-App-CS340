@@ -105,11 +105,11 @@ addRowToTable = (data) => {
     // Fill the cells with correct data
     idCell.innerText = newRow.productID;    // needs to match attribute name in database
     vendorCell.innerText = newRow.vendorID;
-    emailCell.innerText = newRow.productPrice;
-    priceCell.innerText = newRow.productWeight;
-    weightCell.innerText = newRow.productDescription;
-    descriptionCell.innerText = newRow.productInStock;
-    instockCell.innerText = newRow.Name;
+    priceCell.innerText = newRow.productPrice;
+    weightCell.innerText = newRow.productWeight;
+    descriptionCell.innerText = newRow.productDescription;
+    instockCell.innerText = newRow.productInStock;
+    nameCell.innerText = newRow.productName;
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
