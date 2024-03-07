@@ -1,0 +1,119 @@
+<!--
+Students: Guibely De Aguinaga and Ignacio De La Cruz
+Assignment: CS340 Project
+Course: CS340 - Group 39
+Code Citations: ALL code sections within this file uses code from
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+as the skeleton code.
+-->
+
+
+
+
+<!-- menu_items.hbs -->
+        <h1> Menu Items</h1>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <main>
+        <section>
+            <table id="menuItem-table"  border="1" cellpadding="5">
+                <thead>
+                    <tr>
+                        {{#each data.[0]}}
+                        <th>
+                            {{@key}}
+                        </th>
+                        {{/each}}
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+
+                 {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, name, email --}}
+        {{#each data}}
+         <tr data-value={{this.menuItemID}}>
+            <td>{{this.menuItemID}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.listedPrice}}</td>
+            <td>{{this.menuItemQuanity}}</td>
+            <td><button onclick="deleteMenuItem({{this.menuItemID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+            </table>
+            <script src="./js/delete_menuItem.js"></script>
+
+            
+            <p>&nbsp;</p>
+                <form id="add-menuItem-form-ajax">
+                    <fieldset>
+                    <legend> Add Menu Item</legend>
+                    <p> Fill in item information</p>
+
+                    <p>
+                    <label for="input-name">Name: </label>
+                    <input type="text" name="input-name" id="input-name">
+                    </p>
+
+                    <p>
+                    <label for="listedPrice">Price: </label>
+                    <input type="decimal" name="input-price" id="input-price">
+                    </p>
+
+                    <p>
+                    <label for="input-quanity">Quanity: </label>
+                    <input type="text" name="input-quanity" id="input-quanity">
+                    </p>
+                    
+                    <input type="submit">
+                    </fieldset>
+                </form>
+                {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+                <script src="./js/add_menuItem.js"></script> 
+
+
+        {{!-- Form to update a record in the table --}}
+<p>&nbsp;</p>
+<form id="update-menuItem-form-ajax">
+    <fieldset>
+    <legend> Update Menu Item</legend>
+    <p>To update a specific menu item select the item's ID
+        from the drop-down menu on the left and update the information</p>
+    <label for="input-menuItemID">Menu Item ID: </label>
+    <select name="input-menuItemID" id="mySelect">
+        <option value="test">Select an ID</option>
+        {{#each data}}
+        <option value="{{this.menuItemID}}">{{this.menuItemID}}</option>
+        {{/each}}
+    </select>
+    <p>
+    <label for="input-name">Name: </label>
+    <input type="text" name="input-name" id="update-name">
+    </p>
+
+    <p>
+    <label for="listedPrice">Price: </label>
+    <input type="decimal" name="input-price" id="update-price">
+    </p>
+
+    <p>
+    <label for="input-quanity">Quanity: </label>
+    <input type="number" name="input-quanity" id="update-quanity">
+    </p>
+
+    
+    <input type="submit">
+    </fieldset>
+
+</form>
+
+<script src="./js/update_menuItem.js"></script>
+
+        </section>
+    </main>
+
