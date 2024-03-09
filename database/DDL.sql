@@ -95,7 +95,8 @@ CREATE OR REPLACE TABLE Menu_Items (
 CREATE OR REPLACE TABLE Sales_Items (
   salesID INT NULL,
   menuItemID INT NULL,
-  orderQuanity INT NULL,
+  orderQuantity INT NULL,
+  unitPrice DECIMAL(16,2) NULL,
   FOREIGN KEY (salesID) REFERENCES Sales(salesID)
   ON DELETE SET NULL,
   ON UPDATE CASCADE,
@@ -335,42 +336,50 @@ VALUES(
 INSERT INTO Sales_Items(
     salesID,
     menuItemID,
-    orderQuanity
+    orderQuantity,
+    unitPrice
 )
 VALUES(
     1,
     2,
-    1
+    1,
+    3.50
 ),
 (
     1,
     5,
-    1
+    1,
+    4.00
 ),
 (
     2,
     7,
-    2
+    2,
+    3.00
 ),
 (
     3,
     4,
-    1
+    1,
+    2.30
 ),
 (
     3,
     2,
-    1
+    1,
+    3.50
 ),
 (
     4,
     1,
-    3
+    3,
+    5.00
 ),
 (
     5,
     3,
-    2
+    2,
+    4.00
 );
 
 INSERT INTO Sales(

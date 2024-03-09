@@ -398,6 +398,76 @@ app.put('/put-menuItem-ajax', function (req, res, next) {
 
 
 
+///////////// SALES_ITEMS ///////////
+
+app.get('/sales_item', function (req, res) {
+    let query1 = "SELECT * FROM Sales_Items;"               // Define our query
+
+    let query2 = "SELECT * FROM Menu_Items;"
+
+    let query3 = "SELECT * FROM Sales;"
+
+    db.pool.query(query1, function (error, rows, fields) {    // Run the 1st query
+
+        let sales_items = rows;
+
+        db.pool.query(query2, (error, rows, fields) => {
+
+            let menu_items = rows;
+
+            db.pool.query(query3, (error, rows, fields) => {
+
+                let sales = rows;
+
+                return res.render('sales_item', { data: sales_items, menu_items: menu_items, sales: sales });
+            })
+        })
+    })
+});
+
+
+// POST SALES_ITEMS
+
+app.post('/add-sales-item-ajax', function (req, res) {
+
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Sales_Items (salesID, menuItemID, orderQuantity, unitPrice) VALUES ('${data.salesID}', '${data.menuItemID}', '${data.orderQuantity}', '${data.unitPrice}')`;
+    db.pool.query(query1, function (error, rows, fields) {
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else {
+            // If there was no error, perform a SELECT * on Vendors
+            query2 = `SELECT * FROM Sales_Items;`;
+            db.pool.query(query2, function (error, rows, fields) {
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
+
+
 
 /////////////////////////////////////////
 ////             VENDORS            ////
