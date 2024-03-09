@@ -57,13 +57,25 @@ as the skeleton code.
 <p>To add a new invoice item, please enter their information below and click 'Submit'!</p>
 <form id="add-invoice-item-form-ajax">
     <label for="input-invoiceID">Invoice ID: </label>
-    <input type="text" name="input-invoiceID" id="input-invoiceID">
+    <!-- <input type="text" name="input-invoiceID" id="input-invoiceID"> -->
+    <select name="input-invoiceID" id="input-invoiceID">
+        <option value="">Select an Invoice</option>
+        {{#each invoices}}
+        <option value="{{this.invoiceID}}">{{this.invoiceID}}</option>
+        {{/each}}
+    </select>
 
     <label for="input-productID">Product ID: </label>
-    <input type="text" name="input-productID" id="input-productID">
+    <!--  <input type="text" name="input-productID" id="input-productID"> -->
+    <select name="input-productID" id="input-productID">
+        <option value="">Select a Product</option>
+        {{#each products}}
+        <option value="{{this.productID}}">{{this.productName}}</option>
+        {{/each}}
+    </select>
 
     <label for="input-orderQuantity">Quantity: </label>
-    <input type="number" name="input-orderQuantity" id="input-orderQuantity">
+    <input type="number" name="input-orderQuantity" id="input-orderQuantity" min="0">
 
     <label for="input-unitPrice">Unit Price: </label>
     <input type="decimal" name="input-unitPrice" id="input-unitPrice">

@@ -779,15 +779,30 @@ app.put('/put-invoice-ajax', function (req, res, next) {
 ////        INVOICE_ITEMS           ////
 ///////////////////////////////////////
 
-app.get('/invoice_item', function(req, res)
-    {  
-        let query1 = "SELECT * FROM Invoice_Items;";               // Define our query
+app.get('/invoice_item', function (req, res) {
+    let query1 = "SELECT * FROM Invoice_Items;";               // Define our query
 
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+    let query2 = "SELECT * FROM Products"
 
-            res.render('invoice_item', {data: rows});                  // Render the invoice_item.hbs file, and also send the renderer
-        })                                                      // an object where 'data' is equal to the 'rows' we
-    });                                                        // received back from the query
+    let query3 = "SELECT * FROM Invoices"
+
+    db.pool.query(query1, function (error, rows, fields) {    // Run the 1st query
+
+        let invoice_items = rows;
+
+        db.pool.query(query2, (error, rows, fields) => {
+
+            let products = rows;
+
+            db.pool.query(query3, (error, rows, fields) => {
+
+                let invoices = rows;
+
+                return res.render('invoice_item', { data: invoice_items, products: products, invoices: invoices });
+            })
+        })
+    })
+});
 
 
 // POST INVOICE_ITEMS
