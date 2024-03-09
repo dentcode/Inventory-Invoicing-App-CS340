@@ -14,6 +14,7 @@ as the skeleton code.
 <!-- invoice_item.hbs -->
 <h1>Invoice Items</h1>
 <p>This is the invoice items page.</p>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
 {{!-- Create a table --}}
@@ -24,12 +25,29 @@ as the skeleton code.
 
         {{!-- For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders --}}
-        <tr>
+        <!--       <tr>
             {{#each data.[0]}}
             <th>
                 {{@key}}
             </th>
             {{/each}}
+        </tr> -->
+        <tr>
+            <th>
+                Invoice Item
+            </th>
+            <th>
+                Invoice Number
+            </th>
+            <th>
+                Product
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Unit Price
+            </th>
         </tr>
     </thead>
 
@@ -38,16 +56,18 @@ as the skeleton code.
 
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
-        <tr>
+        <tr data-value="{{this.invoiceItemID}}">
             <td>{{this.invoiceItemID}}</td>
             <td>{{this.invoiceID}}</td>
             <td>{{this.productID}}</td>
             <td>{{this.orderQuantity}}</td>
             <td>{{this.unitPrice}}</td>
+            <td><button onclick="deleteInvoiceItem({{this.invoiceItemID}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<script src="./js/delete_invoice_item.js"></script>
 
 
 <!-- /views/index.hbs -->

@@ -782,9 +782,11 @@ app.put('/put-invoice-ajax', function (req, res, next) {
 app.get('/invoice_item', function (req, res) {
     let query1 = "SELECT * FROM Invoice_Items;";               // Define our query
 
-    let query2 = "SELECT * FROM Products"
+    let query2 = "SELECT * FROM Invoices";
 
-    let query3 = "SELECT * FROM Invoices"
+    let query3 = "SELECT * FROM Products";
+
+
 
     db.pool.query(query1, function (error, rows, fields) {    // Run the 1st query
 
@@ -792,13 +794,31 @@ app.get('/invoice_item', function (req, res) {
 
         db.pool.query(query2, (error, rows, fields) => {
 
-            let products = rows;
+            let invoices = rows;
 
             db.pool.query(query3, (error, rows, fields) => {
 
-                let invoices = rows;
+                let products = rows;
 
-                return res.render('invoice_item', { data: invoice_items, products: products, invoices: invoices });
+                // BEGINNING OF NEW CODE
+                // Construct an object for reference in the table
+                // Array.map is awesome for doing something with each
+                // element of an array.
+                let productmap = {}
+                products.map(product => {
+                    let productID = parseInt(product.productID, 10);
+
+                    productmap[productID] = product["productName"];
+                })
+
+                // Overwrite the homeworld ID with the name of the planet in the people object
+                invoice_items = invoice_items.map(invoice_item => {
+                    return Object.assign(invoice_item, { productID: productmap[invoice_item.productID] })
+                })
+
+                // END OF NEW COD
+
+                return res.render('invoice_item', { data: invoice_items, invoices: invoices, products: products });
             })
         })
     })
@@ -844,8 +864,39 @@ app.post('/add-invoice-item-ajax', function (req, res) {
     })
 });
 
+// DELETE INVOICE_ITEMS
 
 
+app.delete('/delete-person-ajax/', function(req,res,next){
+    let data = req.body;
+    let personID = parseInt(data.id);
+    let deleteBsg_Cert_People = `DELETE FROM bsg_cert_people WHERE pid = ?`;
+    let deleteBsg_People= `DELETE FROM bsg_people WHERE id = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteBsg_Cert_People, [personID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                  // Run the second query
+                  db.pool.query(deleteBsg_People, [personID], function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.sendStatus(204);
+                      }
+                  })
+              }
+  })});
 
 
 

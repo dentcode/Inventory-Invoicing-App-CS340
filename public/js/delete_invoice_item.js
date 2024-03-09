@@ -6,3 +6,30 @@ Code Citations: ALL code sections within this file uses code from
 https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
 as the skeleton code.
 */
+
+function deleteInvoiceItem(invoiceItemID) {
+    let link = '/delete-invoice-item-ajax/';
+    let data = {
+        invoiceItemID: invoiceItemID
+    };
+
+    $.ajax({
+        url: link,
+        type: 'DELETE',
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        success: function (result) {
+            deleteRow(invoiceItemID);
+        }
+    });
+}
+
+function deleteRow(invoiceItemID) {
+    let table = document.getElementById("invoice-item-table");
+    for (let i = 0, row; row = table.rows[i]; i++) {
+        if (table.rows[i].getAttribute("data-value") == invoiceItemID) {
+            table.deleteRow(i);
+            break;
+        }
+    }
+}
