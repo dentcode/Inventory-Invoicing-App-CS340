@@ -1,0 +1,86 @@
+<!--
+Students: Ignacio De La Cruz and Guibely De Aguinaga
+Assignment: CS340 Project
+Course: CS340 - Group 39
+Code Citations: ALL code sections within this file uses code from
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+as the skeleton code.
+-->
+
+<!-- SalesItem.hbs -->
+<h1>Sales Items</h1>
+
+{{!-- Create a table --}}
+<table id="sales-item-table" border="1" cellpadding="5">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.salesID}}</td>
+            <td>{{this.menuItemID}}</td>
+            <td>{{this.orderQuantity}}</td>
+            <td>{{this.unitPrice}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+<!-- /views/index.hbs -->
+
+{{!-- Form to add a record to the table --}}
+<h2>Add a Sales Item</h2>
+<p>To add a new item to a sale, please enter their information below and click 'Submit'!</p>
+<form id="add-sales-item-form-ajax">
+    <fieldset>
+    <label for="input-salesID">Sales ID: </label>
+    <!-- <input type="text" name="input-salesID" id="input-salesID"> -->
+    <select name="input-salesID" id="input-salesID">
+        <option value="">Select a Sale</option>
+        {{#each Sales}}
+        <option value="{{this.salesID}}">{{this.salesID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-menuItemID">Menu Item ID: </label>
+    <!--  <input type="text" name="input-productID" id="input-productID"> -->
+    <select name="input-menuitemID" id="input-menuItemID">
+        <option value="">Select an item</option>
+        {{#each products}}
+        <option value="{{this.menuItemID}}">{{this.menuItemName}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-orderQuantity">Quantity: </label>
+    <input type="number" name="input-orderQuantity" id="input-orderQuantity" min="0">
+
+    <label for="input-unitPrice">Unit Price: </label>
+    <input type="decimal" name="input-unitPrice" id="input-unitPrice">
+
+    <input type="submit">
+    </fieldset>
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_salesItem.js"></script>
