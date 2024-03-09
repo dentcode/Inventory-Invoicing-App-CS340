@@ -95,7 +95,7 @@ CREATE OR REPLACE TABLE Menu_Items (
 CREATE OR REPLACE TABLE Sales_Items (
   salesID INT NULL,
   menuItemID INT NULL,
-  orderQuanity INT NULL,
+  orderQuantity INT NULL,
   unitPrice DECIMAL(16,2) NULL,
   FOREIGN KEY (salesID) REFERENCES Sales(salesID)
   ON DELETE SET NULL,
@@ -336,7 +336,7 @@ VALUES(
 INSERT INTO Sales_Items(
     salesID,
     menuItemID,
-    orderQuanity,
+    orderQuantity,
     unitPrice
 )
 VALUES(
