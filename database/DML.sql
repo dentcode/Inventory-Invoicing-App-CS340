@@ -252,7 +252,7 @@ WHERE name = :name_menu_item_from_dropdown_input
 ---------------------
 --- READ ---
 --- get informtation about a sales item by salesID
-SELECT Menu_Items.name AS "Item name", Menu_Items.menuItemID, Sales.salesID, Sales_Items.orderQuanity 
+SELECT Menu_Items.name AS "Item name", Menu_Items.menuItemID, Sales.salesID, Sales_Items.orderQuanity, Sales_Items.unitPrice 
 FROM Sales_Items
 INNER JOIN Menu_Items ON Sales_Items.menuItemId = Menu_Items.menuItemID 
 INNER JOIN Sales ON Sales_Items.salesID = Sales.salesID
@@ -262,8 +262,8 @@ WHERE Sales.salesID = :salesIDInput;
 --- CREATE ----
 
 -- Insert into Sales Items
-INSERT INTO Sales_Items (salesID, menuItemID, orderQuanity)
-VALUES (:salesIDInput, :menuItemIDInput, :orderQuantityInput);
+INSERT INTO Sales_Items (menuItemID, orderQuanity, unitPrice)
+VALUES (:menuItemIDInput, :orderQuantityInput, :unitPriceInput);
 
 --- UPDATE ---
 
@@ -272,7 +272,7 @@ SELECT Sales.salesID, FROM Sales
 
 -- Update order quanities and unit price in Sales Items by salesID dropdown
 UPDATE Sales_Items
-SET menuItemID = :menuItemIDInput, orderQuantity = :orderQuanityInput
+SET orderQuantity = :orderQuanityInput, unitPrice = :unitPriceInput
 WHERE salesID = :sales_id_from_dropdown_input
 
 
