@@ -414,7 +414,7 @@ app.get('/vendor', function (req, res) {
     })  // will process this file, before sending the finished HTML to the client.
 });
 
-// vendor post
+// POST VENDORS
 
 app.post('/add-vendor-ajax', function (req, res) {
 
@@ -774,6 +774,7 @@ app.put('/put-invoice-ajax', function (req, res, next) {
 
 
 
+
 /////////////////////////////////////////
 ////        INVOICE_ITEMS           ////
 ///////////////////////////////////////
@@ -788,7 +789,45 @@ app.get('/invoice_item', function(req, res)
         })                                                      // an object where 'data' is equal to the 'rows' we
     });                                                        // received back from the query
 
-/////////// SALES /////////////
+
+// POST INVOICE_ITEMS
+
+app.post('/add-invoice-item-ajax', function (req, res) {
+
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Invoice_Items (invoiceID, productID, orderQuantity, unitPrice) VALUES ('${data.invoiceID}', '${data.productID}', '${data.orderQuantity}', '${data.unitPrice}')`;
+    db.pool.query(query1, function (error, rows, fields) {
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else {
+            // If there was no error, perform a SELECT * on Vendors
+            query2 = `SELECT * FROM Invoice_Items;`;
+            db.pool.query(query2, function (error, rows, fields) {
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 
 
 

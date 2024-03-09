@@ -17,7 +17,7 @@ as the skeleton code.
 
 
 {{!-- Create a table --}}
-<table>
+<table id="invoice-item-table">
 
     {{!-- Header section --}}
     <thead>
@@ -48,3 +48,28 @@ as the skeleton code.
         {{/each}}
     </tbody>
 </table>
+
+
+<!-- /views/index.hbs -->
+
+{{!-- Form to add a record to the table --}}
+<h2>Add an Invoice Item</h2>
+<p>To add a new invoice item, please enter their information below and click 'Submit'!</p>
+<form id="add-invoice-item-form-ajax">
+    <label for="input-invoiceID">Invoice ID: </label>
+    <input type="text" name="input-invoiceID" id="input-invoiceID">
+
+    <label for="input-productID">Product ID: </label>
+    <input type="text" name="input-productID" id="input-productID">
+
+    <label for="input-orderQuantity">Quantity: </label>
+    <input type="number" name="input-orderQuantity" id="input-orderQuantity">
+
+    <label for="input-unitPrice">Unit Price: </label>
+    <input type="decimal" name="input-unitPrice" id="input-unitPrice">
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_invoice_item.js"></script>
