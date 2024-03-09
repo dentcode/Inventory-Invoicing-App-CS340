@@ -4,6 +4,7 @@ Assignment: CS340 Project
 Course: CS340 - Group 39
 Code Citations: ALL code sections within this file uses code from
 https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
+https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
 as the skeleton code.
 */
 
@@ -87,6 +88,8 @@ addRowToTable = (data) => {
     let orderQuantityCell = document.createElement("TD");
     let unitPriceCell = document.createElement("TD");
 
+    let deleteCell = document.createElement("TD");
+
     // Fill the cells with correct data
     idCell.innerText = newRow.invoiceItemID;
     invoiceIDCell.innerText = newRow.invoiceID;
@@ -94,12 +97,22 @@ addRowToTable = (data) => {
     orderQuantityCell.innerText = newRow.orderQuantity;
     unitPriceCell.innerText = newRow.unitPrice;
 
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function () {
+        deletePerson(newRow.id);
+    };
+
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(invoiceIDCell);
     row.appendChild(productIDCell);
     row.appendChild(orderQuantityCell);
     row.appendChild(unitPriceCell);
+    row.appendChild(deleteCell);
+
+    // Add a row attribute so the deleteRow function can find a newly added row
+    row.setAttribute('data-value', newRow.id);
 
     // Add the row to the table
     currentTable.appendChild(row);
