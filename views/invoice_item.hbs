@@ -105,3 +105,50 @@ as the skeleton code.
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_invoice_item.js"></script>
+
+
+
+
+{{!-- Form to update a record to the table --}}
+<h2>Updating An Invoice Item's Information Form</h2>
+<p>To update a specific invoice item select their ID number from the drop-down menu on the left and update the desired
+    information</p>
+<form id="update-invoice-item-form-ajax">
+
+    <label for="update-invoiceItem">Full name: </label>
+    <select name="update-invoiceItem" id="mySelect">
+        <option value="test">Select an Invoice Item</option>
+        {{#each data}}
+        <option value="{{this.invoiceItemID}}">{{this.invoiceItemID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="update-invoiceID">Invoice Item: </label>
+    <!-- <input type="text" name="update-invoiceID" id="update-invoiceID"> -->
+    <select name="update-invoiceID" id="update-invoiceID">
+        <option value="">Select an Invoice</option>
+        {{#each invoices}}
+        <option value="{{this.invoiceID}}">{{this.invoiceID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="update-productID">Product ID: </label>
+    <!--  <input type="text" name="update-productID" id="update-productID"> -->
+    <select name="update-productID" id="update-productID">
+        <option value="">Select a Product</option>
+        {{#each products}}
+        <option value="{{this.productID}}">{{this.productName}}</option>
+        {{/each}}
+    </select>
+
+    <label for="update-orderQuantity">Quantity: </label>
+    <input type="number" name="update-orderQuantity" id="update-orderQuantity" min="0">
+
+    <label for="update-unitPrice">Unit Price: </label>
+    <input type="decimal" name="update-unitPrice" id="update-unitPrice">
+
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_invoice_item.js"></script>
