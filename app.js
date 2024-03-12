@@ -400,38 +400,22 @@ app.put('/put-menuItem-ajax', function (req, res, next) {
 
 ///////////// SALES_ITEMS ///////////
 
-app.get('/sales_item', function (req, res) {
-    let query1 = "SELECT * FROM Sales_Items;"               // Define our query
+app.get('/sales_items', function (req, res) {
+    let query1 = "SELECT * FROM Sales_Items;";
 
-    let query2 = "SELECT * FROM Menu_Items;"
+    db.pool.query(query1, function (error, rows, fields) {
 
-    let query3 = "SELECT * FROM Sales;"
-
-    db.pool.query(query1, function (error, rows, fields) {    // Run the 1st query
-
-        let sales_items = rows;
-
-        db.pool.query(query2, (error, rows, fields) => {
-
-            let menu_items = rows;
-
-            db.pool.query(query3, (error, rows, fields) => {
-
-                let sales = rows;
-
-                return res.render('sales_item', { data: sales_items, menu_items: menu_items, sales: sales });
-            })
-        })
-    })
+        res.render('sales_items', { data: rows });  // Note the call to render() and not send(). Using render() ensures the templating engine
+    })  // will process this file, before sending the finished HTML to the client.
 });
 
 
-// POST SALES_ITEMS
+// sales post
 
 app.post('/add-sales-item-ajax', function (req, res) {
-
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
+
 
     // Create the query and run it on the database
     query1 = `INSERT INTO Sales_Items (salesID, menuItemID, orderQuantity, unitPrice) VALUES ('${data.salesID}', '${data.menuItemID}', '${data.orderQuantity}', '${data.unitPrice}')`;
@@ -445,7 +429,7 @@ app.post('/add-sales-item-ajax', function (req, res) {
             res.sendStatus(400);
         }
         else {
-            // If there was no error, perform a SELECT * on Vendors
+            // If there was no error, perform a SELECT * on Customers
             query2 = `SELECT * FROM Sales_Items;`;
             db.pool.query(query2, function (error, rows, fields) {
 
