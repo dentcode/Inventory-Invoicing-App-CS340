@@ -946,40 +946,43 @@ app.delete('/delete-invoice-item-ajax/', function (req, res, next) {
 
 // UPDATE INVOICE ITEMS
 
-app.put('/put-invoice-item-ajax', function(req,res,next){
+app.put('/put-invoice-item-ajax', function (req, res, next) {
     let data = req.body;
-  
-    let homeworld = parseInt(data.homeworld);
-    let person = parseInt(data.fullname);
-  
-    let queryUpdateWorld = `UPDATE bsg_people SET homeworld = ? WHERE bsg_people.id = ?`;
-    let selectWorld = `SELECT * FROM bsg_planets WHERE id = ?`
-  
-          // Run the 1st query
-          db.pool.query(queryUpdateWorld, [homeworld, person], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  
-              // If there was no error, we run our second query and return that data so we can use it to update the people's
-              // table on the front-end
-              else
-              {
-                  // Run the second query
-                  db.pool.query(selectWorld, [homeworld], function(error, rows, fields) {
-  
-                      if (error) {
-                          console.log(error);
-                          res.sendStatus(400);
-                      } else {
-                          res.send(rows);
-                      }
-                  })
-              }
-  })});
+
+    let invoiceID = parseInt(data.invoiceID);
+    let productID = parseInt(data.productID);
+    let orderQuantity = data.orderQuantity;
+    let unitPrice = data.unitPrice;
+    let invoiceItemID = parseInt(data.invoiceItemID);
+
+    let queryUpdateWorld = `UPDATE Invoice_Items SET invoiceID = ?, productID = ?, orderQuantity = ?, unitPrice = ? WHERE Invoice_Items.invoiceItemID = ?`;
+    let selectWorld = `SELECT * FROM Products WHERE productID = ?`;
+
+    // Run the 1st query
+    db.pool.query(queryUpdateWorld, [invoiceID, productID, orderQuantity, unitPrice, invoiceItemID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we run our second query and return that data so we can use it to update the people's
+        // table on the front-end
+        else {
+            // Run the second query
+            db.pool.query(selectWorld, [productID], function (error, rows, fields) {
+
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 
 /*
     LISTENER

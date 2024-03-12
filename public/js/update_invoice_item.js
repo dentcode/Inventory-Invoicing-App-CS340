@@ -60,7 +60,7 @@ updatePersonForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response, fullNameValue);
+            updateRow(xhttp.response, invoiceItemValue);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -74,7 +74,7 @@ updatePersonForm.addEventListener("submit", function (e) {
 })
 
 
-function updateRow(data, personID) {
+function updateRow(data, invoiceItemID) {
     let parsedData = JSON.parse(data);
 
     let table = document.getElementById("invoice-item-table");
