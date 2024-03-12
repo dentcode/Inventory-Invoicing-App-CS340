@@ -55,20 +55,18 @@ as the skeleton code.
 <form id="add-sales-item-form-ajax">
     <fieldset>
     <label for="input-salesID">Sales ID: </label>
-    <!-- <input type="text" name="input-salesID" id="input-salesID"> -->
     <select name="input-salesID" id="input-salesID">
         <option value="">Select a Sale</option>
-        {{#each Sales}}
+        {{#each sales}}
         <option value="{{this.salesID}}">{{this.salesID}}</option>
         {{/each}}
     </select>
 
     <label for="input-menuItemID">Menu Item ID: </label>
-    <!--  <input type="text" name="input-productID" id="input-productID"> -->
     <select name="input-menuitemID" id="input-menuItemID">
         <option value="">Select an item</option>
-        {{#each products}}
-        <option value="{{this.menuItemID}}">{{this.menuItemName}}</option>
+        {{#each items}}
+        <option value="{{this.menuItemID}}">{{this.menuItemID}}</option>
         {{/each}}
     </select>
 
