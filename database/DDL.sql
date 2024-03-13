@@ -93,10 +93,12 @@ CREATE OR REPLACE TABLE Menu_Items (
 
 -- Records which items are part of any particular Sales
 CREATE OR REPLACE TABLE Sales_Items (
-  salesID INT NULL,
-  menuItemID INT NULL,
-  orderQuantity INT NULL,
-  unitPrice DECIMAL(16,2) NULL,
+  salesItemID INT NOT NULL AUTO_INCREMENT,
+  salesID INT,
+  menuItemID INT,
+  orderQuantity INT NOT NULL,
+  unitPrice DECIMAL(16,2) NOT NULL,
+  PRIMARY KEY (salesItemID),
   FOREIGN KEY (salesID) REFERENCES Sales(salesID)
   ON DELETE SET NULL
   ON UPDATE CASCADE,
