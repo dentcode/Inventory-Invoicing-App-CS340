@@ -13,98 +13,126 @@ as the skeleton code.
 
 <!-- vendor.hbs -->
 <h1>Vendors</h1>
-<p>This is the vendor page.</p>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-
-
-{{!-- Create a table --}}
-<table id="vendor-table">
-
-    {{!-- Header section --}}
-    <thead>
-
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-            <th>delete</th>
-        </tr>
-    </thead>
-
-    {{!-- Body section --}}
-    <tbody>
-
-        {{!-- For each row, print the vendor id, name, phone, and email, in order --}}
-        {{#each data}}
-        <tr data-value={{this.vendorID}}>
-            <td>{{this.vendorID}}</td>
-            <td>{{this.name}}</td>
-            <td>{{this.phone}}</td>
-            <td>{{this.email}}</td>
-            <td><button onclick="deleteVendor({{this.vendorID}})">Delete</button></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-<script src="./js/delete_vendor.js"></script>
-
-
-<!-- /views/vendor.hbs -->
-
-{{!-- Form to add a record to the table --}}
-<h2>Add Vendor</h2>
-<p>To add a new vendor, please enter their information below and click 'Submit'!</p>
-<form id="add-vendor-form-ajax">
-    <label for="input-vname">Name: </label>
-    <input type="text" name="input-vname" id="input-vname">
-
-    <label for="input-vphone">Phone: </label>
-    <input type="tel" name="input-vphone" id="input-vphone">
-
-    <label for="input-vemail">Email: </label>
-    <input type="text" name="input-vemail" id="input-vemail" size="40" aria-required="true" maxlength="100" required
-        pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com">
-
-    <input type="submit">
-</form>
-
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_vendor.js"></script>
+<main>
+    <section>
 
 
 
-{{!-- Form to update a record in the table --}}
-<h2>Updating A Vendor's Information Form</h2>
-<p>To update a specific vendor's information select their vendor ID from the drop-down menu on the left and update the
-    information</p>
-<form id="update-vendor-form-ajax">
+        {{!-- Create a table --}}
+        <table id="vendor-table" border="1" cellpadding="5">
 
-    <label for="input-vID">Vendor ID: </label>
-    <select name="input-vID" id="mySelect">
-        <option value="test">Select a Vendor</option>
-        {{#each data}}
-        <option value="{{this.vendorID}}">{{this.vendorID}}</option>
-        {{/each}}
-    </select>
+            {{!-- Header section --}}
+            <thead>
 
-    <label for="input-name">Name: </label>
-    <input type="text" name="input-name" id="update-name">
+                {{!-- For just the first row, we print each key of the row object as a header cell so we
+                know what each column means when the page renders --}}
+                <tr>
+                    {{#each data.[0]}}
+                    <th>
+                        {{@key}}
+                    </th>
+                    {{/each}}
+                    <th>delete</th>
+                </tr>
+            </thead>
 
-    <label for="input-phone">Phone: </label>
-    <input type="tel" name="input-phone" id="update-phone">
+            {{!-- Body section --}}
+            <tbody>
 
-    <label for="input-email">Email: </label>
-    <input type="text" name="input-email" id="update-email" size="40" aria-required="true" maxlength="100" required
-        pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com">
+                {{!-- For each row, print the vendor id, name, phone, and email, in order --}}
+                {{#each data}}
+                <tr data-value={{this.vendorID}}>
+                    <td>{{this.vendorID}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.phone}}</td>
+                    <td>{{this.email}}</td>
+                    <td><button onclick="deleteVendor({{this.vendorID}})">Delete</button></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <script src="./js/delete_vendor.js"></script>
+
+        <p>&nbsp;</p>
+        <!-- /views/vendor.hbs -->
+
+        {{!-- Form to add a record to the table --}}
 
 
-    <input type="submit">
+        <form id="add-vendor-form-ajax">
+            <fieldset>
+                <legend>Add Vendor</legend>
+                <p>To add a new vendor, please enter their information below and click 'Submit'!</p>
 
-</form>
+                <p>
+                    <label for="input-vname">Name: </label>
+                    <input type="text" name="input-vname" id="input-vname">
+                </p>
 
-<script src="./js/update_vendor.js"></script>
+                <p>
+                    <label for="input-vphone">Phone: </label>
+                    <input type="tel" name="input-vphone" id="input-vphone">
+                </p>
+
+                <p>
+                    <label for="input-vemail">Email: </label>
+                    <input type="text" name="input-vemail" id="input-vemail" size="40" aria-required="true"
+                        maxlength="100" required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com">
+                </p>
+
+                <input type="submit">
+            </fieldset>
+        </form>
+
+        {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+        <script src="./js/add_vendor.js"></script>
+
+
+
+        {{!-- Form to update a record in the table --}}
+        <h2></h2>
+
+
+        <p>&nbsp;</p>
+        <form id="update-vendor-form-ajax">
+            <fieldset>
+                <legend>Update Vendor</legend>
+                <p>To update a specific vendor's information select their vendor ID from the drop-down menu on the left
+                    and update the information</p>
+
+                <label for="input-vID">Vendor ID: </label>
+                <select name="input-vID" id="mySelect">
+                    <option value="test">Select a Vendor</option>
+                    {{#each data}}
+                    <option value="{{this.vendorID}}">{{this.vendorID}}</option>
+                    {{/each}}
+                </select>
+
+                <p>
+                    <label for="input-name">Name: </label>
+                    <input type="text" name="input-name" id="update-name">
+                </p>
+
+                <p>
+                    <label for="input-phone">Phone: </label>
+                    <input type="tel" name="input-phone" id="update-phone">
+                </p>
+
+                <p>
+                    <label for="input-email">Email: </label>
+                    <input type="text" name="input-email" id="update-email" size="40" aria-required="true"
+                        maxlength="100" required pattern="[^ @]+@[^ @]+.[a-z]+" placeholder="name@host.com">
+                </p>
+
+
+                <input type="submit">
+            </fieldset>
+
+        </form>
+
+        <script src="./js/update_vendor.js"></script>
+
+    </section>
+</main>

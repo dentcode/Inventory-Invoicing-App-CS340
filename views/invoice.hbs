@@ -12,89 +12,112 @@ as the skeleton code.
 -->
 
 <h1>Invoices</h1>
-<p>This is the invoices page.</p>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-
-{{!-- Create a table --}}
-<table id="invoice-table">
-
-    {{!-- Header section --}}
-    <thead>
-
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-            <th>delete</th>
-        </tr>
-    </thead>
-
-    {{!-- Body section --}}
-    <tbody>
-
-        {{!-- For each row, print the product id, name, phone, and email, in order --}}
-        {{#each data}}
-        <tr data-value={{this.invoiceID}}>
-            <td>{{this.invoiceID}}</td>
-            <td>{{this.vendorID}}</td>
-            <td>{{this.invoiceDate}}</td>
-            <td><button onclick="deleteInvoice({{this.invoiceID}})">Delete</button></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-<script src="./js/delete_invoice.js"></script>
+<main>
+    <section>
 
 
+        {{!-- Create a table --}}
+        <table id="invoice-table" border="1" cellpadding="5">
 
-<!-- /views/invoice.hbs -->
+            {{!-- Header section --}}
+            <thead>
 
-{{!-- Form to add a record to the table --}}
-<h2>Add Invoice</h2>
-<p>To add a new invoice, please enter their information below and click 'Submit'!</p>
-<form id="add-invoice-form-ajax">
-    <label for="input-vendorID">Vendor ID: </label>
-    <input type="text" name="input-vendorID" id="input-vendorID">
+                {{!-- For just the first row, we print each key of the row object as a header cell so we
+                know what each column means when the page renders --}}
+                <tr>
+                    {{#each data.[0]}}
+                    <th>
+                        {{@key}}
+                    </th>
+                    {{/each}}
+                    <th>delete</th>
+                </tr>
+            </thead>
 
-    <label for="input-invoicedate">Invoice Date: </label>
-    <input type="date" name="input-invoicedate" id="input-invoicedate">
+            {{!-- Body section --}}
+            <tbody>
 
-    <input type="submit">
-</form>
-
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_invoice.js"></script>
+                {{!-- For each row, print the product id, name, phone, and email, in order --}}
+                {{#each data}}
+                <tr data-value={{this.invoiceID}}>
+                    <td>{{this.invoiceID}}</td>
+                    <td>{{this.vendorID}}</td>
+                    <td>{{this.invoiceDate}}</td>
+                    <td><button onclick="deleteInvoice({{this.invoiceID}})">Delete</button></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <script src="./js/delete_invoice.js"></script>
 
 
 
-{{!-- Form to update a record in the table --}}
-<h2>Updating A Vendor's Information Form</h2>
-<p>To update a specific vendor's information select their vendor ID from the drop-down menu on the left and update the
-    information</p>
-<form id="update-invoice-form-ajax">
+        <!-- /views/invoice.hbs -->
 
-    <label for="input-iID">Invoice ID: </label>
-    <select name="input-iID" id="mySelect">
-        <option value="test">Select an Invoice</option>
-        {{#each data}}
-        <option value="{{this.invoiceID}}">{{this.invoiceID}}</option>
-        {{/each}}
-    </select>
+        {{!-- Form to add a record to the table --}}
+        <p>&nbsp;</p>
 
-    <label for="input-vendorID">Vendor ID: </label>
-    <input type="text" name="input-vendorID" id="update-vendorID">
+        <form id="add-invoice-form-ajax">
+            <fieldset>
+                <legend>Add Invoice</legend>
+                <p>To add a new invoice, please enter their information below and click 'Submit'!</p>
 
-    <label for="input-invoicedate">Invoice Date: </label>
-    <input type="date" name="input-invoicedate" id="update-invoicedate" aria-required="true" placeholder="dd-mm-yy">
+                <p>
+                    <label for="input-vendorID">Vendor ID: </label>
+                    <input type="text" name="input-vendorID" id="input-vendorID">
+                </p>
+
+                <p>
+                    <label for="input-invoicedate">Invoice Date: </label>
+                    <input type="date" name="input-invoicedate" id="input-invoicedate">
+                </p>
+
+                <input type="submit">
+            </fieldset>
+        </form>
+
+        {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+        <script src="./js/add_invoice.js"></script>
 
 
-    <input type="submit">
 
-</form>
+        {{!-- Form to update a record in the table --}}
+        <p>&nbsp;</p>
+        <h2></h2>
 
-<script src="./js/update_invoice.js"></script>
+        <form id="update-invoice-form-ajax">
+            <fieldset>
+                <legend>Update Vendor</legend>
+                <p>To update a specific vendor's information select their vendor ID from the drop-down menu on the left
+                    and update the information</p>
+                <label for="input-iID">Invoice ID: </label>
+                <select name="input-iID" id="mySelect">
+                    <option value="test">Select an Invoice</option>
+                    {{#each data}}
+                    <option value="{{this.invoiceID}}">{{this.invoiceID}}</option>
+                    {{/each}}
+                </select>
+
+                <p>
+                    <label for="input-vendorID">Vendor ID: </label>
+                    <input type="text" name="input-vendorID" id="update-vendorID">
+                </p>
+
+                <p>
+                    <label for="input-invoicedate">Invoice Date: </label>
+                    <input type="date" name="input-invoicedate" id="update-invoicedate" aria-required="true"
+                        placeholder="dd-mm-yy">
+                </p>
+
+
+                <input type="submit">
+            </fieldset>
+
+        </form>
+
+        <script src="./js/update_invoice.js"></script>
+
+    </section>
+</main>

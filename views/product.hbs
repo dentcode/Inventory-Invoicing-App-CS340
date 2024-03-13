@@ -12,119 +12,155 @@ as the skeleton code.
 -->
 
 <h1>Products</h1>
-<p>This is the products page.</p>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-
-{{!-- Create a table --}}
-<table id="product-table">
-
-    {{!-- Header section --}}
-    <thead>
-
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-            <th>delete</th>
-        </tr>
-    </thead>
-
-    {{!-- Body section --}}
-    <tbody>
-
-        {{!-- For each row, print the product id, name, phone, and email, in order --}}
-        {{#each data}}
-        <tr data-value={{this.productID}}>
-            <td>{{this.productID}}</td>
-            <td>{{this.vendorID}}</td>
-            <td>{{this.productPrice}}</td>
-            <td>{{this.productWeight}}</td>
-            <td>{{this.productDescription}}</td>
-            <td>{{this.productInStock}}</td>
-            <td>{{this.productName}}</td>
-            <td><button onclick="deleteProduct({{this.productID}})">Delete</button></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-<script src="./js/delete_product.js"></script>
+<main>
+    <section>
 
 
+        {{!-- Create a table --}}
+        <table id="product-table" border="1" cellpadding="5">
 
-<!-- /views/product.hbs -->
+            {{!-- Header section --}}
+            <thead>
 
-{{!-- Form to add a record to the table --}}
-<h2>Add Product</h2>
-<p>To add a new product, please enter their information below and click 'Submit'!</p>
-<form id="add-product-form-ajax">
-    <label for="input-vname">Vendor ID: </label>
-    <input type="text" name="input-vname" id="input-vname">
+                {{!-- For just the first row, we print each key of the row object as a header cell so we
+                know what each column means when the page renders --}}
+                <tr>
+                    {{#each data.[0]}}
+                    <th>
+                        {{@key}}
+                    </th>
+                    {{/each}}
+                    <th>delete</th>
+                </tr>
+            </thead>
 
-    <label for="input-price">Price: </label>
-    <input type="decimal" name="input-price" id="input-price">
+            {{!-- Body section --}}
+            <tbody>
 
-    <label for="input-weight">Weight: </label>
-    <input type="decimal" id="input-weight" name="input-weight">
-
-    <label for="input-description"> Description</label>
-    <textarea type="textarea" id="input-description" name="input-description"></textarea>
-
-    <label for="input-instock"> In Stock?</label>
-    <input type="decimal" min="0" max="1" id="input-instock" name="input-instock">
-
-    <label for="input-name">Product Name: </label>
-    <input type="text" name="input-name" id="input-name">
-
-    <input type="submit">
-</form>
-
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_product.js"></script>
-
-
-
-
-
-{{!-- Form to update a record in the table --}}
-<h2>Updating A Product's Information Form</h2>
-<p>To update a specific product's information select their product ID from the drop-down menu on the left and update the
-    information</p>
-<form id="update-product-form-ajax">
-
-    <label for="update-pID">Product ID: </label>
-    <select name="update-pID" id="mySelect">
-        <option value="test">Select a Product</option>
-        {{#each data}}
-        <option value="{{this.productID}}">{{this.productID}}</option>
-        {{/each}}
-    </select>
-
-    <label for="update-vname">Vendor ID: </label>
-    <input type="text" name="update-vname" id="update-vname">
-
-    <label for="update-price">Price: </label>
-    <input type="decimal" name="update-price" id="update-price">
-
-    <label for="update-weight">Weight: </label>
-    <input type="decimal" id="update-weight" name="update-weight">
-
-    <label for="update-description"> Description</label>
-    <textarea type="textarea" id="update-description" name="update-description" maxlength="1000"></textarea>
-
-    <label for="InStock"> In Stock?</label>
-    <input type="decimal" min="0" max="1" id="update-instock" name="update-instock">
-
-    <label for="update-name">Product Name: </label>
-    <input type="text" name="update-name" id="update-name">
+                {{!-- For each row, print the product id, name, phone, and email, in order --}}
+                {{#each data}}
+                <tr data-value={{this.productID}}>
+                    <td>{{this.productID}}</td>
+                    <td>{{this.vendorID}}</td>
+                    <td>{{this.productPrice}}</td>
+                    <td>{{this.productWeight}}</td>
+                    <td>{{this.productDescription}}</td>
+                    <td>{{this.productInStock}}</td>
+                    <td>{{this.productName}}</td>
+                    <td><button onclick="deleteProduct({{this.productID}})">Delete</button></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <script src="./js/delete_product.js"></script>
 
 
-    <input type="submit">
+        <p>&nbsp;</p>
+        <!-- /views/product.hbs -->
 
-</form>
+        {{!-- Form to add a record to the table --}}
 
-<script src="./js/update_product.js"></script>
+        <form id="add-product-form-ajax">
+            <fieldset>
+                <legend>Add Product</legend>
+                <p>To add a new product, please enter their information below and click 'Submit'!</p>
+
+                <p>
+                    <label for="input-vname">Vendor ID: </label>
+                    <input type="text" name="input-vname" id="input-vname">
+                </p>
+
+                <p>
+                    <label for="input-price">Price: </label>
+                    <input type="decimal" name="input-price" id="input-price">
+                </p>
+
+                <p>
+                    <label for="input-weight">Weight: </label>
+                    <input type="decimal" id="input-weight" name="input-weight">
+                </p>
+                <p>
+                    <label for="input-description"> Description</label>
+                    <textarea type="textarea" id="input-description" name="input-description"></textarea>
+                </p>
+
+                <p>
+                    <label for="input-instock"> In Stock?</label>
+                    <input type="decimal" min="0" max="1" id="input-instock" name="input-instock">
+                </p>
+
+                <p>
+                    <label for="input-name">Product Name: </label>
+                    <input type="text" name="input-name" id="input-name">
+                </p>
+
+                <input type="submit">
+            </fieldset>
+        </form>
+
+        {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+        <script src="./js/add_product.js"></script>
+
+
+
+
+        <p>&nbsp;</p>
+        {{!-- Form to update a record in the table --}}
+
+
+        <form id="update-product-form-ajax">
+            <fieldset>
+                <legend>Update Product</legend>
+                <p>To update a specific product's information select their product ID from the drop-down menu on the
+                    left and update the information</p>
+
+                <label for="update-pID">Product ID: </label>
+                <select name="update-pID" id="mySelect">
+                    <option value="test">Select a Product</option>
+                    {{#each data}}
+                    <option value="{{this.productID}}">{{this.productID}}</option>
+                    {{/each}}
+                </select>
+                <p>
+                    <label for="update-vname">Vendor ID: </label>
+                    <input type="text" name="update-vname" id="update-vname">
+                </p>
+
+                <p>
+                    <label for="update-price">Price: </label>
+                    <input type="decimal" name="update-price" id="update-price">
+                </p>
+
+                <p>
+                    <label for="update-weight">Weight: </label>
+                    <input type="decimal" id="update-weight" name="update-weight">
+                </p>
+
+                <p>
+                    <label for="update-description"> Description</label>
+                    <textarea type="textarea" id="update-description" name="update-description"
+                        maxlength="1000"></textarea>
+                </p>
+
+                <p>
+                    <label for="InStock"> In Stock?</label>
+                    <input type="decimal" min="0" max="1" id="update-instock" name="update-instock">
+                </p>
+
+                <p>
+                    <label for="update-name">Product Name: </label>
+                    <input type="text" name="update-name" id="update-name">
+                </p>
+
+
+                <input type="submit">
+            </fieldset>
+
+        </form>
+
+        <script src="./js/update_product.js"></script>
+
+    </section>
+</main>
