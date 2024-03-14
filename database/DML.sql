@@ -263,7 +263,7 @@ WHERE Sales.salesID = :salesIDInput;
 
 -- Insert into Sales Items
 INSERT INTO Sales_Items (salesID, menuItemID, orderQuantity, unitPrice)
-VALUES (:menuItemIDInput, :orderQuantityInput, :unitPriceInput);
+VALUES (:salesID, :menuItemIDInput, :orderQuantityInput, :unitPriceInput);
 
 --- UPDATE ---
 
@@ -272,7 +272,7 @@ SELECT Sales.salesID, FROM Sales
 
 -- Update order quanities and unit price in Sales Items by salesID dropdown
 UPDATE Sales_Items
-SET  menuItemID = :menuItemIDInput, orderQuantity = :orderQuantityInput, unitPrice = :unitPriceInput
+SET  salesID = :salesIDInput, menuItemID = :menuItemIDInput, orderQuantity = :orderQuantityInput, unitPrice = :unitPriceInput
 WHERE salesID = :sales_id_from_dropdown_input
 
 

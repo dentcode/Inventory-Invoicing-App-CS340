@@ -1,0 +1,45 @@
+body {
+    background-color:rgba(243, 243, 224, 0.948);
+    margin:2px;
+    border-radius:6px;
+    padding:0% ;
+    min-width: 800px;
+    
+}
+
+header{
+    min-width: 800px;
+}
+
+img {
+    width:10%;
+    padding: 0px;
+    height: 50%;
+    border-radius: 4%;
+    margin-left: 47%;
+    
+}
+
+
+#main{
+    margin-left: 44%;
+    color:rgb(191, 99, 99);
+    font-style: italic;
+}
+
+nav {text-align:center;}
+nav a {
+  background-color: rgba(243, 243, 224, 0.948);
+  color:black; 
+  font-weight:bold;
+  text-decoration:none;
+  border-radius:3px;
+  padding:1%;
+  font-family: sans-serif;
+  font-size: 120%;
+
+}
+nav a:hover {
+    background-color:rgb(190, 101, 101);
+ 
+}

@@ -51,6 +51,11 @@ updateSalesForm.addEventListener("submit", function (e) {
             // Add the new data to the table
             updateRow(xhttp.response, salesIDValue);
 
+            inputsID.value = '';
+            inputcID.value = '';
+            inputDate.value = '';
+            inputTotal.value = '';
+
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
