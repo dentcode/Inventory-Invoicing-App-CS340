@@ -17,16 +17,16 @@ addSalesItemForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputsalesID = document.getElementById("input-salesID");
+    let inputSalesID = document.getElementById("input-salesID");
     let inputMenuItemID = document.getElementById("input-menuItemID");
-    let inputorderQuantity = document.getElementById("input-orderQuantity");
-    let inputunitPrice = document.getElementById("input-unitPrice");
+    let inputOrderQuantity = document.getElementById("input-orderQuantity");
+    let inputUnitPrice = document.getElementById("input-unitPrice");
 
     // Get the values from the form fields
-    let salesIDValue = inputsalesID.value;
+    let salesIDValue = inputSalesID.value;
     let menuItemIDValue = inputMenuItemID.value;
-    let orderQuantityValue = inputorderQuantity.value;
-    let unitPriceValue = inputunitPrice.value;
+    let orderQuantityValue = inputOrderQuantity.value;
+    let unitPriceValue = inputUnitPrice.value;
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -49,10 +49,10 @@ addSalesItemForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            inputsalesID.value = '';
+            inputSalesID.value = '';
             inputMenuItemID.value = '';
-            inputorderQuantity.value = '';
-            inputunitPrice.value = '';
+            inputOrderQuantity.value = '';
+            inputUnitPrice.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -66,7 +66,7 @@ addSalesItemForm.addEventListener("submit", function (e) {
 
 
 // Creates a single row from an Object representing a single record from 
-// bsg_people
+// Sales_Items
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
@@ -81,22 +81,37 @@ addRowToTable = (data) => {
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
+    let salesItemIDCell = document.createElement("TD");
     let salesIDCell = document.createElement("TD");
     let menuItemIDCell = document.createElement("TD");
     let orderQuantityCell = document.createElement("TD");
     let unitPriceCell = document.createElement("TD");
 
+    let deleteCell = document.createElement("TD");
+
     // Fill the cells with correct data
+    salesItemIDCell = newRow.salesItemID;
     salesIDCell.innerText = newRow.salesID;
-    menuItemIDCell.innerText = newRow.salesID;
+    menuItemIDCell.innerText = newRow.menuItemID;
     orderQuantityCell.innerText = newRow.orderQuantity;
     unitPriceCell.innerText = newRow.unitPrice;
 
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function () {
+        deleteSalesItem(newRow.salesItemID);
+    }
+
     // Add the cells to the row 
+    row.appendChild(salesItemIDCell);
     row.appendChild(salesIDCell);
     row.appendChild(menuItemIDCell);
     row.appendChild(orderQuantityCell);
     row.appendChild(unitPriceCell);
+    row.appendChild(deleteCell);
+
+        // Add a row attribute so the deleteRow function can find a newly added row
+        row.setAttribute('data-value', newRow.salesItemID);
 
     // Add the row to the table
     currentTable.appendChild(row);

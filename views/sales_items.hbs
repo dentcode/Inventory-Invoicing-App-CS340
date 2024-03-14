@@ -11,41 +11,44 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%2
 as the skeleton code.
 -->
 
-<!-- SalesItem.hbs -->
+<!-- Sales_items.hbs -->
 <h1>Sales Items</h1>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 {{!-- Create a table --}}
 <table id="sales-item-table" border="1" cellpadding="5">
 
     {{!-- Header section --}}
-    <thead>
+     <thead>
+                    <tr>
+                        {{#each data.[0]}}
+                        <th>
+                            {{@key}}
+                        </th>
+                        {{/each}}
+                        <th>Delete</th>
+                    </tr>
+                </tr>
+            </thead>
 
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-        </tr>
-    </thead>
+        </thead>
 
-    {{!-- Body section --}}
+                 {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{!-- For each row, print each attributes --}}
         {{#each data}}
-        <tr>
+         <tr data-value={{this.salesItemID}}>
+            <td>{{this.salesItemID}}</td>
             <td>{{this.salesID}}</td>
             <td>{{this.menuItemID}}</td>
             <td>{{this.orderQuantity}}</td>
             <td>{{this.unitPrice}}</td>
+            <td><button onclick="deleteSalesItem({{this.salesItemID}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
-</table>
-
+            </table>
+            <script src="./js/delete_sales_item.js"></script>
 
 <!-- /views/index.hbs -->
 
@@ -55,20 +58,12 @@ as the skeleton code.
 <form id="add-sales-item-form-ajax">
     <fieldset>
     <label for="input-salesID">Sales ID: </label>
-    <select name="input-salesID" id="input-salesID">
-        <option value="">Select a Sale</option>
-        {{#each sales}}
-        <option value="{{this.salesID}}">{{this.salesID}}</option>
-        {{/each}}
-    </select>
+    <input type="number" name="input-salesID" id="input-salesID">
+        
 
     <label for="input-menuItemID">Menu Item ID: </label>
-    <select name="input-menuitemID" id="input-menuItemID">
-        <option value="">Select an item</option>
-        {{#each items}}
-        <option value="{{this.menuItemID}}">{{this.menuItemID}}</option>
-        {{/each}}
-    </select>
+    <input type="number" name="input-menuitemID" id="input-menuItemID">
+       
 
     <label for="input-orderQuantity">Quantity: </label>
     <input type="number" name="input-orderQuantity" id="input-orderQuantity" min="0">
