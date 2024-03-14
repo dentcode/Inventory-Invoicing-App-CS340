@@ -28,6 +28,8 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 
 var db = require('./database/db-connector') // Database
 
+
+
 /*
     ROUTES
 */
@@ -37,6 +39,9 @@ app.get('/', function (req, res) {
 
     // will process this file, before sending the finished HTML to the client.
 });
+
+
+
 
 //////// CUSTOMERS /////////
 
