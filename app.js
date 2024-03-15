@@ -407,16 +407,52 @@ app.put('/put-menuItem-ajax', function (req, res, next) {
 ///////////// SALES_ITEMS ///////////
 
 app.get('/sales_items', function (req, res) {
-    let query1 = "SELECT * FROM Sales_Items;";
+    let query1 = "SELECT * FROM Sales_Items;";               // Define our query
 
-    db.pool.query(query1, function (error, rows, fields) {
+    let query2 = "SELECT * FROM Sales";
 
-        res.render('sales_items', { data: rows });  // Note the call to render() and not send(). Using render() ensures the templating engine
-    })  // will process this file, before sending the finished HTML to the client.
+    let query3 = "SELECT * FROM Menu_Items";
+
+
+
+    db.pool.query(query1, function (error, rows, fields) {    // Run the 1st query
+
+        let sales_items = rows;
+
+        db.pool.query(query2, (error, rows, fields) => {
+
+            let sales = rows;
+
+            db.pool.query(query3, (error, rows, fields) => {
+
+                let menuItems = rows;
+
+                // BEGINNING OF NEW CODE
+                // Construct an object for reference in the table
+                // Array.map is awesome for doing something with each
+                // element of an array.
+                let menuItemsmap = {}
+                menuItems.map(menuItem => {
+                    let menuItemID = parseInt(menuItem.menuItemID, 10);
+
+                    menuItemsmap[menuItemID] = menuItem["name"];
+                })
+
+                // Overwrite the menuItem ID with the name of the planet in the people object
+                sales_items = sales_items.map(sale_item => {
+                    return Object.assign(sale_item, { menuItemID: menuItemsmap[sale_item.menuItemID] })
+                })
+
+                // END OF NEW CODe
+
+                return res.render('sales_items', { data: sales_items, sales: sales, menuItems: menuItems });
+            })
+        })
+    })
 });
 
 
-// sales post
+// sales-items post
 
 app.post('/add-sales-item-ajax', function (req, res) {
     // Capture the incoming data and parse it back to a JS object
@@ -455,6 +491,73 @@ app.post('/add-sales-item-ajax', function (req, res) {
     })
 });
 
+//DELTE SALES_ITEMS
+
+app.delete('/delete-sales-item-ajax/', function (req, res, next) {
+    let data = req.body;
+    let salesItemID = parseInt(data.salesItemID);
+    let deleteSalesItem = `DELETE FROM Sales_Items WHERE salesItemID = ?`;
+
+
+
+    // Run the 1st query
+    db.pool.query(deleteSalesItem, [salesItemID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        else {
+            // Run the second query
+            res.sendStatus(204);
+        }
+    })
+});
+
+
+// UPDATE SALES_ITEMS
+
+app.put('/put-sales-item-ajax', function (req, res, next) {
+    let data = req.body;
+
+    let salesID = parseInt(data.salesID);
+    let menuItemID = parseInt(data.menuItemID);
+    let quantity = data.orderQuantity;
+    let unitPrice = data.unitPrice;
+
+    let salesItemID = parseInt(data.salesItemID);
+
+    let queryUpdateSalesItems = `UPDATE Sales_Items SET salesID = ?, menuItemID = ?, orderQuantity = ?, unitPrice = ? WHERE salesItemID = ?`;
+    let selectSalesItems = `SELECT * FROM Sales_Items`;
+
+
+    // Run the 1st query
+    db.pool.query(queryUpdateSalesItems, [salesID, menuItemID, quantity, unitPrice, salesItemID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we run our second query and return that data so we can use it to update the people's
+        // table on the front-end
+        else {
+            // Run the second query
+            db.pool.query(selectSalesItems, function (error, rows, fields) {
+
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 
 
 

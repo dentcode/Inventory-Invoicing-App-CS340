@@ -268,12 +268,12 @@ VALUES (:salesID, :menuItemIDInput, :orderQuantityInput, :unitPriceInput);
 --- UPDATE ---
 
 --get IDs and names to populate dropdown
-SELECT Sales.salesID, FROM Sales
+SELECT salesItemID, FROM Sales_Items
 
 -- Update order quanities and unit price in Sales Items by salesID dropdown
 UPDATE Sales_Items
 SET  salesID = :salesIDInput, menuItemID = :menuItemIDInput, orderQuantity = :orderQuantityInput, unitPrice = :unitPriceInput
-WHERE salesID = :sales_id_from_dropdown_input
+WHERE salesItemID = :sales_item_id_from_dropdown_input
 
 
 
