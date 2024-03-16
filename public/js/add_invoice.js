@@ -15,7 +15,7 @@ addvendorForm.addEventListener("submit", function (e) {
 
     // Prevent the form from submitting
     e.preventDefault();
-    debugger;
+    //debugger;
 
 
     // Get form fields we need to get data from
@@ -86,7 +86,7 @@ addRowToTable = (data) => {
     let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
-    idCell.innerText = newRow.vendorID;    // needs to match attribute name in database
+    idCell.innerText = newRow.invoiceID;    // needs to match attribute name in database
     vendorCell.innerText = newRow.vendorID;
     dateCell.innerText = newRow.invoiceDate;
 

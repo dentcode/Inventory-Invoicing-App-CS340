@@ -66,7 +66,13 @@ as the skeleton code.
 
                 <p>
                     <label for="input-vendorID">Vendor ID: </label>
-                    <input type="text" name="input-vendorID" id="input-vendorID">
+                    <select name="input-vendorID" id="input-vendorID">
+                        <option value="">Select a Vendor</option>
+                        {{#each vendors}}
+                        <option value="{{this.vendorID}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                    {{!-- <input type="text" name="input-vendorID" id="input-vendorID"> --}}
                 </p>
 
                 <p>
@@ -102,7 +108,13 @@ as the skeleton code.
 
                 <p>
                     <label for="input-vendorID">Vendor ID: </label>
-                    <input type="text" name="input-vendorID" id="update-vendorID">
+                    <select name="input-vendorID" id="update-vendorID">
+                        <option value="">Select a Vendor</option>
+                        {{#each vendors}}
+                        <option value="{{this.vendorID}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                    {{!-- <input type="text" name="input-vendorID" id="update-vendorID"> --}}
                 </p>
 
                 <p>

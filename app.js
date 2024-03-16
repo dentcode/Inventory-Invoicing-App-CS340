@@ -591,10 +591,39 @@ app.put('/put-vendor-ajax', function (req, res, next) {
 app.get('/product', function (req, res) {
     let query1 = "SELECT * FROM Products;";
 
+    let query2 = "SELECT * FROM Vendors;"
+
     db.pool.query(query1, function (error, rows, fields) {
 
-        res.render('product', { data: rows });  // Note the call to render() and not send(). Using render() ensures the templating engine
-    })  // will process this file, before sending the finished HTML to the client.
+        let products = rows;
+
+        db.pool.query(query2, (error, rows, fields) => {
+
+            let vendors = rows;
+
+            // BEGINNING OF NEW CODE
+
+            // Construct an object for reference in the table
+            // Array.map is awesome for doing something with each
+            // element of an array.
+            let vendormap = {}
+            vendors.map(vendor => {
+                let vendorID = parseInt(vendor.vendorID, 10);
+
+                vendormap[vendorID] = vendor["name"];
+            })
+
+            // Overwrite the homeworld ID with the name of the planet in the people object
+            products = products.map(product => {
+                return Object.assign(product, { vendorID: vendormap[product.vendorID] })
+            })
+
+            // END OF NEW CODE
+
+            return res.render('product', { data: products, vendors: vendors });
+
+        })
+    })
 });
 
 // POST PRODUCTS
@@ -719,10 +748,38 @@ app.put('/put-product-ajax', function (req, res, next) {
 app.get('/invoice', function (req, res) {
     let query1 = "SELECT * FROM Invoices;";
 
+    let query2 = "SELECT * FROM Vendors;"
+
     db.pool.query(query1, function (error, rows, fields) {
 
-        res.render('invoice', { data: rows });  // Note the call to render() and not send(). Using render() ensures the templating engine
-    })  // will process this file, before sending the finished HTML to the client.
+        let invoices = rows;
+
+        db.pool.query(query2, (error, rows, fields) => {
+
+            let vendors = rows;
+
+            // BEGINNING OF NEW CODE
+
+            // Construct an object for reference in the table
+            // Array.map is awesome for doing something with each
+            // element of an array.
+            let vendormap = {}
+            vendors.map(vendor => {
+                let vendorID = parseInt(vendor.vendorID, 10);
+
+                vendormap[vendorID] = vendor["name"];
+            })
+
+            // Overwrite the homeworld ID with the name of the planet in the people object
+            invoices = invoices.map(invoice => {
+                return Object.assign(invoice, { vendorID: vendormap[invoice.vendorID] })
+            })
+
+            // END OF NEW CODE
+
+            return res.render('invoice', { data: invoices, vendors: vendors });
+        })
+    })
 });
 
 

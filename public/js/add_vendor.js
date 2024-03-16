@@ -15,7 +15,7 @@ addvendorForm.addEventListener("submit", function (e) {
 
     // Prevent the form from submitting
     e.preventDefault();
-    debugger;
+    //debugger;
 
 
     // Get form fields we need to get data from
