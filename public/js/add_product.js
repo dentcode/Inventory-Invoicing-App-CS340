@@ -15,7 +15,7 @@ addvendorForm.addEventListener("submit", function (e) {
 
     // Prevent the form from submitting
     e.preventDefault();
-    debugger;
+
 
 
     // Get form fields we need to get data from
@@ -35,9 +35,9 @@ addvendorForm.addEventListener("submit", function (e) {
     let productNameValue = inputProductName.value;
 
     // if value is Null, abort
-    if (isNaN(vendorNameValue) || isNaN(productPriceValue) || isNaN(productWeightValue) || isNaN(productDescriptionValue) || isNaN(productInStockValue) || isNaN(productNameValue)) {
-        return
-    }
+    // if (isNaN(vendorNameValue) || isNaN(productPriceValue) || isNaN(productWeightValue) || isNaN(productDescriptionValue) || isNaN(productInStockValue) || isNaN(productNameValue)) {
+    //     return
+    // }
 
     // Put our data we want to send in a javascript object
     let data = {

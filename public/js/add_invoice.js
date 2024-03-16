@@ -29,9 +29,9 @@ addvendorForm.addEventListener("submit", function (e) {
     let invoiceDate = inputInvoiceDate.value;
 
     // if passed null value, abort
-    if (isNaN(vendorValue) || isNaN(invoiceDate)) {
-        return;
-    }
+    // if (isNaN(vendorValue) || isNaN(invoiceDate)) {
+    //     return;
+    // }
 
     // Put our data we want to send in a javascript object
     let data = {

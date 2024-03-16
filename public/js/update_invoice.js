@@ -35,9 +35,9 @@ updateInvoiceForm.addEventListener("submit", function (e) {
 
     // currently the database table for Vendors does not allow updating values to NULL
     // so we must abort if being passed NULL
-    if (isNaN(invoiceIDValue) || isNaN(nameValue) || isNaN(dateValue)) {
-        return;
-    }
+    // if (isNaN(invoiceIDValue) || isNaN(nameValue) || isNaN(dateValue)) {
+    //     return;
+    // }
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -57,6 +57,10 @@ updateInvoiceForm.addEventListener("submit", function (e) {
 
             // Add the new data to the table
             updateRow(xhttp.response, invoiceIDValue);
+
+            inputinvoiceID.value = '';
+            inputvendor.value = '';
+            inputdate.value = '';
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -89,8 +93,8 @@ function updateRow(data, invoiceID) {
 
 
             // Reassign attributes to our value we updated to
-            vendorCell.innerHTML = parsedData[0].vendorID;
-            invoiceDateCell.innerHTML = parsedData[0].invoiceDate;
+            vendorCell.innerHTML = parsedData[i - 1].vendorID;
+            invoiceDateCell.innerHTML = parsedData[i - 1].invoiceDate;
 
 
         }

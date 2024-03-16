@@ -41,9 +41,9 @@ updateProductForm.addEventListener("submit", function (e) {
 
     // currently the database table for Vendors does not allow updating values to NULL
     // so we must abort if being passed NULL
-    if (isNaN(productValue) || isNaN(vendorValue) || isNaN(priceValue) || isNaN(weightValue) || isNaN(descriptionValue) || isNaN(instockValue) || isNaN(nameValue)){
-        return
-    }
+    // if (isNaN(productValue) || isNaN(vendorValue) || isNaN(priceValue) || isNaN(weightValue) || isNaN(descriptionValue) || isNaN(instockValue) || isNaN(nameValue)){
+    //     return
+    // }
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -67,6 +67,14 @@ updateProductForm.addEventListener("submit", function (e) {
 
             // Add the new data to the table
             updateRow(xhttp.response, productValue);
+
+            inputproductID.value = '';
+            inputvname.value = '';
+            inputprice.value = '';
+            inputweight.value = '';
+            inputdescription.value = '';
+            inputinstock.value = '';
+            inputname.value = '';
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -102,12 +110,12 @@ function updateRow(data, productID) {
             let nameCell = updateRowIndex.getElementsByTagName("td")[6];
 
             // Reassign attributes to our value we updated to
-            vendorCell.innerHTML = parsedData[0].vendorID;
-            priceCell.innerHTML = parsedData[0].productPrice;
-            weightCell.innerHTML = parsedData[0].productWeight;
-            descriptionCell.innerHTML = parsedData[0].productDescription;
-            instockCell.innerHTML = parsedData[0].productInStock;
-            nameCell.innerHTML = parsedData[0].productName;
+            vendorCell.innerHTML = parsedData[i - 1].vendorID;
+            priceCell.innerHTML = parsedData[i - 1].productPrice;
+            weightCell.innerHTML = parsedData[i - 1].productWeight;
+            descriptionCell.innerHTML = parsedData[i - 1].productDescription;
+            instockCell.innerHTML = parsedData[i - 1].productInStock;
+            nameCell.innerHTML = parsedData[i - 1].productName;
 
         }
     }

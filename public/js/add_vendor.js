@@ -31,9 +31,9 @@ addvendorForm.addEventListener("submit", function (e) {
 
     // abort if being passed NULL
 
-    if (isNaN(vendorNameValue) || isNaN(vendorPhoneValue) || isNaN(vendorEmailValue)) {
-        return
-    }
+    // if (isNaN(vendorNameValue) || isNaN(vendorPhoneValue) || isNaN(vendorEmailValue)) {
+    //     return
+    // }
 
     // Put our data we want to send in a javascript object
     let data = {

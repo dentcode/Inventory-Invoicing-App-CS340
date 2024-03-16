@@ -35,9 +35,9 @@ updateVendorForm.addEventListener("submit", function (e) {
 
     // abort if being passed NULL
 
-    if (isNaN(vendorIDValue) || isNaN(nameValue) || isNaN(phoneValue) || isNaN(emailValue)){
-        return
-    }
+    // if (isNaN(vendorIDValue) || isNaN(nameValue) || isNaN(phoneValue) || isNaN(emailValue)){
+    //     return
+    // }
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -58,6 +58,11 @@ updateVendorForm.addEventListener("submit", function (e) {
 
             // Add the new data to the table
             updateRow(xhttp.response, vendorIDValue);
+
+            inputvID.value = '';
+            inputvname.value = '';
+            inputvphone.value = '';
+            inputvemail.value = '';
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -90,9 +95,9 @@ function updateRow(data, vendorID) {
             let emailCell = updateRowIndex.getElementsByTagName("td")[3];
 
             // Reassign attributes to our value we updated to
-            nameCell.innerHTML = parsedData[0].name;
-            phoneCell.innerHTML = parsedData[0].phone;
-            emailCell.innerHTML = parsedData[0].email;
+            nameCell.innerHTML = parsedData[i-1].name;
+            phoneCell.innerHTML = parsedData[i-1].phone;
+            emailCell.innerHTML = parsedData[i-1].email;
 
         }
     }
