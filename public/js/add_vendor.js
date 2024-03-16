@@ -29,6 +29,11 @@ addvendorForm.addEventListener("submit", function (e) {
     let vendorPhoneValue = inputVendorPhone.value;
     let vendorEmailValue = inputVendorEmail.value;
 
+    // abort if being passed NULL
+
+    if (isNaN(vendorNameValue) || isNaN(vendorPhoneValue) || isNaN(vendorEmailValue)) {
+        return
+    }
 
     // Put our data we want to send in a javascript object
     let data = {

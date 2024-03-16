@@ -34,6 +34,10 @@ addvendorForm.addEventListener("submit", function (e) {
     let productInStockValue = inputProductInStock.value;
     let productNameValue = inputProductName.value;
 
+    // if value is Null, abort
+    if (isNaN(vendorNameValue) || isNaN(productPriceValue) || isNaN(productWeightValue) || isNaN(productDescriptionValue) || isNaN(productInStockValue) || isNaN(productNameValue)) {
+        return
+    }
 
     // Put our data we want to send in a javascript object
     let data = {

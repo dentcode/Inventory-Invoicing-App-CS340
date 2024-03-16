@@ -19,7 +19,7 @@ updateInvoiceForm.addEventListener("submit", function (e) {
 
     // Prevent the form from submitting
     e.preventDefault();
-    debugger;
+    //debugger;
 
     // Get form fields we need to get data from
     let inputinvoiceID = document.getElementById("mySelect");
@@ -30,28 +30,20 @@ updateInvoiceForm.addEventListener("submit", function (e) {
     // Get the values from the form fields
     let invoiceIDValue = inputinvoiceID.value;
     let nameValue = inputvendor.value;
-    let phoneValue = inputdate.value;
+    let dateValue = inputdate.value;
 
 
     // currently the database table for Vendors does not allow updating values to NULL
     // so we must abort if being passed NULL
-    /*
-        if (isNaN(nameValue)) {
-            return;
-        }
-        if (isNaN(phoneValue)) {
-            return;
-        }
-        if (isNaN(emailValue)) {
-            return;
-        }
-        */
+    if (isNaN(invoiceIDValue) || isNaN(nameValue) || isNaN(dateValue)) {
+        return;
+    }
 
     // Put our data we want to send in a javascript object
     let data = {
         invoiceID: invoiceIDValue,
         vendorID: nameValue,
-        invoiceDate: phoneValue,
+        invoiceDate: dateValue,
     }
 
     // Setup our AJAX request

@@ -41,17 +41,9 @@ updateProductForm.addEventListener("submit", function (e) {
 
     // currently the database table for Vendors does not allow updating values to NULL
     // so we must abort if being passed NULL
-    /*
-        if (isNaN(nameValue)) {
-            return;
-        }
-        if (isNaN(phoneValue)) {
-            return;
-        }
-        if (isNaN(emailValue)) {
-            return;
-        }
-        */
+    if (isNaN(productValue) || isNaN(vendorValue) || isNaN(priceValue) || isNaN(weightValue) || isNaN(descriptionValue) || isNaN(instockValue) || isNaN(nameValue)){
+        return
+    }
 
     // Put our data we want to send in a javascript object
     let data = {

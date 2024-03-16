@@ -29,6 +29,10 @@ addPersonForm.addEventListener("submit", function (e) {
     let orderQuantityValue = inputorderQuantity.value;
     let unitPriceValue = inputunitPrice.value;
 
+    if (isNaN(invoiceIDValue) || isNaN(productIDValue) || isNaN(orderQuantityValue) || isNaN(unitPriceValue)) {
+        return;
+    }
+
     // Put our data we want to send in a javascript object
     let data = {
         invoiceID: invoiceIDValue,

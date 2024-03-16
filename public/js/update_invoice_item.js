@@ -33,10 +33,10 @@ updatePersonForm.addEventListener("submit", function (e) {
     let orderQuantityValue = inputOrderQuantity.value;
     let unitPriceValue = inputUnitPrice.value;
 
-    // currently the database table for bsg_people does not allow updating values to NULL
+    // abort if any value is NULL
     // so we must abort if being bassed NULL for homeworld
 
-    if (isNaN(invoiceIDValue) || isNaN(productIDValue) || isNaN(orderQuantityValue) || isNaN(unitPriceValue)) {
+    if (isNaN(invoiceItemValue) || isNaN(invoiceIDValue) || isNaN(productIDValue) || isNaN(orderQuantityValue) || isNaN(unitPriceValue)) {
         return;
     }
 

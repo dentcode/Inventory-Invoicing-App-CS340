@@ -33,19 +33,11 @@ updateVendorForm.addEventListener("submit", function (e) {
     let phoneValue = inputvphone.value;
     let emailValue = inputvemail.value;
 
-    // currently the database table for Vendors does not allow updating values to NULL
-    // so we must abort if being passed NULL
-    /*
-        if (isNaN(nameValue)) {
-            return;
-        }
-        if (isNaN(phoneValue)) {
-            return;
-        }
-        if (isNaN(emailValue)) {
-            return;
-        }
-        */
+    // abort if being passed NULL
+
+    if (isNaN(vendorIDValue) || isNaN(nameValue) || isNaN(phoneValue) || isNaN(emailValue)){
+        return
+    }
 
     // Put our data we want to send in a javascript object
     let data = {
