@@ -27,12 +27,14 @@ as the skeleton code.
                 {{!-- For just the first row, we print each key of the row object as a header cell so we
                 know what each column means when the page renders --}}
                 <tr>
-                    {{#each data.[0]}}
-                    <th>
-                        {{@key}}
-                    </th>
-                    {{/each}}
-                    <th>delete</th>
+                    <th>Product ID</th>
+                    <th>Vendor</th>
+                    <th>Price</th>
+                    <th>Weight[kg]</th>
+                    <th>Description</th>
+                    <th>In Stock?</th>
+                    <th>Name</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
 
