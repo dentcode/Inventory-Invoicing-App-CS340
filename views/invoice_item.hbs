@@ -84,7 +84,7 @@ as the skeleton code.
                 <p>
                     <label for="input-invoiceID">Invoice Item: </label>
                     <!-- <input type="text" name="input-invoiceID" id="input-invoiceID"> -->
-                    <select name="input-invoiceID" id="input-invoiceID">
+                    <select name="input-invoiceID" id="input-invoiceID" required>
                         <option value="">Select an Invoice</option>
                         {{#each invoices}}
                         <option value="{{this.invoiceID}}">{{this.invoiceID}}</option>
@@ -94,7 +94,7 @@ as the skeleton code.
                 <p>
                     <label for="input-productID">Product ID: </label>
                     <!--  <input type="text" name="input-productID" id="input-productID"> -->
-                    <select name="input-productID" id="input-productID">
+                    <select name="input-productID" id="input-productID" required>
                         <option value="">Select a Product</option>
                         {{#each products}}
                         <option value="{{this.productID}}">{{this.productName}}</option>
@@ -103,12 +103,12 @@ as the skeleton code.
                 </p>
                 <p>
                     <label for="input-orderQuantity">Quantity: </label>
-                    <input type="number" name="input-orderQuantity" id="input-orderQuantity" min="0">
+                    <input type="number" name="input-orderQuantity" id="input-orderQuantity" min="1" required>
                 </p>
                 <p>
 
                     <label for="input-unitPrice">Unit Price: </label>
-                    <input type="decimal" name="input-unitPrice" id="input-unitPrice">
+                    <input type="decimal" name="input-unitPrice" id="input-unitPrice" min=".01" required>
                 </p>
 
                 <input type="submit">
@@ -131,7 +131,7 @@ as the skeleton code.
 
 
                 <label for="mySelect">Invoice Item: </label>
-                <select name="update-invoiceItem" id="mySelect">
+                <select name="update-invoiceItem" id="mySelect" required>
                     <option value="test">Select an Invoice Item</option>
                     {{#each data}}
                     <option value="{{this.invoiceItemID}}">{{this.invoiceItemID}}</option>
@@ -140,7 +140,7 @@ as the skeleton code.
                 <p>
                     <label for="update-invoiceID">Invoice Number: </label>
                     <!-- <input type="text" name="update-invoiceID" id="update-invoiceID"> -->
-                    <select name="update-invoiceID" id="update-invoiceID">
+                    <select name="update-invoiceID" id="update-invoiceID" required>
                         <option value="">Select an Invoice</option>
                         {{#each invoices}}
                         <option value="{{this.invoiceID}}">{{this.invoiceID}}</option>
@@ -150,7 +150,7 @@ as the skeleton code.
                 <p>
                     <label for="update-productID">Product ID: </label>
                     <!--  <input type="text" name="update-productID" id="update-productID"> -->
-                    <select name="update-productID" id="update-productID">
+                    <select name="update-productID" id="update-productID" required>
                         <option value="">Select a Product</option>
                         {{#each products}}
                         <option value="{{this.productID}}">{{this.productName}}</option>
@@ -160,12 +160,12 @@ as the skeleton code.
                 <p>
 
                     <label for="update-orderQuantity">Quantity: </label>
-                    <input type="number" name="update-orderQuantity" id="update-orderQuantity" min="0">
+                    <input type="number" name="update-orderQuantity" id="update-orderQuantity" min="1" required>
                 </p>
                 <p>
 
                     <label for="update-unitPrice">Unit Price: </label>
-                    <input type="decimal" name="update-unitPrice" id="update-unitPrice" min=".01">
+                    <input type="decimal" name="update-unitPrice" id="update-unitPrice" min=".01" required>
                 </p>
                 <input type="submit">
             </fieldset>

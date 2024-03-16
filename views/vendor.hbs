@@ -67,12 +67,13 @@ as the skeleton code.
 
                 <p>
                     <label for="input-vname">Name: </label>
-                    <input type="text" name="input-vname" id="input-vname">
+                    <input type="text" name="input-vname" id="input-vname" required>
                 </p>
 
                 <p>
                     <label for="input-vphone">Phone: </label>
-                    <input type="tel" name="input-vphone" id="input-vphone">
+                    <input type="tel" name="input-vphone" id="input-vphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                        required placeholder="###-###-####">
                 </p>
 
                 <p>
@@ -102,7 +103,7 @@ as the skeleton code.
                     and update the information</p>
 
                 <label for="input-vID">Vendor ID: </label>
-                <select name="input-vID" id="mySelect">
+                <select name="input-vID" id="mySelect" required>
                     <option value="test">Select a Vendor</option>
                     {{#each data}}
                     <option value="{{this.vendorID}}">{{this.vendorID}}</option>
@@ -111,12 +112,13 @@ as the skeleton code.
 
                 <p>
                     <label for="input-name">Name: </label>
-                    <input type="text" name="input-name" id="update-name">
+                    <input type="text" name="input-name" id="update-name" required>
                 </p>
 
                 <p>
                     <label for="input-phone">Phone: </label>
-                    <input type="tel" name="input-phone" id="update-phone">
+                    <input type="tel" name="input-phone" id="update-phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
+                        placeholder="###-###-####">
                 </p>
 
                 <p>

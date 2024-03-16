@@ -71,7 +71,7 @@ as the skeleton code.
 
                 <p>
                     <label for="input-vname">Vendor ID: </label>
-                    <select name="input-vname" id="input-vname">
+                    <select name="input-vname" id="input-vname" required>
                         <option value="">Select a Vendor</option>
                         {{#each vendors}}
                         <option value="{{this.vendorID}}">{{this.name}}</option>
@@ -82,26 +82,27 @@ as the skeleton code.
 
                 <p>
                     <label for="input-price">Price: </label>
-                    <input type="decimal" name="input-price" id="input-price">
+                    <input type="decimal" name="input-price" id="input-price" min="0.01" required>
                 </p>
 
                 <p>
                     <label for="input-weight">Weight: </label>
-                    <input type="decimal" id="input-weight" name="input-weight">
+                    <input type="decimal" id="input-weight" name="input-weight" min="0.01" required>
                 </p>
                 <p>
                     <label for="input-description"> Description</label>
-                    <textarea type="textarea" id="input-description" name="input-description"></textarea>
+                    <textarea type="textarea" id="input-description" name="input-description" minlength="2"
+                        maxlength="1000" required></textarea>
                 </p>
 
                 <p>
                     <label for="input-instock"> In Stock?</label>
-                    <input type="decimal" min="0" max="1" id="input-instock" name="input-instock">
+                    <input type="decimal" min="0" max="1" id="input-instock" name="input-instock" required>
                 </p>
 
                 <p>
                     <label for="input-name">Product Name: </label>
-                    <input type="text" name="input-name" id="input-name">
+                    <input type="text" name="input-name" id="input-name" required>
                 </p>
 
                 <input type="submit">
@@ -125,7 +126,7 @@ as the skeleton code.
                     left and update the information</p>
 
                 <label for="update-pID">Product ID: </label>
-                <select name="update-pID" id="mySelect">
+                <select name="update-pID" id="mySelect" required>
                     <option value="test">Select a Product</option>
                     {{#each data}}
                     <option value="{{this.productID}}">{{this.productID}}</option>
@@ -133,7 +134,7 @@ as the skeleton code.
                 </select>
                 <p>
                     <label for="update-vname">Vendor ID: </label>
-                    <select name="update-vname" id="update-vname">
+                    <select name="update-vname" id="update-vname" required>
                         <option value="">Select a Vendor</option>
                         {{#each vendors}}
                         <option value="{{this.vendorID}}">{{this.name}}</option>
@@ -144,28 +145,28 @@ as the skeleton code.
 
                 <p>
                     <label for="update-price">Price: </label>
-                    <input type="decimal" name="update-price" id="update-price">
+                    <input type="decimal" name="update-price" id="update-price" min="0.01" required>
                 </p>
 
                 <p>
                     <label for="update-weight">Weight: </label>
-                    <input type="decimal" id="update-weight" name="update-weight">
+                    <input type="decimal" id="update-weight" name="update-weight" min="0.01" required>
                 </p>
 
                 <p>
                     <label for="update-description"> Description</label>
-                    <textarea type="textarea" id="update-description" name="update-description"
-                        maxlength="1000"></textarea>
+                    <textarea type="textarea" id="update-description" name="update-description" minlength="2"
+                        maxlength="1000" required></textarea>
                 </p>
 
                 <p>
                     <label for="InStock"> In Stock?</label>
-                    <input type="decimal" min="0" max="1" id="update-instock" name="update-instock">
+                    <input type="decimal" min="0" max="1" id="update-instock" name="update-instock" required>
                 </p>
 
                 <p>
                     <label for="update-name">Product Name: </label>
-                    <input type="text" name="update-name" id="update-name">
+                    <input type="text" name="update-name" id="update-name" required>
                 </p>
 
 

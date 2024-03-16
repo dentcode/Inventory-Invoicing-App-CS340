@@ -64,7 +64,7 @@ as the skeleton code.
 
                 <p>
                     <label for="input-vendorID">Vendor ID: </label>
-                    <select name="input-vendorID" id="input-vendorID">
+                    <select name="input-vendorID" id="input-vendorID" required>
                         <option value="">Select a Vendor</option>
                         {{#each vendors}}
                         <option value="{{this.vendorID}}">{{this.name}}</option>
@@ -75,7 +75,7 @@ as the skeleton code.
 
                 <p>
                     <label for="input-invoicedate">Invoice Date: </label>
-                    <input type="date" name="input-invoicedate" id="input-invoicedate">
+                    <input type="date" name="input-invoicedate" id="input-invoicedate" required>
                 </p>
 
                 <input type="submit">
@@ -97,7 +97,7 @@ as the skeleton code.
                 <p>To update a specific vendor's information select their vendor ID from the drop-down menu on the left
                     and update the information</p>
                 <label for="input-iID">Invoice ID: </label>
-                <select name="input-iID" id="mySelect">
+                <select name="input-iID" id="mySelect" required>
                     <option value="test">Select an Invoice</option>
                     {{#each data}}
                     <option value="{{this.invoiceID}}">{{this.invoiceID}}</option>
@@ -106,7 +106,7 @@ as the skeleton code.
 
                 <p>
                     <label for="input-vendorID">Vendor ID: </label>
-                    <select name="input-vendorID" id="update-vendorID">
+                    <select name="input-vendorID" id="update-vendorID" required>
                         <option value="">Select a Vendor</option>
                         {{#each vendors}}
                         <option value="{{this.vendorID}}">{{this.name}}</option>
@@ -118,7 +118,7 @@ as the skeleton code.
                 <p>
                     <label for="input-invoicedate">Invoice Date: </label>
                     <input type="date" name="input-invoicedate" id="update-invoicedate" aria-required="true"
-                        placeholder="dd-mm-yy">
+                        placeholder="dd-mm-yy" required>
                 </p>
 
 
