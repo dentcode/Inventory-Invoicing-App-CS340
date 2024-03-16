@@ -90,7 +90,7 @@ addRowToTable = (data) => {
     let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
-    salesItemIDCell = newRow.salesItemID;
+    salesItemIDCell.innerText = newRow.salesItemID;
     salesIDCell.innerText = newRow.salesID;
     menuItemIDCell.innerText = newRow.menuItemID;
     orderQuantityCell.innerText = newRow.orderQuantity;
@@ -115,4 +115,6 @@ addRowToTable = (data) => {
 
     // Add the row to the table
     currentTable.appendChild(row);
+
 }
+

@@ -20,13 +20,24 @@ as the skeleton code.
     {{!-- Header section --}}
      <thead>
                     <tr>
-                        {{#each data.[0]}}
-                        <th>
-                            {{@key}}
-                        </th>
-                        {{/each}}
-                        <th>Delete</th>
-                    </tr>
+                    <th>
+                        Sales Item ID
+                    </th>
+                    <th>
+                        Sales Number
+                    </th>
+                    <th>
+                        Menu Item
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Unit Price
+                    </th>
+                    <th>
+                        Delete
+                    </th>
                 </tr>
             </thead>
 
@@ -56,14 +67,30 @@ as the skeleton code.
 <h2>Add a Sales Item</h2>
 <p>To add a new item to a sale, please enter their information below and click 'Submit'!</p>
 <form id="add-sales-item-form-ajax">
-    <fieldset>
-    <label for="input-salesID">Sales ID: </label>
-    <input type="number" name="input-salesID" id="input-salesID">
-        
 
-    <label for="input-menuItemID">Menu Item ID: </label>
-    <input type="number" name="input-menuitemID" id="input-menuItemID">
-       
+     <fieldset>
+                <legend>Add a Sales Item</legend>
+                <p>To add a new sales item, please enter their information below and click 'Submit'!</p>
+                <p>
+                    <label for="input-salesID">Sales ID: </label>
+                    <!-- <input type="text" name="input-invoiceID" id="input-invoiceID"> -->
+                    <select name="input-invoiceID" id="input-salesID">
+                        <option value="">Select a SalesID</option>
+                        {{#each sales}}
+                        <option value="{{this.salesID}}">{{this.salesID}}</option>
+                        {{/each}}
+                    </select>
+                </p>
+                <p>
+                    <label for="input-menuItemID">Menu Item : </label>
+                    <!--  <input type="text" name="input-productID" id="input-productID"> -->
+                    <select name="input-menuItemID" id="input-menuItemID">
+                        <option value="">Select an item</option>
+                        {{#each menuItems}}
+                        <option value="{{this.menuItemID}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </p>
 
     <label for="input-orderQuantity">Quantity: </label>
     <input type="number" name="input-orderQuantity" id="input-orderQuantity" min="0">
@@ -77,3 +104,57 @@ as the skeleton code.
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_salesItem.js"></script>
+
+
+
+<p>&nbsp;</p>
+        {{!-- Form to update a record to the table --}}
+
+        <form id="update-sales-item-form-ajax">
+            <fieldset>
+                <legend>Update Sales Item</legend>
+                <p>To update a specific sale item select their ID number from the drop-down menu on the left and
+                    update information.</p>
+
+
+                <label for="update-salesItemID">Sales Item ID: </label>
+                <select name="update-salesItemID" id="update-salesItemID">
+                    <option value="test">Select a Sales Item</option>
+                    {{#each data}}
+                    <option value="{{this.salesItemID}}">{{this.salesItemID}}</option>
+                    {{/each}}
+                </select>
+                <p>
+                    <label for="update-salesID">Sales Number: </label>
+                    <select name="update-salesID" id="update-salesID">
+                        <option value="">Select a SaleID</option>
+                        {{#each sales}}
+                        <option value="{{this.salesID}}">{{this.salesID}}</option>
+                        {{/each}}
+                    </select>
+                </p>
+                <p>
+                    <label for="update-menuID">Menu Item ID: </label>
+                    <select name="update-menuID" id="update-menuID">
+                        <option value="">Select a menu item ID</option>
+                        {{#each menuItems}}
+                        <option value="{{this.menuItemID}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </p>
+                <p>
+
+                    <label for="update-orderQuantity">Quantity: </label>
+                    <input type="number" name="update-orderQuantity" id="update-quantity" min="0">
+                </p>
+                <p>
+
+                    <label for="update-unitPrice">Unit Price: </label>
+                    <input type="decimal" name="update-unitPrice" id="update-unitPrice" min=".01">
+                </p>
+                <input type="submit">
+            </fieldset>
+
+        </form>
+
+        <script src="./js/update_sales_item.js"></script>
