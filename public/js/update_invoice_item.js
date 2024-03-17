@@ -20,23 +20,23 @@ updatePersonForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputInvoiceItem = document.getElementById("mySelect");
-    let inputInvoiceID = document.getElementById("update-invoiceID");
-    let inputProductID = document.getElementById("update-productID");
+    // let inputInvoiceID = document.getElementById("update-invoiceID");
+    // let inputProductID = document.getElementById("update-productID");
     let inputOrderQuantity = document.getElementById("update-orderQuantity");
     let inputUnitPrice = document.getElementById("update-unitPrice");
 
 
     // Get the values from the form fields
     let invoiceItemValue = inputInvoiceItem.value;
-    let invoiceIDValue = inputInvoiceID.value;
-    let productIDValue = inputProductID.value;
+    // let invoiceIDValue = inputInvoiceID.value;
+    // let productIDValue = inputProductID.value;
     let orderQuantityValue = inputOrderQuantity.value;
     let unitPriceValue = inputUnitPrice.value;
 
     // abort if any value is NULL
     // so we must abort if being bassed NULL for homeworld
 
-    if (isNaN(invoiceItemValue) || isNaN(invoiceIDValue) || isNaN(productIDValue) || isNaN(orderQuantityValue) || isNaN(unitPriceValue)) {
+    if (isNaN(invoiceItemValue) || isNaN(orderQuantityValue) || isNaN(unitPriceValue)) {
         return;
     }
 
@@ -44,8 +44,8 @@ updatePersonForm.addEventListener("submit", function (e) {
     // Put our data we want to send in a javascript object
     let data = {
         invoiceItemID: invoiceItemValue,
-        invoiceID: invoiceIDValue,
-        productID: productIDValue,
+        // invoiceID: invoiceIDValue,
+        // productID: productIDValue,
         orderQuantity: orderQuantityValue,
         unitPrice: unitPriceValue,
     }
@@ -63,8 +63,8 @@ updatePersonForm.addEventListener("submit", function (e) {
             updateRow(xhttp.response, invoiceItemValue);
 
             inputInvoiceItem.value = '';
-            inputInvoiceID.value = '';
-            inputProductID.value = '';
+            // inputInvoiceID.value = '';
+            // inputProductID.value = '';
             inputOrderQuantity.value = '';
             inputUnitPrice.value = '';
 
@@ -94,16 +94,16 @@ function updateRow(data, invoiceItemID) {
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Get td of different values
-            let td1 = updateRowIndex.getElementsByTagName("td")[1];
-            let td2 = updateRowIndex.getElementsByTagName("td")[2];
+            // let td1 = updateRowIndex.getElementsByTagName("td")[1];
+            // let td2 = updateRowIndex.getElementsByTagName("td")[2];
             let td3 = updateRowIndex.getElementsByTagName("td")[3];
             let td4 = updateRowIndex.getElementsByTagName("td")[4];
 
             // Reassign the cells to our value we updated to
-            td1.innerHTML = parsedData[0].invoiceID;
-            td2.innerHTML = parsedData[0].productID;
-            td3.innerHTML = parsedData[0].orderQuantity;
-            td4.innerHTML = parsedData[0].unitPrice;
+            // td1.innerHTML = parsedData[0].invoiceID;
+            // td2.innerHTML = parsedData[0].productID;
+            td3.innerHTML = parsedData[i - 1].orderQuantity;
+            td4.innerHTML = parsedData[i - 1].unitPrice;
 
         }
     }

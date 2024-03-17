@@ -1115,17 +1115,19 @@ app.delete('/delete-invoice-item-ajax/', function (req, res, next) {
 app.put('/put-invoice-item-ajax', function (req, res, next) {
     let data = req.body;
 
-    let invoiceID = parseInt(data.invoiceID);
-    let productID = parseInt(data.productID);
+    // let invoiceID = parseInt(data.invoiceID);
+    // let productID = parseInt(data.productID);
     let orderQuantity = data.orderQuantity;
     let unitPrice = data.unitPrice;
     let invoiceItemID = parseInt(data.invoiceItemID);
 
-    let queryUpdateWorld = `UPDATE Invoice_Items SET invoiceID = ?, productID = ?, orderQuantity = ?, unitPrice = ? WHERE Invoice_Items.invoiceItemID = ?`;
-    let selectWorld = `SELECT * FROM Products WHERE productID = ?`;
+    // let queryUpdateWorld = `UPDATE Invoice_Items SET invoiceID = ?, productID = ?, orderQuantity = ?, unitPrice = ? WHERE Invoice_Items.invoiceItemID = ?`;
+    let queryUpdateWorld = `UPDATE Invoice_Items SET orderQuantity = ?, unitPrice = ? WHERE Invoice_Items.invoiceItemID = ?`
+    // let selectWorld = `SELECT * FROM Products WHERE productID = ?`;
+    let selectWorld = `SELECT * FROM Invoice_Items`;
 
     // Run the 1st query
-    db.pool.query(queryUpdateWorld, [invoiceID, productID, orderQuantity, unitPrice, invoiceItemID], function (error, rows, fields) {
+    db.pool.query(queryUpdateWorld, [orderQuantity, unitPrice, invoiceItemID], function (error, rows, fields) {
         if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -1137,7 +1139,7 @@ app.put('/put-invoice-item-ajax', function (req, res, next) {
         // table on the front-end
         else {
             // Run the second query
-            db.pool.query(selectWorld, [productID], function (error, rows, fields) {
+            db.pool.query(selectWorld, function (error, rows, fields) {
 
                 if (error) {
                     console.log(error);

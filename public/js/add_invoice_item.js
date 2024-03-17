@@ -104,7 +104,7 @@ addRowToTable = (data) => {
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function () {
-        deletePerson(newRow.id);
+        deleteInvoiceItem(newRow.invoiceItemID);
     };
 
     // Add the cells to the row 
