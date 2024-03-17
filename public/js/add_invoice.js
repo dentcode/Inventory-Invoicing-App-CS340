@@ -54,6 +54,9 @@ addvendorForm.addEventListener("submit", function (e) {
             // Clear the input fields for another transaction
             inputVendor.value = '';
             inputInvoiceDate.value = '';
+
+            // Reloads page so the table reflects product name instead of productID
+            window.location.reload()
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
