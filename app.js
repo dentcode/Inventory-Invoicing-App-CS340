@@ -957,16 +957,16 @@ app.put('/put-invoice-ajax', function (req, res, next) {
     let data = req.body;
 
 
-    let vendorID = parseInt(data.vendorID);
+    // let vendorID = parseInt(data.vendorID);
     let date = data.invoiceDate
     let invoiceID = parseInt(data.invoiceID);
 
-    let queryUpdateInvoice = `UPDATE Invoices SET vendorID = ?, invoiceDate = ? WHERE invoiceID = ?`;
+    let queryUpdateInvoice = `UPDATE Invoices SET invoiceDate = ? WHERE invoiceID = ?`;
     let selectInvoice = `SELECT * FROM Invoices;`;
 
 
     // Run the 1st query
-    db.pool.query(queryUpdateInvoice, [vendorID, date, invoiceID], function (error, rows, fields) {
+    db.pool.query(queryUpdateInvoice, [date, invoiceID], function (error, rows, fields) {
         if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.

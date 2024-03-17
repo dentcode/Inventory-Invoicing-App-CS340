@@ -23,13 +23,13 @@ updateInvoiceForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputinvoiceID = document.getElementById("mySelect");
-    let inputvendor = document.getElementById("update-vendorID");
+    // let inputvendor = document.getElementById("update-vendorID");
     let inputdate = document.getElementById("update-invoicedate");
 
 
     // Get the values from the form fields
     let invoiceIDValue = inputinvoiceID.value;
-    let nameValue = inputvendor.value;
+    // let nameValue = inputvendor.value;
     let dateValue = inputdate.value;
 
 
@@ -42,7 +42,7 @@ updateInvoiceForm.addEventListener("submit", function (e) {
     // Put our data we want to send in a javascript object
     let data = {
         invoiceID: invoiceIDValue,
-        vendorID: nameValue,
+        // vendorID: nameValue,
         invoiceDate: dateValue,
     }
 
@@ -88,12 +88,12 @@ function updateRow(data, invoiceID) {
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Get td of attribute values
-            let vendorCell = updateRowIndex.getElementsByTagName("td")[1];
+            // let vendorCell = updateRowIndex.getElementsByTagName("td")[1];
             let invoiceDateCell = updateRowIndex.getElementsByTagName("td")[2];
 
 
             // Reassign attributes to our value we updated to
-            vendorCell.innerHTML = parsedData[i - 1].vendorID;
+            // vendorCell.innerHTML = parsedData[i - 1].vendorID;
             invoiceDateCell.innerHTML = parsedData[i - 1].invoiceDate;
 
 

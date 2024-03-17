@@ -94,7 +94,7 @@ as the skeleton code.
         <form id="update-invoice-form-ajax">
             <fieldset>
                 <legend>Update Vendor</legend>
-                <p>To update a specific vendor's information select their vendor ID from the drop-down menu on the left
+                <p>To update a specific invoice's date select their vendor ID from the drop-down menu on the left
                     and update the information</p>
                 <label for="input-iID">Invoice ID: </label>
                 <select name="input-iID" id="mySelect" required>
@@ -104,16 +104,17 @@ as the skeleton code.
                     {{/each}}
                 </select>
 
-                <p>
+                {{!-- <p>
                     <label for="input-vendorID">Vendor ID: </label>
                     <select name="input-vendorID" id="update-vendorID" required>
                         <option value="">Select a Vendor</option>
                         {{#each vendors}}
                         <option value="{{this.vendorID}}">{{this.name}}</option>
                         {{/each}}
-                    </select>
+                    </select> --}}
                     {{!-- <input type="text" name="input-vendorID" id="update-vendorID"> --}}
-                </p>
+                    {{!--
+                </p> --}}
 
                 <p>
                     <label for="input-invoicedate">Invoice Date: </label>

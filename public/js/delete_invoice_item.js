@@ -29,7 +29,19 @@ function deleteRow(invoiceItemID) {
     for (let i = 0, row; row = table.rows[i]; i++) {
         if (table.rows[i].getAttribute("data-value") == invoiceItemID) {
             table.deleteRow(i);
+            deleteDropDownMenu(invoiceItemID);
             break;
         }
+    }
+}
+
+function deleteDropDownMenu(invoiceItemID) {
+    let selectMenu = document.getElementById("mySelect");
+    for (let i = 0; i < selectMenu.length; i++) {
+        if (Number(selectMenu.options[i].value) === Number(invoiceItemID)) {
+            selectMenu[i].remove();
+            break;
+        }
+
     }
 }

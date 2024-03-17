@@ -30,11 +30,22 @@ function deleteRow(vendorID) {
     for (let i = 0, row; row = table.rows[i]; i++) {
         if (table.rows[i].getAttribute("data-value") == vendorID) {
             table.deleteRow(i);
+            deleteDropDownMenu(vendorID);
             break;
         }
     }
 }
 
+function deleteDropDownMenu(vendorID) {
+    let selectMenu = document.getElementById("mySelect");
+    for (let i = 0; i < selectMenu.length; i++) {
+        if (Number(selectMenu.options[i].value) === Number(vendorID)) {
+            selectMenu[i].remove();
+            break;
+        }
+
+    }
+}
 
 /*
 function deleteVendor(vendorID) {
