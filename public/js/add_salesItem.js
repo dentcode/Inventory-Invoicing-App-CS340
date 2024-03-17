@@ -53,6 +53,9 @@ addSalesItemForm.addEventListener("submit", function (e) {
             inputMenuItemID.value = '';
             inputOrderQuantity.value = '';
             inputUnitPrice.value = '';
+
+            // Reloads page so the table reflects item's name instead of menuItemD
+            window.location.reload()
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
