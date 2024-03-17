@@ -799,7 +799,7 @@ app.delete('/delete-product-ajax/', function (req, res, next) {
 app.put('/put-product-ajax', function (req, res, next) {
     let data = req.body;
 
-    let vendorID = parseInt(data.vendorID);
+    // let vendorID = parseInt(data.vendorID);
     let price = data.productPrice
     let weight = data.productWeight
     let description = data.productDescription
@@ -809,12 +809,12 @@ app.put('/put-product-ajax', function (req, res, next) {
     let productID = parseInt(data.productID)
 
 
-    let queryUpdateProduct = `UPDATE Products SET vendorID = ?, productPrice = ?, productWeight = ?, productDescription = ?, productInStock = ?, productName = ? WHERE productID = ?`;
+    let queryUpdateProduct = `UPDATE Products SET productPrice = ?, productWeight = ?, productDescription = ?, productInStock = ?, productName = ? WHERE productID = ?`;
     let selectProduct = `SELECT * FROM Products;`;
 
 
     // Run the 1st query
-    db.pool.query(queryUpdateProduct, [vendorID, price, weight, description, instock, name, productID], function (error, rows, fields) {
+    db.pool.query(queryUpdateProduct, [price, weight, description, instock, name, productID], function (error, rows, fields) {
         if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.

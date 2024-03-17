@@ -23,7 +23,7 @@ updateProductForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputproductID = document.getElementById("mySelect");
-    let inputvname = document.getElementById("update-vname");
+    // let inputvname = document.getElementById("update-vname");
     let inputprice = document.getElementById("update-price");
     let inputweight = document.getElementById("update-weight");
     let inputdescription = document.getElementById("update-description");
@@ -32,7 +32,7 @@ updateProductForm.addEventListener("submit", function (e) {
 
     // Get the values from the form fields
     let productValue = inputproductID.value;
-    let vendorValue = inputvname.value;
+    // let vendorValue = inputvname.value;
     let priceValue = inputprice.value;
     let weightValue = inputweight.value;
     let descriptionValue = inputdescription.value;
@@ -48,7 +48,7 @@ updateProductForm.addEventListener("submit", function (e) {
     // Put our data we want to send in a javascript object
     let data = {
         productID: productValue,
-        vendorID: vendorValue,
+        // vendorID: vendorValue,
         productPrice: priceValue,
         productWeight: weightValue,
         productDescription: descriptionValue,
@@ -69,7 +69,7 @@ updateProductForm.addEventListener("submit", function (e) {
             updateRow(xhttp.response, productValue);
 
             inputproductID.value = '';
-            inputvname.value = '';
+            // inputvname.value = '';
             inputprice.value = '';
             inputweight.value = '';
             inputdescription.value = '';
@@ -102,7 +102,7 @@ function updateRow(data, productID) {
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Get td of attribute values
-            let vendorCell = updateRowIndex.getElementsByTagName("td")[1];
+            // let vendorCell = updateRowIndex.getElementsByTagName("td")[1];
             let priceCell = updateRowIndex.getElementsByTagName("td")[2];
             let weightCell = updateRowIndex.getElementsByTagName("td")[3];
             let descriptionCell = updateRowIndex.getElementsByTagName("td")[4];
@@ -110,7 +110,7 @@ function updateRow(data, productID) {
             let nameCell = updateRowIndex.getElementsByTagName("td")[6];
 
             // Reassign attributes to our value we updated to
-            vendorCell.innerHTML = parsedData[i - 1].vendorID;
+            // vendorCell.innerHTML = parsedData[i - 1].vendorID;
             priceCell.innerHTML = parsedData[i - 1].productPrice;
             weightCell.innerHTML = parsedData[i - 1].productWeight;
             descriptionCell.innerHTML = parsedData[i - 1].productDescription;
