@@ -1,4 +1,4 @@
--- Project Step 2 Draft DDL
+-- Project Step 6  DDL for CS340 Portfolio Project
 --Team 39
 -- Ignacio De La Cruz and Guibely De Aguinaga
 
